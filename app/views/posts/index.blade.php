@@ -1,0 +1,1 @@
+/Users/amil/Works/flor/www/app/views/posts/index.blade.php
