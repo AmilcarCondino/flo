@@ -10,8 +10,9 @@ class PostsController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
-	}
+        return View::make('posts/index')
+            ->with('posts', Post::all());
+    }
 
 	/**
 	 * Show the form for creating a new resource.
@@ -21,7 +22,8 @@ class PostsController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		//Render Create View
+        return View::make('posts.create');
 	}
 
 	/**
@@ -32,7 +34,15 @@ class PostsController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$post = new Post;
+
+        $post->title = Input::get('title');
+        $post->body = Input::get('body');
+
+        $post->save();
+
+        return Redirect::to('posts');
+
 	}
 
 	/**
@@ -44,7 +54,9 @@ class PostsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+        $post = Post::findOrFail($id);
+
+		return View::make('posts.show', compact('post'));
 	}
 
 	/**
@@ -56,7 +68,9 @@ class PostsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+        $post = Post::findOrFail($id);
+
+        return View::make('posts.edit', compact('post'));
 	}
 
 	/**
@@ -68,7 +82,14 @@ class PostsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$post = Post::findOrFail($id);
+
+        $post->title = Input::get('title');
+        $post->body = Input::get('body');
+
+        $post->save();
+
+        return Redirect::to('posts');
 	}
 
 	/**
@@ -80,7 +101,11 @@ class PostsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+        $post = Post::findOrFail($id);
+
+        Post::find($id)->delete();
+
+        return Redirect::to('posts');
 	}
 
 }
