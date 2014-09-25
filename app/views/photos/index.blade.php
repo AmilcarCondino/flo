@@ -20,8 +20,9 @@
 
 
 <h2>Gurdar una Nueva Foto</h2>
-{{ HTML::link('photos/create', 'Guardar') }}
+<p>{{ HTML::link('photos/create', 'Guardar') }}</p>
 
+<p>{{ HTML::link('/', 'Home') }}</p>
 
 
 @stop

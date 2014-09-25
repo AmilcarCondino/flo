@@ -21,7 +21,8 @@
     {{ Form::close() }}
 
 
-    <p>{{ HTML::link('photos', 'Home') }}</p>
+    <p>{{ HTML::link('photos', 'Fotos') }}</p>
+    <p>{{ HTML::link('/', 'Home') }}</p>
 @stop
 
 

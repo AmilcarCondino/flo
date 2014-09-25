@@ -17,7 +17,8 @@
 
     {{ Form::close() }}
 
-    <p>{{ HTML::link('posts', 'Home') }}</p>
+    <p>{{ HTML::link('posts', 'Posts') }}</p>
+    <p>{{ HTML::link('/', 'Home') }}</p>
 @stop
 
 

@@ -48,7 +48,9 @@ class PhotosController extends \BaseController {
         $image = Input::file('image');
 
         //Grab the original file name
-        $filename = $image->getCLientOriginalName();
+        //$filename = $image->getCLientOriginalName();
+
+        $filename = str_random(10) . '.' . $image->getClientOriginalExtension();
 
         //Target the save path location
         $destination_path = 'public/uploads/images/';
@@ -59,8 +61,6 @@ class PhotosController extends \BaseController {
         $photo->category = Input::get('category');
         $photo->show = Input::get('show');
         $photo->img_name = $filename;
-        //$photo->path = $destination_path;
-        //$photo->img_name = Input::get('title');
 
         //Move the image in to the server
         $filename = $photo->img_name;

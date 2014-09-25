@@ -23,8 +23,8 @@
             {{ Form::text('category') }}
         </p>
         <p>
-            {{ Form::label('show', 'Mostrar: ') }}
-            {{ Form::text('show') }}
+            {{ Form::label('show', 'Mostrar') }}
+            {{ Form::select('show', [ '0' => 'No', '1' => 'Si' ]) }}
         </p>
 
         <p> {{ Form::submit('Editar Foto') }}</p>
