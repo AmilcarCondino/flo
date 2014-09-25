@@ -81,7 +81,11 @@ class PhotosController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+        //Instantiate
+        $photo = Photo::findOrFail($id);
+
+        //Remder show page with the image data
+        return View::make('photos.show', compact('photo'));
 	}
 
 	/**
@@ -94,6 +98,9 @@ class PhotosController extends \BaseController {
 	public function edit($id)
 	{
 		//
+        $photo = Photo::findOrFail($id);
+
+        return View::make('photos.edit', compact('photo'));
 	}
 
 	/**
@@ -106,6 +113,16 @@ class PhotosController extends \BaseController {
 	public function update($id)
 	{
 		//
+        $photo = Photo::findOrFail($id);
+
+        $photo->title = Input::get('title');
+        $photo->description = Input::get('description');
+        $photo->category = Input::get('category');
+        $photo->show = Input::get('show');
+
+        $photo->save();
+
+        return Redirect::to('photos');
 	}
 
 	/**
@@ -118,6 +135,11 @@ class PhotosController extends \BaseController {
 	public function destroy($id)
 	{
 		//
+        $photo = Photo::findOrFail($id);
+
+        Photo::find($id)->delete();
+
+        return Redirect::to('photos');
 	}
 
 }
