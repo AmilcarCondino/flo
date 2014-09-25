@@ -1,0 +1,1 @@
+/Users/amil/Works/flor/www/app/views/photos/show.blade.php

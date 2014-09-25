@@ -4,20 +4,22 @@
 
 @section('content')
 
-    <h1>Listado de posts</h1>
+<h1>Listado de posts</h1>
 
-    <u>
-        @foreach($posts as $post)
-            <li>{{ link_to("/posts/{$post->id}", $post->title) }}</li>
+<u>
+    @foreach($posts as $post)
+    <li>
+        {{ link_to("/posts/{$post->id}", $post->title) }}
+    </li>
 
-        @endforeach
-    </u>
+    @endforeach
+</u>
 
 
 
 
-    <h2>Crear un Nuevo Post</h2>
-    {{ HTML::link('posts/create', 'Crear') }}
+<h2>Crear un Nuevo Post</h2>
+{{ HTML::link('posts/create', 'Crear') }}
 
 
 

@@ -7,7 +7,7 @@
     {{  Form::open(array('url' => 'posts' )) }}
 
         <p>
-            {{ Form::label('title', 'Titlo: ') }}<br />
+            {{ Form::label('title', 'Titulo: ') }}<br />
             {{ Form::text('title') }}
         </p>
         <p>
