@@ -10,6 +10,7 @@ class PhotosController extends \BaseController {
 	 */
 	public function index()
 	{
+        $destination_path = 'public/uploads/img/';
 		//Render the "photos" page, with all photos instantiated
         return View::make('photos/index')
             ->with('photos', Photo::all());
@@ -50,25 +51,26 @@ class PhotosController extends \BaseController {
         $filename = $image->getCLientOriginalName();
 
         //Target the save path location
-        $destination_path = 'public/img/';
+        $destination_path = 'public/uploads/images/';
 
         //Assign the data at the apropiate fields
         $photo->title = Input::get('title');
         $photo->description = Input::get('description');
         $photo->category = Input::get('category');
         $photo->show = Input::get('show');
-        //$photo->img_name = $filename;
-        $photo->img_name = Input::get('title');
+        $photo->img_name = $filename;
+        //$photo->path = $destination_path;
+        //$photo->img_name = Input::get('title');
 
         //Move the image in to the server
-        $filename = $photo->img_name.'.jpg';
+        $filename = $photo->img_name;
         $image->move($destination_path, $filename);
 
         //Insert the new record in the DB
         $photo->save();
 
         //Return to photos.index
-        return Redirect::to('photos/create');
+        return Redirect::to('photos');
 
 	}
 

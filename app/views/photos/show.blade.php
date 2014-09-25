@@ -9,7 +9,7 @@
 
     <p>{{ link_to("/photos/{$photo->id}/edit", 'Editar') }}</p>
 
-    <p>{{ HTML::image("/img/{$photo->img_name}", 'foto', array('width' => '500')) }}</p><br />
+    <p>{{ HTML::image("/uploads/images/{$photo->img_name}", 'foto', array('width' => '500')) }}</p><br />
 
     <p>{{ $photo->description }}</p>
 

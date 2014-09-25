@@ -10,7 +10,7 @@
     @foreach($photos as $photo)
     <li>
         {{ link_to("/photos/{$photo->id}", $photo->title) }}
-        {{ HTML::image("/img/{$photo->img_name}", 'foto', array('width' => '150')) }}
+        {{ HTML::image("/uploads/images/{$photo->img_name}", 'foto', array('width' => '150')) }}
     </li>
 
     @endforeach

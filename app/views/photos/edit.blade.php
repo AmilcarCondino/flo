@@ -6,6 +6,7 @@
 
     <h1>{{ 'Editar foto' }}</h1>
 
+    <p>{{ HTML::image("/uploads/images/{$photo->img_name}", 'foto', array('width' => '500')) }}</p><br />
 
     {{  Form::model($photo, ['method' => 'PATCH', 'route' => ['photos.update', $photo->id]]) }}
 
