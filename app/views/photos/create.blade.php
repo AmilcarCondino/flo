@@ -12,14 +12,17 @@
             <p>
                 {{ Form::label('title', 'Titulo: ') }}
                 {{ Form::text('title') }}
+                {{ $errors->first('title') }}
             </p>
             <p>
                 {{ Form::label('description', 'Descripción: ') }}
                 {{ Form::textarea('description') }}
+                {{ $errors->first('description') }}
             </p>
             <p>
                 {{ Form::label('category', 'Categoria: ') }}
                 {{ Form::text('category') }}
+                {{ $errors->first('category') }}
             </p>
             <p>
                 {{ Form::label('show', 'Mostrar') }}
@@ -30,6 +33,8 @@
             </p>
 
         {{ Form::close() }}
+
+        <p>{{ HTML::link('photos', 'Cancelar') }}</p>
 
 
 @stop

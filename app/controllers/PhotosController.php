@@ -36,24 +36,38 @@ class PhotosController extends \BaseController {
 	public function store()
 	{
 
-        //Check errors
-
-        //Validate the data
-
         //Instantiate a new Photo object
         $photo = new Photo;
 
         //Instantiate the image file
         $image = Input::file('image');
 
-        //Search the last record id plus 1, and store it in $next_id
+        //Declare the allowed extensions
+        $allowed_extensions = ['jpg', 'jpeg', 'bmp', 'png'];
+
+        //Get the file extension
+        $extension = $image->getClientOriginalExtension();
+
+        //Get the target file original name
+        $original_name = $image->getClientOriginalName();
+
+        //Check if the file extension, is in the allowed ones
+        if ( !in_array($extension, $allowed_extensions)) {
+            //If isn't an allowed extension, then fails, redirect to create page and send an flash error message.
+            return Redirect::back()
+                ->withInput()
+                ->with('flash_message','El archivo "' . $original_name . '" no se pudo guardar, por no tener un formato valido')
+                ->with('flash_type', 'flash-error');
+        };
+
+
+
+      //Search the last record id plus 1, and store it in $next_id
         $last_id = DB::table('photos')->orderBy('id','dec')->take(1)->pluck('id');
         $next_id = $last_id + 1;
 
         //Construct de filename to avoid file replacement
         $filename = 'tucci_web_' . $next_id . '.' . $image->getClientOriginalExtension();
-
-
 
         //Target the save path location
         $destination_path = 'public/uploads/images/';
@@ -65,15 +79,31 @@ class PhotosController extends \BaseController {
         $photo->show = Input::get('show');
         $photo->img_name = $filename;
 
-        //Insert the new record in the DB
-        $photo->save();
 
         //Move the image in to the server
         $filename = $photo->img_name;
         $image->move($destination_path, $filename);
 
-        //Return to photos.index
-        return Redirect::to('photos');
+        //Check if the if the image was created in the server
+        if ( !file_exists("public/uploads/images/{$filename}")) {
+            //Don't exist. Then fails, redirect to create page and send an flash error message.
+            return Redirect::back()
+                ->withInput()
+                ->with('flash_message','El archivo "' . $original_name . '" no se puedo guardar. Si el error continua, contacte con su administrador')
+                ->with('flash_type', 'flash-error');
+
+        }
+
+        //Try to save in the DB and check for true or false
+        if ($photo->save()) {
+            //If it's tru, redirect at photos page with a successful message.
+            return Redirect::to('photos')
+                ->with('flash_message','El archivo "' . $original_name . '" se ha guardado correctamente')
+                ->with('flash_type', 'flash-success');
+        }
+
+        //If it's false, don't pass de validation checks. Redirect to the previous page with details of the problem.
+        return Redirect::back()->withInput()->withErrors($photo->getErrors());
 
 	}
 
@@ -127,10 +157,16 @@ class PhotosController extends \BaseController {
         $photo->category = Input::get('category');
         $photo->show = Input::get('show');
 
-        //Save the data in to the DB
-        $photo->save();
+        //Try to update the register in the DB and check for true or false
+        if ($photo->save()) {
+            //If it's tru, redirect at photos page with a successful message.
+            return Redirect::to('photos')
+                ->with('flash_message','El archivo "' . $original_name . '" se ha editado correctamente')
+                ->with('flash_type', 'flash-success');
+        }
 
-        return Redirect::to('photos');
+        //If it's false, don't pass de validation checks. Redirect to the previous page with details of the problem.
+        return Redirect::back()->withInput()->withErrors($photo->getErrors());
 	}
 
 	/**
