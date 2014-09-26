@@ -65,12 +65,12 @@ class PhotosController extends \BaseController {
         $photo->show = Input::get('show');
         $photo->img_name = $filename;
 
+        //Insert the new record in the DB
+        $photo->save();
+
         //Move the image in to the server
         $filename = $photo->img_name;
         $image->move($destination_path, $filename);
-
-        //Insert the new record in the DB
-        $photo->save();
 
         //Return to photos.index
         return Redirect::to('photos');
