@@ -10,8 +10,7 @@ class PhotosController extends \BaseController {
 	 */
 	public function index()
 	{
-        $destination_path = 'public/uploads/img/';
-		//Render the "photos" page, with all photos instantiated
+		//Render the "photos" page, with all records instantiated
         return View::make('photos/index')
             ->with('photos', Photo::all());
 	}
@@ -36,7 +35,7 @@ class PhotosController extends \BaseController {
 	 */
 	public function store()
 	{
-		//Grab the new image data, validate ir anda save it en the DB
+
         //Check errors
 
         //Validate the data
@@ -47,15 +46,19 @@ class PhotosController extends \BaseController {
         //Instantiate the image file
         $image = Input::file('image');
 
-        //Grab the original file name
-        //$filename = $image->getCLientOriginalName();
+        //Search the last record id plus 1, and store it in $next_id
+        $last_id = DB::table('photos')->orderBy('id','dec')->take(1)->pluck('id');
+        $next_id = $last_id + 1;
 
-        $filename = str_random(10) . '.' . $image->getClientOriginalExtension();
+        //Construct de filename to avoid file replacement
+        $filename = 'tucci_web_' . $next_id . '.' . $image->getClientOriginalExtension();
+
+
 
         //Target the save path location
         $destination_path = 'public/uploads/images/';
 
-        //Assign the data at the apropiate fields
+        //Assign the data at the appropriate fields
         $photo->title = Input::get('title');
         $photo->description = Input::get('description');
         $photo->category = Input::get('category');
@@ -83,10 +86,10 @@ class PhotosController extends \BaseController {
 	 */
 	public function show($id)
 	{
-        //Instantiate
+        //Instantiate the record to show
         $photo = Photo::findOrFail($id);
 
-        //Remder show page with the image data
+        //Render show page with the record data
         return View::make('photos.show', compact('photo'));
 	}
 
@@ -99,9 +102,10 @@ class PhotosController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		//Instantiate the record to edit
         $photo = Photo::findOrFail($id);
 
+        //Render edit page with the record data
         return View::make('photos.edit', compact('photo'));
 	}
 
@@ -114,14 +118,16 @@ class PhotosController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		//Instantiate the record to edit
         $photo = Photo::findOrFail($id);
 
+        //Assign the data at the appropriate fields
         $photo->title = Input::get('title');
         $photo->description = Input::get('description');
         $photo->category = Input::get('category');
         $photo->show = Input::get('show');
 
+        //Save the data in to the DB
         $photo->save();
 
         return Redirect::to('photos');
@@ -136,11 +142,13 @@ class PhotosController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		//Instantiate the record to edit
         $photo = Photo::findOrFail($id);
 
+        //Delete the record from the DB
         Photo::find($id)->delete();
 
+        //Redirect to the photo.index page
         return Redirect::to('photos');
 	}
 
