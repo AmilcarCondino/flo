@@ -135,6 +135,8 @@ class PhotosController extends \BaseController {
 		//Instantiate the record to edit
         $photo = Photo::findOrFail($id);
 
+
+
         //Render edit page with the record data
         return View::make('photos.edit', compact('photo'));
 	}
@@ -161,7 +163,7 @@ class PhotosController extends \BaseController {
         if ($photo->save()) {
             //If it's tru, redirect at photos page with a successful message.
             return Redirect::to('photos')
-                ->with('flash_message','El archivo "' . $original_name . '" se ha editado correctamente')
+                ->with('flash_message','La foto "' . $photo->title . '" se ha editado correctamente')
                 ->with('flash_type', 'flash-success');
         }
 
@@ -184,8 +186,19 @@ class PhotosController extends \BaseController {
         //Delete the record from the DB
         Photo::find($id)->delete();
 
-        //Redirect to the photo.index page
-        return Redirect::to('photos');
+        //Check register still exist in the DB
+        if (empty(Photo::find($id))) {
+            //Redirect to the photo.index page
+            return Redirect::to('photos')
+                ->with('flash_message','La foto "' . $photo->title . '" se ha eliminado correctamente')
+                ->with('flash_type', 'flash-success');
+        }
+
+        return Redirect::back()
+            ->withInput()
+            ->with('flash_message','El archivo "' . $original_name . '" no se puedo eliminar. Si el error continua, contacte con su administrador')
+            ->with('flash_type', 'flash-error');
+
 	}
 
 }

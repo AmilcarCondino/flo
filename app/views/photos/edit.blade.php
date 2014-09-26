@@ -6,8 +6,6 @@
 
     <h1>{{ 'Editar foto' }}</h1>
 
-
-
     {{  Form::model($photo, ['method' => 'PATCH', 'route' => ['photos.update', $photo->id]]) }}
 
         <p>

@@ -58,6 +58,13 @@ class Model extends Eloquent {
      */
     public function validate()
     {
+
+        $replace = ($this->getKey() > 0) ? $this->getKey() : '';
+        foreach (static::$rules as $key => $rule)
+        {
+            static::$rules[$key] = str_replace('[id]', $replace, $rule);
+        }
+
         $v = $this->validator->make($this->attributes, static::$rules, static::$messages);
 
         if ($v->passes())
