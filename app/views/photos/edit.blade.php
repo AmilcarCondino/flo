@@ -6,8 +6,11 @@
 
     <h1>{{ 'Editar foto' }}</h1>
 
-    {{  Form::model($photo, ['method' => 'PATCH', 'route' => ['photos.update', $photo->id]]) }}
+    {{  Form::model($photo, ['method' => 'PATCH', 'files' => true, 'route' => ['photos.update', $photo->id]]) }}
 
+        <p>
+            {{ Form::file('image') }}
+        </p>
         <p>
             {{ Form::label('title', 'Titulo: ') }}
             {{ Form::text('title') }}
