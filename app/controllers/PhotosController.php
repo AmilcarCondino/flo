@@ -36,6 +36,7 @@ class PhotosController extends \BaseController {
 	public function store()
 	{
         try {
+
             //Instantiate a new Photo object
             $photo = new Photo;
 
@@ -48,10 +49,7 @@ class PhotosController extends \BaseController {
             //Control if a file was selected
             if (is_null ($image)) {
                 //If not, then go back and send an error message.
-                return Redirect::back()
-                    ->withInput()
-                    ->with('flash_message','Debe seleccionar un archivo')
-                    ->with('flash_type', 'flash-error');
+                throw new Exception('Debe seleccionar un archivo');
             }
 
             //Get the file extension
@@ -93,11 +91,7 @@ class PhotosController extends \BaseController {
             //Check if the if the image was created in the server
             if ( !file_exists("public/uploads/images/{$filename}")) {
                 //Don't exist. Then fails, redirect to create page and send a flash error message.
-                return Redirect::back()
-                    ->withInput()
-                    ->with('flash_message','El archivo "' . $original_name . '" no se puedo guardar. Si el error continua, contacte con su administrador')
-                    ->with('flash_type', 'flash-error');
-
+                throw new Exception('flash_message','El archivo "' . $original_name . '" no se puedo guardar. Si el error continua, contacte con su administrador');
             }
 
             //Try to save in the DB and check for true or false
@@ -110,9 +104,13 @@ class PhotosController extends \BaseController {
 
             //If it's false, don't pass de validation checks. Redirect to the previous page with details of the problem.
             return Redirect::back()->withInput()->withErrors($photo->getErrors());
-        } catch (\Exception $e) { return Redirect::to('photos')
+        }
+        catch (\Exception $e) {
+            return Redirect::back()
+            ->withInput()
             ->with('flash_message', 'Algo salio mal. ' .  $e->getMessage())
-            ->with('flash_type', 'flash-error'); }
+            ->with('flash_type', 'flash-error');
+        }
 	}
 
 	/**
@@ -131,9 +129,12 @@ class PhotosController extends \BaseController {
 
             //Render show page with the record data
             return View::make('photos.show', compact('photo'));
-        } catch (\Exception $e) { return Redirect::to('photos')
-        ->with('flash_message', 'Algo salio mal. Error: ' .  $e->getMessage())
-        ->with('flash_type', 'flash-error'); }
+        }
+        catch (\Exception $e) {
+            return Redirect::to('photos')
+            ->with('flash_message', 'Algo salio mal. Error: ' .  $e->getMessage())
+            ->with('flash_type', 'flash-error');
+        }
 	}
 
 	/**
@@ -147,16 +148,18 @@ class PhotosController extends \BaseController {
 	{
         //Error handler
         try {
+            //Instantiate the record to edit
+            $photo = Photo::findOrFail($id);
 
-		//Instantiate the record to edit
-        $photo = Photo::findOrFail($id);
-
-        //Render edit page with the record data
-        return View::make('photos.edit', compact('photo'));
-        //Error handler response
-        } catch (\Exception $e) { return Redirect::to('photos')
+            //Render edit page with the record data
+            return View::make('photos.edit', compact('photo'));
+            //Error handler response
+        }
+        catch (\Exception $e) {
+            return Redirect::to('photos')
             ->with('flash_message', 'Algo salio mal. Error: ' .  $e->getMessage())
-            ->with('flash_type', 'flash-error'); }
+            ->with('flash_type', 'flash-error');
+        }
 	}
 
 	/**
@@ -177,12 +180,8 @@ class PhotosController extends \BaseController {
             //Instantiate the record to edit
             $photo = Photo::findOrFail($id);
 
-
-
-
-            //Check for a new image
-            if (!empty ($image))
-            {
+           //Check for a new image
+            if (!empty ($image)) {
                 //if exist a new image, validate
                 //Declare the allowed extensions
                 $allowed_extensions = ['jpg', 'jpeg', 'bmp', 'png'];
@@ -194,7 +193,6 @@ class PhotosController extends \BaseController {
                     //If isn't an allowed extension, then throw a new Exceptio, with a reason.
                     throw new Exception('El archivo nos es de un formato valido.');
                 };
-
             }
 
             //Assign the data at the appropriate fields
@@ -203,33 +201,32 @@ class PhotosController extends \BaseController {
             $photo->category = Input::get('category');
             $photo->show = Input::get('show');
 
-            //Try to update the register in the DB and check for true or false
+            //Try to update the register in the DB and check for errors
             if ($photo->save()) {
                 //If it's tru, redirect at photos page with a successful message.
+                 if (!empty ($image)) {
+                    //Target the save path location
+                    $destination_path = 'public/uploads/images/';
 
+                    $photo_name = $photo->img_name;
+                    //Copy the new image
+                    $image->move($destination_path, $photo->img_name);
 
-            if (!empty ($image))
-            {
-                //Target the save path location
-                $destination_path = 'public/uploads/images/';
-
-                $photo_name = $photo->img_name;
-                //Copy the new image
-                $image->move($destination_path, $photo->img_name);
-
-                return Redirect::to('photos')
-                    ->with('flash_message','La foto "' . $photo->title . '" se ha editado correctamente')
-                    ->with('flash_type', 'flash-success');
+                     return Redirect::to('photos')
+                         ->with('flash_message','La foto "' . $photo->title . '" se ha editado correctamente')
+                         ->with('flash_type', 'flash-success');
+                }
             }
-            }
-
-            //If it's false, don't pass de validation checks. Redirect to the previous page with details of the problem.
+            //If errors exist, don't pass de validation checks. Redirect to the previous page with details of the problem.
             return Redirect::back()->withInput()->withErrors($photo->getErrors());
 
-        } catch (\Exception $e) { return Redirect::back()
+        }
+        catch (\Exception $e) {
+            return Redirect::back()
             ->withInput()
             ->with('flash_message', 'Algo salio mal. Error: ' .  $e->getMessage())
-            ->with('flash_type', 'flash-error'); }
+            ->with('flash_type', 'flash-error');
+        }
 	}
 
 	/**
@@ -252,18 +249,17 @@ class PhotosController extends \BaseController {
             //Check register still exist in the DB
             if (empty(Photo::find($id))) {
                 //Redirect to the photo.index page
-                return Redirect::to('photos')
+                    return Redirect::to('photos')
                     ->with('flash_message','La foto "' . $photo->title . '" se ha eliminado correctamente')
                     ->with('flash_type', 'flash-success');
             }
-
-            return Redirect::back()
-                ->withInput()
-                ->with('flash_message','El archivo "' . $original_name . '" no se puedo eliminar. Si el error continua, contacte con su administrador')
-                ->with('flash_type', 'flash-error');
-        } catch (\Exception $e) { return Redirect::to('photos')
+            throw new Exception('El archivo "' . $photo->title . '" no se puedo eliminar. Si el error continua, contacte con su administrador');
+        }
+        catch (\Exception $e) {
+            return Redirect::to('photos')
             ->with('flash_message', 'Algo salio mal. Error: ' .  $e->getMessage())
-            ->with('flash_type', 'flash-error'); }
+            ->with('flash_type', 'flash-error');
+        }
 	}
 
 }

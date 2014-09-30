@@ -34,15 +34,28 @@ class PostsController extends \BaseController {
 	 */
 	public function store()
 	{
-		$post = new Post;
+        try {
+            $post = new Post;
 
-        $post->title = Input::get('title');
-        $post->body = Input::get('body');
+            $post->title = Input::get('title');
+            $post->body = Input::get('body');
 
-        $post->save();
-
-        return Redirect::to('posts');
-
+            //Try to save in the DB and check for errors
+            if ($post->save()) {
+                //If it's tru, redirect at posts page with a successful message.
+                return Redirect::to('posts')
+                    ->with('flash_message','El Post "' . $post->title . '" se ha guardado correctamente')
+                    ->with('flash_type', 'flash-success');
+            }
+            //If it's false, don't pass de validation checks. Redirect to the previous page with details of the problem.
+            return Redirect::back()->withInput()->withErrors($photo->getErrors());
+        }
+        catch (\Exception $e) {
+                return Redirect::back()
+                ->withInput()
+                ->with('flash_message', 'Algo salio mal. ' .  $e->getMessage())
+                ->with('flash_type', 'flash-error');
+        }
 	}
 
 	/**
@@ -54,9 +67,18 @@ class PostsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-        $post = Post::findOrFail($id);
-
-		return View::make('posts.show', compact('post'));
+        //Error handler
+        try {
+            //Instantiate the record to show
+            $post = Post::findOrFail($id);
+            //Render show page with the record data
+		    return View::make('posts.show', compact('post'));
+        }
+        catch (\Exception $e) {
+            return Redirect::to('posts')
+            ->with('flash_message', 'Algo salio mal. Error: ' .  $e->getMessage())
+            ->with('flash_type', 'flash-error');
+        }
 	}
 
 	/**
@@ -68,9 +90,18 @@ class PostsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-        $post = Post::findOrFail($id);
-
-        return View::make('posts.edit', compact('post'));
+        //Error handler
+        try {
+            //Instantiate the record to show
+            $post = Post::findOrFail($id);
+            //Render show page with the record data
+            return View::make('posts.edit', compact('post'));
+        }
+        catch (\Exception $e) {
+            return Redirect::to('posts')
+                ->with('flash_message', 'Algo salio mal. Error: ' .  $e->getMessage())
+                ->with('flash_type', 'flash-error');
+        }
 	}
 
 	/**
@@ -82,14 +113,26 @@ class PostsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		$post = Post::findOrFail($id);
+        try {
+            $post = Post::findOrFail($id);
 
-        $post->title = Input::get('title');
-        $post->body = Input::get('body');
+            $post->title = Input::get('title');
+            $post->body = Input::get('body');
 
-        $post->save();
-
-        return Redirect::to('posts');
+            if ($post->save()) {
+                return Redirect::to('photos')
+                    ->with('flash_message','La foto "' . $photo->title . '" se ha editado correctamente')
+                    ->with('flash_type', 'flash-success');
+            }
+            //If errors exist, don't pass de validation checks. Redirect to the previous page with details of the problem.
+            return Redirect::back()->withInput()->withErrors($photo->getErrors());
+         }
+        catch (\Exception $e) {
+            return Redirect::back()
+                ->withInput()
+                ->with('flash_message', 'Algo salio mal. Error: ' .  $e->getMessage())
+                ->with('flash_type', 'flash-error');
+        }
 	}
 
 	/**
@@ -101,11 +144,27 @@ class PostsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-        $post = Post::findOrFail($id);
+        try {
+            //Instantiate the record to edit
+            $posts = Post::findOrFail($id);
 
-        Post::find($id)->delete();
+            //Delete the record from the DB
+            Post::find($id)->delete();
 
-        return Redirect::to('posts');
+            //Check register still exist in the DB
+            if (empty(Post::find($id))) {
+                //Redirect to the photo.index page
+                return Redirect::to('posts')
+                    ->with('flash_message','El Post "' . $posts->title . '" se ha eliminado correctamente')
+                    ->with('flash_type', 'flash-success');
+            }
+            throw new Exception('El Post "' . $posts->title . '" no se puedo eliminar. Si el error continua, contacte con su administrador');
+        }
+        catch (\Exception $e) {
+            return Redirect::to('posts')
+                ->with('flash_message', 'Algo salio mal. Error: ' .  $e->getMessage())
+                ->with('flash_type', 'flash-error');
+        }
 	}
 
 }
