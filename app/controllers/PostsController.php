@@ -52,9 +52,9 @@ class PostsController extends \BaseController {
         }
         catch (\Exception $e) {
                 return Redirect::back()
-                ->withInput()
-                ->with('flash_message', 'Algo salio mal. ' .  $e->getMessage())
-                ->with('flash_type', 'flash-error');
+                    ->withInput()
+                    ->with('flash_message', 'Algo salio mal. ' .  $e->getMessage())
+                    ->with('flash_type', 'flash-error');
         }
 	}
 
@@ -76,8 +76,8 @@ class PostsController extends \BaseController {
         }
         catch (\Exception $e) {
             return Redirect::to('posts')
-            ->with('flash_message', 'Algo salio mal. Error: ' .  $e->getMessage())
-            ->with('flash_type', 'flash-error');
+                ->with('flash_message', 'Algo salio mal. Error: ' .  $e->getMessage())
+                ->with('flash_type', 'flash-error');
         }
 	}
 
@@ -120,12 +120,12 @@ class PostsController extends \BaseController {
             $post->body = Input::get('body');
 
             if ($post->save()) {
-                return Redirect::to('photos')
-                    ->with('flash_message','La foto "' . $photo->title . '" se ha editado correctamente')
+                return Redirect::to('posts')
+                    ->with('flash_message','El post "' . $post->title . '" se ha editado correctamente')
                     ->with('flash_type', 'flash-success');
             }
             //If errors exist, don't pass de validation checks. Redirect to the previous page with details of the problem.
-            return Redirect::back()->withInput()->withErrors($photo->getErrors());
+            return Redirect::back()->withInput()->withErrors($post->getErrors());
          }
         catch (\Exception $e) {
             return Redirect::back()
