@@ -2,6 +2,8 @@
 
 class PostsController extends \BaseController {
 
+
+   protected $layout = 'layouts.default';
 	/**
 	 * Display a listing of the resource.
 	 * GET /posts
@@ -10,7 +12,7 @@ class PostsController extends \BaseController {
 	 */
 	public function index()
 	{
-        return View::make('posts/index')
+      $this->layout->content =  View::make('posts/index')
             ->with('posts', Post::all());
     }
 
@@ -23,7 +25,7 @@ class PostsController extends \BaseController {
 	public function create()
 	{
 		//Render Create View
-        return View::make('posts.create');
+        $this->layout->content = View::make('posts.create');
 	}
 
 	/**
@@ -72,7 +74,7 @@ class PostsController extends \BaseController {
             //Instantiate the record to show
             $post = Post::findOrFail($id);
             //Render show page with the record data
-		    return View::make('posts.show', compact('post'));
+            $this->layout->content = View::make('posts.show', compact('post'));
         }
         catch (\Exception $e) {
             return Redirect::to('posts')
@@ -95,7 +97,7 @@ class PostsController extends \BaseController {
             //Instantiate the record to show
             $post = Post::findOrFail($id);
             //Render show page with the record data
-            return View::make('posts.edit', compact('post'));
+            $this->layout->content = View::make('posts.edit', compact('post'));
         }
         catch (\Exception $e) {
             return Redirect::to('posts')

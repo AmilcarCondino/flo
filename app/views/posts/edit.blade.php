@@ -1,11 +1,3 @@
-
-
-
-
-
-
-@extends('layouts.default')
-
 @section('content')
 
     <h1>{{ 'Editar registro' }}</h1>

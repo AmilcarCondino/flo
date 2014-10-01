@@ -1,7 +1,3 @@
-
-
-@extends('layouts.default')
-
 @section('content')
 
     <h1>{{ 'Editar foto' }}</h1>

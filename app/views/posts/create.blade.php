@@ -1,5 +1,3 @@
-@extends('layouts.default')
-
 @section('content')
 
     <h1>Add a New Post</h1>

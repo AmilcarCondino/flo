@@ -1,8 +1,3 @@
-
-
-
-@extends('layouts.default')
-
 @section('content')
 
     <h1>{{ $photo->title }}</h1>

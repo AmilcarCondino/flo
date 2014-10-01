@@ -2,6 +2,8 @@
 
 class PhotosController extends \BaseController {
 
+    protected $layout = 'layouts.default';
+
 	/**
 	 * Display a listing of the resource.
 	 * GET /photos
@@ -11,7 +13,7 @@ class PhotosController extends \BaseController {
 	public function index()
 	{
 		//Render the "photos" page, with all records instantiated
-        return View::make('photos/index')
+        $this->layout->content =  View::make('photos/index')
             ->with('photos', Photo::all());
 	}
 
@@ -24,7 +26,7 @@ class PhotosController extends \BaseController {
 	public function create()
 	{
 		//Render the "create" view
-        return View::make('photos.create');
+        $this->layout->content = View::make('photos.create');
 	}
 
 	/**
@@ -128,7 +130,7 @@ class PhotosController extends \BaseController {
             $photo = Photo::findOrFail($id);
 
             //Render show page with the record data
-            return View::make('photos.show', compact('photo'));
+            $this->layout->content = View::make('photos.show', compact('photo'));
         }
         catch (\Exception $e) {
             return Redirect::to('photos')
@@ -152,7 +154,7 @@ class PhotosController extends \BaseController {
             $photo = Photo::findOrFail($id);
 
             //Render edit page with the record data
-            return View::make('photos.edit', compact('photo'));
+            $this->layout->content = View::make('photos.edit', compact('photo'));
             //Error handler response
         }
         catch (\Exception $e) {

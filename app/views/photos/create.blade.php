@@ -1,5 +1,3 @@
-@extends('layouts.default')
-
 @section('content')
 
     <h1>Agreguemos una Nueva Foto</h1>
