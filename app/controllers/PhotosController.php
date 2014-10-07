@@ -130,7 +130,7 @@ class PhotosController extends \BaseController {
             $photo = Photo::findOrFail($id);
 
             //Render show page with the record data
-            $this->layout->content = View::make('photos.show', compact('photo'));
+            $this->layout->content = View::make('photos/show', compact('photo'));
         }
         catch (\Exception $e) {
             return Redirect::to('photos')

@@ -10,14 +10,8 @@
 
             @endforeach
         </u>
-
-
-
-
-    <h2>Crear un Nuevo Post</h2>
-        <p>{{ HTML::link('posts/create', 'Crear') }}</p>
-
-    <p>{{ HTML::link('/', 'Home') }}</p>
+    <br/>
+     <p><a class="btn btn-sm btn-success" href="posts/create" role="button">Crear un nuevo post</a></p>
 
 
 

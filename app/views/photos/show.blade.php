@@ -1,23 +1,27 @@
 @section('content')
 
-    <h1>{{ $photo->title }}</h1>
-
-    <p>{{ link_to("/photos/{$photo->id}/edit", 'Editar') }}</p>
-
-    <p>{{ HTML::image("/uploads/images/{$photo->img_name}", 'foto', array('width' => '500')) }}</p><br />
-
-    <p>{{ $photo->description }}</p>
+    <h2 style="text-align: center">{{ $photo->title }}</h2>
 
 
-    {{ Form::open(['method' => 'delete', 'route' => ['photos.destroy', $photo->id]]) }}
 
-    {{ Form::submit('Eliminar') }}
+    <p><a class="btn btn-success" href="/photos/{{$photo->id}}/edit" role="button">Editar</a></p>
+    <p>
+        {{ Form::open(['method' => 'delete', 'route' => ['photos.destroy', $photo->id]]) }}
 
-    {{ Form::close() }}
+        {{ Form::submit('Eliminar', array('class'=>'btn btn-sm btn-danger')) }}
+
+        {{ Form::close() }}
+    </p>
 
 
-    <p>{{ HTML::link('photos', 'Fotos') }}</p>
-    <p>{{ HTML::link('/', 'Home') }}</p>
+
+    <p style="text-align: center">{{ HTML::image("/uploads/images/{$photo->img_name}", 'foto', array('width' => '500')) }}</p><br />
+
+    <h4 style="text-align: center">{{ $photo->description }}</h4>
+
+
+
+
 @stop
 
 

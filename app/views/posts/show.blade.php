@@ -1,19 +1,18 @@
 @section('content')
 
-    <h1>{{ $post->title }}</h1>
+    <h2 style="text-align: center">{{ $post->title }}</h2>
 
-    <p>{{ $post->body }}</p>
+    <p style="text-align: center;  color: white;">{{ $post->body }}</p>
 
-    <p>{{ link_to("/posts/{$post->id}/edit", 'Editar') }}</p>
+    <p><a class="btn btn-success" href="/posts/{{$post->id}}/edit" role="button">Editar</a></p>
 
     {{ Form::open(['method' => 'delete', 'route' => ['posts.destroy', $post->id]]) }}
 
-        {{ Form::submit('Eliminar') }}
+        {{ Form::submit('Eliminar', array('class'=>'btn btn-sm btn-danger')) }}
 
     {{ Form::close() }}
 
-    <p>{{ HTML::link('posts', 'Posts') }}</p>
-    <p>{{ HTML::link('/', 'Home') }}</p>
+
 @stop
 
 

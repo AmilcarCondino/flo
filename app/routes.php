@@ -13,9 +13,14 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('index');
 });
 
 Route::resource('posts', 'PostsController');
 
 Route::resource('photos', 'PhotosController');
+
+Route::get('/login', function()
+{
+    return View::make('login');
+});

@@ -1,21 +1,22 @@
+
 @section('content')
 
-    <h1>Listado de Fotos</h1>
+    <p><a class="btn btn-success" href="photos/create" role="button">Nueva Foto</a></p>
 
-        <u>
-            @foreach($photos as $photo)
-            <li>
-                {{ link_to("/photos/{$photo->id}", $photo->title) }}
-                {{ HTML::image("/uploads/images/{$photo->img_name}", 'foto', array('width' => '150')) }}
-            </li>
+        <div class="container marketing">
+            <div class="row">
+                <u>
+                    @foreach($photos as $photo)
+                    <div class="col-lg-4">
+                        <a href="/photos/{{ $photo->id }}"><img class="img-rounded" src="/uploads/images/{{$photo->img_name}}" style="width: 150px;" ></a>
 
-            @endforeach
-        </u>
+                        <h5>{{$photo->title}}<h5>
+                    </div>
 
-    <h2>Gurdar una Nueva Foto</h2>
-        <p>{{ HTML::link('photos/create', 'Guardar') }}</p>
 
-    <p>{{ HTML::link('/', 'Home') }}</p>
-
+                    @endforeach
+                </u>
+            </div>
+        </div>
 
 @stop
