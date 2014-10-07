@@ -3,6 +3,8 @@
     <h1>{{ 'Editar registro' }}</h1>
 
     <div class="container" style="color: #303030 ">
+        <div class="row show-grid">
+            <div class="col-md-3">
             {{  Form::model($post, ['method' => 'PATCH', 'route' => ['posts.update', $post->id]]) }}
 
                 <p>
@@ -19,7 +21,11 @@
 
             {{ Form::close() }}
 
+                <p><a class="btn btn-danger" href="/posts" role="button">Cancear</a></p>
+
+            </div>
+        </div>
     </div>
-    <p>{{ HTML::link('posts', 'Cancelar') }}</p>
+
 
 @stop

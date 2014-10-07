@@ -1,9 +1,9 @@
 <?php
 // File: app/src/Providers/HtmlServiceProvider
 
-namespace Acme\Providers;
+namespace bootstrap_forms\Providers;
 
-use Acme\Html\FormBuilder;
+use bootstrap_forms\Html\FormBuilder;
 use Illuminate\Html\HtmlServiceProvider as IlluminateHtmlServiceProvider;
 
 class HtmlServiceProvider extends IlluminateHtmlServiceProvider {

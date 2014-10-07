@@ -1,6 +1,11 @@
 <?php
 // File: app/src/Html/FormBuilder.php
 // ...
+
+namespace bootstrap_forms\Html;
+
+use Illuminate\Html\FormBuilder as IlluminateFormBuilder;
+
 class FormBuilder extends IlluminateFormBuilder {
 
     /**
