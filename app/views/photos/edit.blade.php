@@ -25,8 +25,9 @@
                         {{ Form::openGroup() }}
                     </p>
                     <p>
-                        {{ Form::label('show', 'Mostrar') }}
-                        {{ Form::select('show', [ '0' => 'No', '1' => 'Si' ]) }}
+                        {{  Form::openGroup('show', 'Mostrar') }}
+                            {{ Form::select('show', [ '0' => 'No', '1' => 'Si' ]) }}
+                        {{ Form::openGroup() }}
                     </p>
 
                     <p> {{ Form::submit('Editar Foto', array('class'=>'btn btn-sm btn-success')) }}</p>

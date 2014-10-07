@@ -1,6 +1,4 @@
 <?php
-// File: app/src/Html/FormBuilder.php
-// ...
 
 namespace bootstrap_forms\Html;
 
@@ -14,6 +12,53 @@ class FormBuilder extends IlluminateFormBuilder {
      * @var array
      */
     protected $groupStack = array();
+
+    /**
+     * Open a new form group.
+     *
+     * @param  string  $name
+     * @param  mixed   $label
+     * @param  array   $options
+     * @return string
+     */
+    public function openGroup($name, $label = null, $options = array())
+    {
+        $options = $this->appendClassToOptions('form-group', $options);
+
+        // Append the name of the group to the groupStack.
+        $this->groupStack[] = $name;
+
+        if ($this->hasErrors($name))
+        {
+            // If the form element with the given name has any errors,
+            // apply the 'has-error' class to the group.
+            $options = $this->appendClassToOptions('has-error', $options);
+        }
+
+        // If a label is given, we set it up here. Otherwise, we will just
+        // set it to an empty string.
+        $label = $label ? $this->label($name, $label) : '';
+
+        return '<div'.$this->html->attributes($options).'>'.$label;
+    }
+
+    /**
+     * Close out the last opened form group.
+     *
+     * @return string
+     */
+    public function closeGroup()
+    {
+        // Get the last added name from the groupStack and
+        // remove it from the array.
+        $name = array_pop($this->groupStack);
+
+        // Get the formatted errors for this form group.
+        $errors = $this->getFormattedErrors($name);
+
+        // Append the errors to the group and close it out.
+        return $errors.'</div>';
+    }
 
     /**
      * Create a form input field.
@@ -52,23 +97,6 @@ class FormBuilder extends IlluminateFormBuilder {
     }
 
     /**
-     * Append the given class to the given options array.
-     *
-     * @param  string  $class
-     * @param  array   $options
-     * @return array
-     */
-    private function appendClassToOptions($class, array $options = array())
-    {
-        // If a 'class' is already specified, append the 'form-control'
-        // class to it. Otherwise, set the 'class' to 'form-control'.
-        $options['class'] = isset($options['class']) ? $options['class'].' ' : '';
-        $options['class'] .= $class;
-
-        return $options;
-    }
-
-    /**
      * Create a plain form input field.
      *
      * @param  string  $type
@@ -94,6 +122,138 @@ class FormBuilder extends IlluminateFormBuilder {
     public function plainSelect($name, $list = array(), $selected = null, $options = array())
     {
         return parent::select($name, $list, $selected, $options);
+    }
+
+    /**
+     * Create a checkable input field.
+     *
+     * @param  string  $type
+     * @param  string  $name
+     * @param  mixed   $value
+     * @param  bool    $checked
+     * @param  array   $options
+     * @return string
+     */
+    protected function checkable($type, $name, $value, $checked, $options)
+    {
+        $checked = $this->getCheckedState($type, $name, $value, $checked);
+
+        if ($checked) $options['checked'] = 'checked';
+
+        return parent::input($type, $name, $value, $options);
+    }
+
+    /**
+     * Create a checkbox input field.
+     *
+     * @param  string  $name
+     * @param  mixed   $value
+     * @param  mixed   $label
+     * @param  bool    $checked
+     * @param  array   $options
+     * @return string
+     */
+    public function checkbox($name, $value = 1, $label = null, $checked = null, $options = array())
+    {
+        $checkable = parent::checkbox($name, $value, $checked, $options);
+
+        return $this->wrapCheckable($label, 'checkbox', $checkable);
+    }
+
+    /**
+     * Create a radio button input field.
+     *
+     * @param  string  $name
+     * @param  mixed   $value
+     * @param  mixed   $label
+     * @param  bool    $checked
+     * @param  array   $options
+     * @return string
+     */
+    public function radio($name, $value = null, $label = null, $checked = null, $options = array())
+    {
+        $checkable = parent::radio($name, $value, $checked, $options);
+
+        return $this->wrapCheckable($label, 'radio', $checkable);
+    }
+
+    /**
+     * Create an inline checkbox input field.
+     *
+     * @param  string  $name
+     * @param  mixed   $value
+     * @param  mixed   $label
+     * @param  bool    $checked
+     * @param  array   $options
+     * @return string
+     */
+    public function inlineCheckbox($name, $value = 1, $label = null, $checked = null, $options = array())
+    {
+        $checkable = parent::checkbox($name, $value, $checked, $options);
+
+        return $this->wrapInlineCheckable($label, 'checkbox', $checkable);
+    }
+
+    /**
+     * Create an inline radio button input field.
+     *
+     * @param  string  $name
+     * @param  mixed   $value
+     * @param  mixed   $label
+     * @param  bool    $checked
+     * @param  array   $options
+     * @return string
+     */
+    public function radio($name, $value = null, $label = null, $checked = null, $options = array())
+    {
+        $checkable = parent::radio($name, $value, $checked, $options);
+
+        return $this->wrapInlineCheckable($label, 'radio', $checkable);
+    }
+
+    /**
+     * Create a textarea input field.
+     *
+     * @param  string  $name
+     * @param  string  $value
+     * @param  array   $options
+     * @return string
+     */
+    public function textarea($name, $value = null, $options = array())
+    {
+        $options = $this->appendClassToOptions('form-control', $options);
+
+        return parent::textarea($name, $value, $options);
+    }
+
+    /**
+     * Create a plain textarea input field.
+     *
+     * @param  string  $name
+     * @param  string  $value
+     * @param  array   $options
+     * @return string
+     */
+    public function plainTextarea($name, $value = null, $options = array())
+    {
+        return parent::textarea($name, $value, $options);
+    }
+
+    /**
+     * Append the given class to the given options array.
+     *
+     * @param  string  $class
+     * @param  array   $options
+     * @return array
+     */
+    private function appendClassToOptions($class, array $options = array())
+    {
+        // If a 'class' is already specified, append the 'form-control'
+        // class to it. Otherwise, set the 'class' to 'form-control'.
+        $options['class'] = isset($options['class']) ? $options['class'].' ' : '';
+        $options['class'] .= $class;
+
+        return $options;
     }
 
     /**
@@ -145,50 +305,29 @@ class FormBuilder extends IlluminateFormBuilder {
     }
 
     /**
-     * Open a new form group.
+     * Wrap the given checkable in the necessary wrappers.
      *
-     * @param  string  $name
      * @param  mixed   $label
-     * @param  array   $options
+     * @param  string  $type
+     * @param  string  $checkable
      * @return string
      */
-    public function openGroup($name, $label = null, $options = array())
+    private function wrapCheckable($label, $type, $checkable)
     {
-        $options = $this->appendClassToOptions('form-group', $options);
-
-        // Append the name of the group to the groupStack.
-        $this->groupStack[] = $name;
-
-        if ($this->hasErrors($name))
-        {
-            // If the form element with the given name has any errors,
-            // apply the 'has-error' class to the group.
-            $options = $this->appendClassToOptions('has-error', $options);
-        }
-
-        // If a label is given, we set it up here. Otherwise, we will just
-        // set it to an empty string.
-        $label = $label ? $this->label($name, $label) : '';
-
-        return '<div'.$this->html->attributes($options).'>'.$label;
+        return '<div class="'.$type.'"><label>'.$checkable.' '.$label.'</label></div>';
     }
 
     /**
-     * Close out the last opened form group.
+     * Wrap the given checkable in the necessary inline wrappers.
      *
+     * @param  mixed   $label
+     * @param  string  $type
+     * @param  string  $checkable
      * @return string
      */
-    public function closeGroup()
+    private function wrapInlineCheckable($label, $type, $checkable)
     {
-        // Get the last added name from the groupStack and
-        // remove it from the array.
-        $name = array_pop($this->groupStack);
-
-        // Get the formatted errors for this form group.
-        $errors = $this->getFormattedErrors($name);
-
-        // Append the errors to the group and close it out.
-        return $errors.'</div>';
+        return '<div class="'.$type.'-inline">'.$checkable.' '.$label.'</div>';
     }
 
 }
