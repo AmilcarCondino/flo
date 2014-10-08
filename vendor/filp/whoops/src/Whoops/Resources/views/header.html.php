@@ -15,5 +15,5 @@
   </h3>
   <p class="exc-message">
     <?php echo $tpl->escape($message) ?>
-  </p>
+
 </div>

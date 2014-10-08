@@ -22,6 +22,4 @@ return array(
     'Whoops\\Module' => $vendorDir . '/filp/whoops/src/deprecated/Zend/Module.php',
     'Whoops\\Provider\\Zend\\ExceptionStrategy' => $vendorDir . '/filp/whoops/src/deprecated/Zend/ExceptionStrategy.php',
     'Whoops\\Provider\\Zend\\RouteNotFoundStrategy' => $vendorDir . '/filp/whoops/src/deprecated/Zend/RouteNotFoundStrategy.php',
-    'bootstrap_forms\\Html\\FormBuilder' => $baseDir . '/app/src/Html/FormBuilder.php',
-    'bootstrap_forms\\Providers\\HtmlServiceProvider' => $baseDir . '/app/src/Providers/HtmlServiceProvider.php',
 );

@@ -1,6 +1,6 @@
 <?php
 
-namespace bootstrap_forms\Html;
+namespace BootstrapForms\Html;
 
 use Illuminate\Html\FormBuilder as IlluminateFormBuilder;
 
@@ -204,7 +204,7 @@ class FormBuilder extends IlluminateFormBuilder {
      * @param  array   $options
      * @return string
      */
-    public function radio($name, $value = null, $label = null, $checked = null, $options = array())
+    public function inlineRadio($name, $value = null, $label = null, $checked = null, $options = array())
     {
         $checkable = parent::radio($name, $value, $checked, $options);
 
@@ -265,7 +265,7 @@ class FormBuilder extends IlluminateFormBuilder {
      */
     private function hasErrors($name)
     {
-        if (is_null($session) || ! $this->session->has('errors'))
+        if (is_null($this->session) || ! $this->session->has('errors'))
         {
             // If the session is not set, or the session doesn't contain
             // any errors, the form element does not have any errors
@@ -301,7 +301,7 @@ class FormBuilder extends IlluminateFormBuilder {
         $errors = $this->session->get('errors');
 
         // Return the formatted error message, if the form element has any.
-        return $errors->first($this->transformKey($name), '<p class="help-block">:message</p>');
+        return $errors->first($this->transformKey($name), '<p class="help-block">:message');
     }
 
     /**

@@ -1,7 +1,7 @@
 
 @section('content')
 
-    <p><a class="btn btn-success" href="photos/create" role="button">Nueva Foto</a></p>
+    <a class="btn btn-success" href="photos/create" role="button">Nueva Foto</a>
 
         <div class="container marketing">
             <div class="row">

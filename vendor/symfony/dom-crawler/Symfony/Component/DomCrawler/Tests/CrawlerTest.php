@@ -119,7 +119,7 @@ class CrawlerTest extends \PHPUnit_Framework_TestCase
     public function testAddHtmlContentCharsetGbk()
     {
         $crawler = new Crawler();
-        //gbk encode of <html><p>中文</p></html>
+        //gbk encode of <html>中文</html>
         $crawler->addHtmlContent(base64_decode('PGh0bWw+PHA+1tDOxDwvcD48L2h0bWw+'), 'gbk');
 
         $this->assertEquals('中文', $crawler->filterXPath('//p')->text());
@@ -899,7 +899,7 @@ HTML;
         }
 
         try {
-            $crawler = new Crawler('<p></p>');
+            $crawler = new Crawler('');
             $crawler->filter('p')->children();
             $this->assertTrue(true, '->children() does not trigger a notice if the node has no children');
         } catch (\PHPUnit_Framework_Error_Notice $e) {

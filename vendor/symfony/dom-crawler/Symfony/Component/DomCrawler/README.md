@@ -8,7 +8,7 @@ If you are familiar with jQuery, DomCrawler is a PHP equivalent:
     use Symfony\Component\DomCrawler\Crawler;
 
     $crawler = new Crawler();
-    $crawler->addContent('<html><body><p>Hello World!</p></body></html>');
+    $crawler->addContent('<html><body>Hello World!</body></html>');
 
     print $crawler->filterXPath('descendant-or-self::body/p')->text();
 
@@ -18,7 +18,7 @@ instead of XPath expressions:
     use Symfony\Component\DomCrawler\Crawler;
 
     $crawler = new Crawler();
-    $crawler->addContent('<html><body><p>Hello World!</p></body></html>');
+    $crawler->addContent('<html><body>Hello World!</body></html>');
 
     print $crawler->filter('body > p')->text();
 

@@ -766,7 +766,7 @@ class Crypt_RSA
                 return "<RSAKeyValue>\r\n" .
                        '  <Modulus>' . base64_encode($raw['modulus']) . "</Modulus>\r\n" .
                        '  <Exponent>' . base64_encode($raw['publicExponent']) . "</Exponent>\r\n" .
-                       '  <P>' . base64_encode($raw['prime1']) . "</P>\r\n" .
+                       '  ' . base64_encode($raw['prime1']) . "\r\n" .
                        '  <Q>' . base64_encode($raw['prime2']) . "</Q>\r\n" .
                        '  <DP>' . base64_encode($raw['exponent1']) . "</DP>\r\n" .
                        '  <DQ>' . base64_encode($raw['exponent2']) . "</DQ>\r\n" .

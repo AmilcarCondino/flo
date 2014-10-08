@@ -101,7 +101,7 @@ class PhotosController extends \BaseController {
                 //If it's tru, redirect at photos page with a successful message.
                 return Redirect::to('photos')
                     ->with('flash_message','El archivo "' . $original_name . '" se ha guardado correctamente')
-                    ->with('flash_type', 'flash-success');
+                    ->with('flash_type', 'alert-success');
             }
 
             //If it's false, don't pass de validation checks. Redirect to the previous page with details of the problem.
@@ -111,7 +111,7 @@ class PhotosController extends \BaseController {
             return Redirect::back()
                 ->withInput()
                 ->with('flash_message', 'Algo salio mal. ' .  $e->getMessage())
-                ->with('flash_type', 'flash-error');
+                ->with('flash_type', 'alert-danger');
         }
 	}
 
@@ -135,7 +135,7 @@ class PhotosController extends \BaseController {
         catch (\Exception $e) {
             return Redirect::to('photos')
                 ->with('flash_message', 'Algo salio mal. Error: ' .  $e->getMessage())
-                ->with('flash_type', 'flash-error');
+                ->with('flash_type', 'alert-danger');
         }
 	}
 
@@ -160,7 +160,7 @@ class PhotosController extends \BaseController {
         catch (\Exception $e) {
             return Redirect::to('photos')
                 ->with('flash_message', 'Algo salio mal. Error: ' .  $e->getMessage())
-                ->with('flash_type', 'flash-error');
+                ->with('flash_type', 'alert-danger');
         }
 	}
 
@@ -176,6 +176,12 @@ class PhotosController extends \BaseController {
         //Error handler
         try {
 
+            $foo = [
+                'naranja'   => 'naranja',
+                'rojo'      => 'tomate',
+                'amarillo'  => 'banana'
+            ];
+
             //Instantiate the new image file
             $image = Input::file('image');
 
@@ -190,8 +196,7 @@ class PhotosController extends \BaseController {
                 //Get the file extension
                 $extension = $image->getClientOriginalExtension();
 
-                if ( !in_array($extension, $allowed_extensions))
-                {
+                if ( !in_array($extension, $allowed_extensions)){
                     //If isn't an allowed extension, then throw a new Exceptio, with a reason.
                     throw new Exception('El archivo nos es de un formato valido.');
                 };
@@ -216,7 +221,7 @@ class PhotosController extends \BaseController {
 
                      return Redirect::to('photos')
                          ->with('flash_message','La foto "' . $photo->title . '" se ha editado correctamente')
-                         ->with('flash_type', 'flash-success');
+                         ->with('flash_type', 'alert-success');
                 }
             }
             //If errors exist, don't pass de validation checks. Redirect to the previous page with details of the problem.
@@ -227,7 +232,7 @@ class PhotosController extends \BaseController {
             return Redirect::back()
                 ->withInput()
                 ->with('flash_message', 'Algo salio mal. Error: ' .  $e->getMessage())
-                ->with('flash_type', 'flash-error');
+                ->with('flash_type', 'alert-danger');
         }
 	}
 
@@ -253,14 +258,14 @@ class PhotosController extends \BaseController {
                 //Redirect to the photo.index page
                     return Redirect::to('photos')
                         ->with('flash_message','La foto "' . $photo->title . '" se ha eliminado correctamente')
-                        ->with('flash_type', 'flash-success');
+                        ->with('flash_type', 'alert-success');
             }
             throw new Exception('El archivo "' . $photo->title . '" no se puedo eliminar. Si el error continua, contacte con su administrador');
         }
         catch (\Exception $e) {
             return Redirect::to('photos')
                 ->with('flash_message', 'Algo salio mal. Error: ' .  $e->getMessage())
-                ->with('flash_type', 'flash-error');
+                ->with('flash_type', 'alert-danger');
         }
 	}
 
