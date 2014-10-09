@@ -1,42 +1,46 @@
 @section('content')
-
-    <h1>Agreguemos una Nueva Foto</h1>
-
-    <div class="container" style="color: #303030 ">
-
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Agreguemos una Nueva Foto</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
             {{ Form::open(array('url' => 'photos', 'files' => true)) }}
 
+                {{ Form::file('image') }}
 
-                    {{ Form::file('image') }}
+                {{ Form::openGroup('title', 'Titulo: ') }}
+                {{ Form::text('title') }}
+                {{ Form::closeGroup() }}
 
+                {{ Form::openGroup('description', 'Descripción: ') }}
+                {{ Form::textarea('description') }}
+                {{ Form::closeGroup() }}
 
-                    {{ Form::label('title', 'Titulo: ') }}
-                    {{ Form::text('title') }}
-                    {{ $errors->first('title') }}
+                <div class="row">
+                    <div class="col-sm-2">
+                        {{ Form::label('show', 'Mostrar') }}
+                        {{ Form::select('show', [ '0' => 'No', '1' => 'Si' ], '1') }}
+                    </div>
 
+                </div>
+                {{ Form::openGroup('category', 'Categoria: ') }}
+                {{ Form::text('category') }}
+                {{ Form::closeGroup() }}
 
-                    {{ Form::label('description', 'Descripción: ') }}
-                    {{ Form::textarea('description') }}
-                    {{ $errors->first('description') }}
-
-
-                    {{ Form::label('category', 'Categoria: ') }}
-                    {{ Form::text('category') }}
-                    {{ $errors->first('category') }}
-
-
-                    {{ Form::label('show', 'Mostrar') }}
-                    {{ Form::select('show', [ '0' => 'No', '1' => 'Si' ], '1') }}
-
-
-                    {{ Form::submit('Guardar Foto') }}
-
+                <div class="row">
+                    <div class="col-sm-3">
+                        {{ Form::submit('Guardar Foto', array('class'=>'btn btn-sm-3 btn-success')) }}
+                    </div>
+                    <div class="col-sm-3">
+                        <a class="btn btn-block btn-danger" href="/photos" role="button">Cancelar</a>
+                    </div>
+                </div>
 
             {{ Form::close() }}
-
+        </div>
     </div>
-
-        {{ HTML::link('photos', 'Cancelar') }}
-
-
+</div>
 @stop

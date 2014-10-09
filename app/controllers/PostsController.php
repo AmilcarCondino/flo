@@ -52,7 +52,7 @@ class PostsController extends \BaseController
                     ->with('flash_type', 'alert-success');
             }
             //If it's false, don't pass de validation checks. Redirect to the previous page with details of the problem.
-            return Redirect::back()->withInput()->withErrors($photo->getErrors());
+            return Redirect::back()->withInput()->withErrors($post->getErrors());
         } catch (\Exception $e) {
             return Redirect::back()
                 ->withInput()

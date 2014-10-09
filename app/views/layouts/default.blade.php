@@ -33,15 +33,16 @@
         @yield('content')
     </div>
 
-    <footer>
-        <div class="container">
-            <div class="col-sm-12">
-                Just a c.r.u.d, by KeleK.
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <footer>
+                    Just a c.r.u.d, by KeleK.
+                </footer>
             </div>
         </div>
-    </footer>
+    </div>
     </body>
-
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

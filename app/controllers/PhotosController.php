@@ -196,7 +196,7 @@ class PhotosController extends \BaseController {
                 //Get the file extension
                 $extension = $image->getClientOriginalExtension();
 
-                if ( !in_array($extension, $allowed_extensions)){
+                if ( !in_array(strtolower($extension), $allowed_extensions)){
                     //If isn't an allowed extension, then throw a new Exceptio, with a reason.
                     throw new Exception('El archivo nos es de un formato valido.');
                 };
@@ -218,11 +218,12 @@ class PhotosController extends \BaseController {
                     $photo_name = $photo->img_name;
                     //Copy the new image
                     $image->move($destination_path, $photo->img_name);
+                 }
 
-                     return Redirect::to('photos')
-                         ->with('flash_message','La foto "' . $photo->title . '" se ha editado correctamente')
-                         ->with('flash_type', 'alert-success');
-                }
+                 return Redirect::to('photos')
+                     ->with('flash_message','La foto "' . $photo->title . '" se ha editado correctamente')
+                     ->with('flash_type', 'alert-success');
+
             }
             //If errors exist, don't pass de validation checks. Redirect to the previous page with details of the problem.
             return Redirect::back()->withInput()->withErrors($photo->getErrors());

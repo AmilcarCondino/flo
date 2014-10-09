@@ -14,7 +14,7 @@ class Post extends Model {
         'title.unique' => 'Este Titulo ya existe en otra publicacion.',
         'title.min' => 'El Titulo debe ser mayor a 3 caracteres.',
         'body.required' => 'La descripcion es obligatoria',
-        'bodi.max' => 'La descripcio no puede superar los 140 caracteres'
+        'body.max' => 'La descripcion no puede superar los 140 caracteres'
 
 
     ];

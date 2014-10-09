@@ -1,8 +1,9 @@
 footer {
-    bottom: 10px;
-    position: fixed;
-    text-align: center;
+    bottom: 20px;
+    height: 30px;
+    margin: 0 auto;
     color: darkgray;
     width: 100%;
-    
+    position: fixed;
+
 }
