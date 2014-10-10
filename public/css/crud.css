@@ -1,9 +1,27 @@
-footer {
-    bottom: 20px;
-    height: 30px;
-    margin: 0 auto;
-    color: darkgray;
-    width: 100%;
-    position: fixed;
+body {
+    padding-top: 65px;
+}
 
+
+
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+.footer {
+    position: absolute;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 40px;
+    background-color: #222;
+    padding-top: 10px;
 }

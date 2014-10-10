@@ -1,5 +1,5 @@
 .idea/
 app/config/database.php
 .DS_Store
-
+app/config/app.php
 public/uploads
