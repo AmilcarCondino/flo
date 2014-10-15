@@ -13,29 +13,52 @@
 
     </head>
     <body>
-
-        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/">C.R.U.D</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>{{ HTML::link('/', 'Home') }}</li>
-                        <li>{{ HTML::link('posts', 'Posts') }}</li>
-                        <li>{{ HTML::link('photos', 'Fotos') }}</li>
-                        <li>{{ HTML::link('login', 'Log in') }}</li>
-                    </ul>
+        @if (Auth::check())
+            <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">C.R.U.D</a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li>{{ HTML::link('/', 'Home') }}</li>
+                            <li>{{ HTML::link('posts', 'Posts') }}</li>
+                            <li>{{ HTML::link('photos', 'Fotos') }}</li>
+                            <li>{{ HTML::link('login', 'Log in') }}</li>
+                            <li>{{ HTML::link('logout', 'Log out') }}</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-
+        @else
+            <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">C.R.U.D</a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li>{{ HTML::link('/', 'Home') }}</li>
+                            <li>{{ HTML::link('posts', 'Posts') }}</li>
+                            <li>{{ HTML::link('photos', 'Fotos') }}</li>
+                            <li>{{ HTML::link('login', 'Log in') }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        @endif
 
         <div class="container">
             @if (Session::has('flash_message'))

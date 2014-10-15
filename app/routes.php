@@ -20,7 +20,7 @@ Route::resource('posts', 'PostsController');
 
 Route::resource('photos', 'PhotosController');
 
-Route::get('/login', function()
-{
-    return View::make('login');
-});
+Route::get('login', 'SessionsController@create');
+Route::get('logout', 'SessionsController@destroy');
+
+Route::resource('sessions', 'SessionsController', ['only' => ['index', 'create', 'destroy', 'store']]);

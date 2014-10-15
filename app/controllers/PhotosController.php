@@ -12,9 +12,14 @@ class PhotosController extends \BaseController {
 	 */
 	public function index()
 	{
+        if (Auth::check()) {
 		//Render the "photos" page, with all records instantiated
-        $this->layout->content =  View::make('photos/index')
+        $this->layout->content =  View::make('photos.index')
             ->with('photos', Photo::all());
+        } else {
+            $this->layout->content =  View::make('guest.photos.index')
+                ->with('photos', Photo::all());
+        }
 	}
 
 	/**
@@ -25,8 +30,14 @@ class PhotosController extends \BaseController {
 	 */
 	public function create()
 	{
+        if (Auth::check()) {
 		//Render the "create" view
         $this->layout->content = View::make('photos.create');
+        } else {
+            return Redirect::to('/')
+                ->with('flash_message', 'Solo el administrador puede cargar nuevas fotos')
+                ->with('flash_type', 'alert-danger');
+        }
 	}
 
 	/**
@@ -126,11 +137,19 @@ class PhotosController extends \BaseController {
 	{
         //Error handler
         try {
+            if (Auth::check()) {
             //Instantiate the record to show
             $photo = Photo::findOrFail($id);
 
             //Render show page with the record data
-            $this->layout->content = View::make('photos/show', compact('photo'));
+            $this->layout->content = View::make('photos.show', compact('photo'));
+            } else {
+                //Instantiate the record to show
+                $photo = Photo::findOrFail($id);
+
+                //Render show page with the record data
+                $this->layout->content = View::make('guest.photos.show', compact('photo'));
+            }
         }
         catch (\Exception $e) {
             return Redirect::to('photos')
@@ -150,12 +169,16 @@ class PhotosController extends \BaseController {
 	{
         //Error handler
         try {
-            //Instantiate the record to edit
-            $photo = Photo::findOrFail($id);
+            if (Auth::check()) {
+                //Instantiate the record to edit
+                $photo = Photo::findOrFail($id);
 
-            //Render edit page with the record data
-            $this->layout->content = View::make('photos.edit', compact('photo'));
-            //Error handler response
+                //Render edit page with the record data
+                $this->layout->content = View::make('photos.edit', compact('photo'));
+                //Error handler response
+            } else {
+                throw new Exception('El archivo solo puede ser editado por el administrador');
+            }
         }
         catch (\Exception $e) {
             return Redirect::to('photos')
@@ -175,12 +198,6 @@ class PhotosController extends \BaseController {
 	{
         //Error handler
         try {
-
-            $foo = [
-                'naranja'   => 'naranja',
-                'rojo'      => 'tomate',
-                'amarillo'  => 'banana'
-            ];
 
             //Instantiate the new image file
             $image = Input::file('image');
@@ -248,18 +265,22 @@ class PhotosController extends \BaseController {
 	{
         //Error handler
         try {
-            //Instantiate the record to edit
-            $photo = Photo::findOrFail($id);
+            if (Auth::check()) {
+                //Instantiate the record to edit
+                $photo = Photo::findOrFail($id);
 
-            //Delete the record from the DB
-            Photo::find($id)->delete();
+                //Delete the record from the DB
+                Photo::find($id)->delete();
 
-            //Check register still exist in the DB
-            if (empty(Photo::find($id))) {
-                //Redirect to the photo.index page
-                    return Redirect::to('photos')
-                        ->with('flash_message','La foto "' . $photo->title . '" se ha eliminado correctamente')
-                        ->with('flash_type', 'alert-success');
+                //Check register still exist in the DB
+                if (empty(Photo::find($id))) {
+                    //Redirect to the photo.index page
+                        return Redirect::to('photos')
+                            ->with('flash_message','La foto "' . $photo->title . '" se ha eliminado correctamente')
+                            ->with('flash_type', 'alert-success');
+                } else {
+                    throw new Exception('El archivo solo puede ser eliminado por el administrador');
+                }
             }
             throw new Exception('El archivo "' . $photo->title . '" no se puedo eliminar. Si el error continua, contacte con su administrador');
         }
