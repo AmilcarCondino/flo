@@ -20,7 +20,7 @@ Route::resource('posts', 'PostsController');
 
 Route::resource('photos', 'PhotosController');
 
-Route::get('login', 'SessionsController@create');
-Route::get('logout', 'SessionsController@destroy');
+Route::get('login', 'UsersController@create');
+Route::get('logout', 'UsersController@destroy');
 
-Route::resource('sessions', 'SessionsController', ['only' => ['index', 'create', 'destroy', 'store']]);
+Route::resource('users', 'UsersController', ['only' => ['index', 'create', 'destroy', 'store']]);

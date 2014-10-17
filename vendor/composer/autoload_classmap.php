@@ -1579,7 +1579,7 @@ return array(
     'System_SSH_Agent_Identity' => $vendorDir . '/phpseclib/phpseclib/phpseclib/System/SSH/Agent.php',
     'TestCase' => $baseDir . '/app/tests/TestCase.php',
     'User' => $baseDir . '/app/models/User.php',
-    'UsersController' => $baseDir . '/app/controllers/AdminsController.php',
+    'UsersController' => $baseDir . '/app/controllers/UsersController.php',
     'Way\\Database\\DatabaseServiceProvider' => $vendorDir . '/way/database/src/Way/Database/DatabaseServiceProvider.php',
     'Way\\Database\\Model' => $vendorDir . '/way/database/src/Way/Database/Model.php',
     'Way\\Generators\\Commands\\ControllerGeneratorCommand' => $vendorDir . '/way/generators/src/Way/Generators/Commands/ControllerGeneratorCommand.php',
