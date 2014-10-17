@@ -13,7 +13,7 @@ class PostsController extends \BaseController
      */
     public function index()
     {
-        if (Auth::check()) {
+        if (Auth::user()->isAdmin()) {
         $this->layout->content = View::make('posts.index')
             ->with('posts', Post::all());
         } else {

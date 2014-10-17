@@ -23,4 +23,4 @@ Route::resource('photos', 'PhotosController');
 Route::get('login', 'UsersController@create');
 Route::get('logout', 'UsersController@destroy');
 
-Route::resource('users', 'UsersController', ['only' => ['index', 'create', 'destroy', 'store']]);
+Route::resource('users', 'UsersController', ['only' => ['create', 'destroy', 'store']]);
