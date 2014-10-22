@@ -9,12 +9,12 @@
         <div class="col-sm-4">
             <div class="row">
                 <div class="col-sm-4">
-                    <a class="btn btn-block btn-success" href="/photos/{{$photo->id}}/edit" role="button">Editar</a>
+                    <a class="btn btn-block btn-success" href="/admin/photos/{{$photo->id}}/edit" role="button">Editar</a>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-4">
-                    {{ Form::open(['method' => 'delete', 'route' => ['photos.destroy', $photo->id]]) }}
+                    {{ Form::open(['method' => 'delete', 'route' => ['admin.photos.destroy', $photo->id]]) }}
 
                     {{ Form::submit('Eliminar', array('class'=>'btn btn-sm btn-danger')) }}
 
@@ -36,10 +36,6 @@
         </div>
     </div>
 </div>
-
-
-
-
 @stop
 
 

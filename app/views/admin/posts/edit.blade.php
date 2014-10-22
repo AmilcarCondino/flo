@@ -22,7 +22,7 @@
                     {{ Form::submit('Editar Post', array('class'=>'btn btn-sm btn-success')) }}
                     </div>
                     <div class="col-sm-6">
-                    <a class="btn btn-block btn-danger" href="/posts" role="button">Cancelar</a>
+                    <a class="btn btn-block btn-danger" href="/admin/posts" role="button">Cancelar</a>
                     </div>
                 </div>
 

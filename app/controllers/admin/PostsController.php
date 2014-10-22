@@ -3,7 +3,10 @@
 use BaseController;
 use View;
 use Post;
-
+use Input;
+use Redirect;
+use DB;
+use Exception;
 
 class PostsController extends BaseController
 {
@@ -52,7 +55,7 @@ class PostsController extends BaseController
             //Try to save in the DB and check for errors
             if ($post->save()) {
                 //If it's tru, redirect at posts page with a successful message.
-                return Redirect::to('admin.posts')
+                return Redirect::to('admin/posts')
                     ->with('flash_message', 'El Post "' . $post->title . '" se ha guardado correctamente')
                     ->with('flash_type', 'alert-success');
             }
@@ -126,7 +129,7 @@ class PostsController extends BaseController
             $post->body = Input::get('body');
 
             if ($post->save()) {
-                return Redirect::to('admin.posts')
+                return Redirect::to('admin/posts')
                     ->with('flash_message', 'El post "' . $post->title . '" se ha editado correctamente')
                     ->with('flash_type', 'alert-success');
             }
@@ -159,7 +162,7 @@ class PostsController extends BaseController
             //Check register still exist in the DB
             if (empty(Post::find($id))) {
                 //Redirect to the photo.index page
-                return Redirect::to('admin.posts')
+                return Redirect::to('admin/posts')
                     ->with('flash_message', 'El Post "' . $posts->title . '" se ha eliminado correctamente')
                     ->with('flash_type', 'alert-success');
             }

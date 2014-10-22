@@ -19,8 +19,8 @@ Route::get('/', function()
 Route::group(array('prefix' => 'admin', 'before' => array('auth|admin')), function()
 {
 
-    Route::resource('/posts', 'Admin\\PostsController');
-    Route::resource('/photos', 'Admin\\PhotosController');
+    Route::resource('posts', 'Admin\\PostsController');
+    Route::resource('photos', 'Admin\\PhotosController');
 
 });
 

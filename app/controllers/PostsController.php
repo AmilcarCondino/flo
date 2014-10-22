@@ -54,7 +54,7 @@ class PostsController extends \BaseController
             //Instantiate the record to show
             $post = Post::findOrFail($id);
             //Render show page with the record data
-            $this->layout->content = View::make('posts.show', compact('post'));
+            $this->layout->content = View::make('guest.posts.show', compact('post'));
         } catch (\Exception $e) {
             return Redirect::to('posts')
                 ->with('flash_message', 'Algo salio mal. Error: ' . $e->getMessage())

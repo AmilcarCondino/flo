@@ -1,5 +1,14 @@
 <?php namespace Admin;
 
+use BaseController;
+use View;
+use Photo;
+use Input;
+use Redirect;
+use DB;
+use Exception;
+
+
 class PhotosController extends \BaseController {
 
     protected $layout = 'layouts.default';
@@ -12,14 +21,9 @@ class PhotosController extends \BaseController {
 	 */
 	public function index()
 	{
-        if (Auth::user()->isAdmin()) {
-		//Render the "photos" page, with all records instantiated
-        $this->layout->content =  View::make('photos.index')
-            ->with('photos', Photo::all());
-        } else {
-            $this->layout->content =  View::make('guest.photos.index')
-                ->with('photos', Photo::all());
-        }
+	//Render the "photos" page, with all records instantiated
+    $this->layout->content =  View::make('admin.photos.index')
+        ->with('photos', Photo::all());
 	}
 
 	/**
@@ -30,14 +34,8 @@ class PhotosController extends \BaseController {
 	 */
 	public function create()
 	{
-        if (Auth::user()->isAdmin()) {
 		//Render the "create" view
-        $this->layout->content = View::make('photos.create');
-        } else {
-            return Redirect::to('/')
-                ->with('flash_message', 'Solo el administrador puede cargar nuevas fotos')
-                ->with('flash_type', 'alert-danger');
-        }
+        $this->layout->content = View::make('admin.photos.create');
 	}
 
 	/**
@@ -110,7 +108,7 @@ class PhotosController extends \BaseController {
             //Try to save in the DB and check for true or false
             if ($photo->save()) {
                 //If it's tru, redirect at photos page with a successful message.
-                return Redirect::to('photos')
+                return Redirect::to('admin/photos')
                     ->with('flash_message','El archivo "' . $original_name . '" se ha guardado correctamente')
                     ->with('flash_type', 'alert-success');
             }
@@ -137,22 +135,13 @@ class PhotosController extends \BaseController {
 	{
         //Error handler
         try {
-            if (Auth::user()->isAdmin()) {
             //Instantiate the record to show
             $photo = Photo::findOrFail($id);
 
             //Render show page with the record data
-            $this->layout->content = View::make('photos.show', compact('photo'));
-            } else {
-                //Instantiate the record to show
-                $photo = Photo::findOrFail($id);
-
-                //Render show page with the record data
-                $this->layout->content = View::make('guest.photos.show', compact('photo'));
-            }
-        }
-        catch (\Exception $e) {
-            return Redirect::to('photos')
+            $this->layout->content = View::make('admin.photos.show', compact('photo'));
+        }catch (\Exception $e) {
+            return Redirect::to('admin.photos')
                 ->with('flash_message', 'Algo salio mal. Error: ' .  $e->getMessage())
                 ->with('flash_type', 'alert-danger');
         }
@@ -169,19 +158,15 @@ class PhotosController extends \BaseController {
 	{
         //Error handler
         try {
-            if (Auth::user()->isAdmin()) {
-                //Instantiate the record to edit
-                $photo = Photo::findOrFail($id);
+            //Instantiate the record to edit
+            $photo = Photo::findOrFail($id);
 
-                //Render edit page with the record data
-                $this->layout->content = View::make('photos.edit', compact('photo'));
-                //Error handler response
-            } else {
-                throw new Exception('El archivo solo puede ser editado por el administrador');
-            }
+            //Render edit page with the record data
+            $this->layout->content = View::make('admin.photos.edit', compact('photo'));
+            //Error handler response
         }
         catch (\Exception $e) {
-            return Redirect::to('photos')
+            return Redirect::to('admin/photos')
                 ->with('flash_message', 'Algo salio mal. Error: ' .  $e->getMessage())
                 ->with('flash_type', 'alert-danger');
         }
@@ -237,7 +222,7 @@ class PhotosController extends \BaseController {
                     $image->move($destination_path, $photo->img_name);
                  }
 
-                 return Redirect::to('photos')
+                 return Redirect::to('admin/photos')
                      ->with('flash_message','La foto "' . $photo->title . '" se ha editado correctamente')
                      ->with('flash_type', 'alert-success');
 
@@ -265,22 +250,18 @@ class PhotosController extends \BaseController {
 	{
         //Error handler
         try {
-            if (Auth::user()->isAdmin()) {
-                //Instantiate the record to edit
-                $photo = Photo::findOrFail($id);
+            //Instantiate the record to edit
+            $photo = Photo::findOrFail($id);
 
-                //Delete the record from the DB
-                Photo::find($id)->delete();
+            //Delete the record from the DB
+            Photo::find($id)->delete();
 
-                //Check register still exist in the DB
-                if (empty(Photo::find($id))) {
-                    //Redirect to the photo.index page
-                        return Redirect::to('photos')
-                            ->with('flash_message','La foto "' . $photo->title . '" se ha eliminado correctamente')
-                            ->with('flash_type', 'alert-success');
-                } else {
-                    throw new Exception('El archivo solo puede ser eliminado por el administrador');
-                }
+            //Check register still exist in the DB
+            if (empty(Photo::find($id))) {
+                //Redirect to the photo.index page
+                    return Redirect::to('admin/photos')
+                        ->with('flash_message','La foto "' . $photo->title . '" se ha eliminado correctamente')
+                        ->with('flash_type', 'alert-success');
             }
             throw new Exception('El archivo "' . $photo->title . '" no se puedo eliminar. Si el error continua, contacte con su administrador');
         }

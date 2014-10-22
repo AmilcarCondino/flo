@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row show-grid">
             <div class="col-md-4">
-                {{  Form::model($photo, ['method' => 'PATCH', 'files' => true, 'route' => ['photos.update', $photo->id]]) }}
+                {{  Form::model($photo, ['method' => 'PATCH', 'files' => true, 'route' => ['admin.photos.update', $photo->id]]) }}
 
                     {{ Form::file('image') }}
 
@@ -27,7 +27,7 @@
                             {{ Form::submit('Editar Foto', array('class'=>'btn btn-sm btn-success')) }}
                         </div>
                         <div class="col-sm-6">
-                            <a class="btn btn-block btn-danger" href="/photos" role="button">Cancear</a>
+                            <a class="btn btn-block btn-danger" href="/photos" role="button">Cancelar</a>
                         </div>
                     </div>
 

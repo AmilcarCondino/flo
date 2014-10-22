@@ -5,7 +5,7 @@
         <div class="col-sm-4">
             <div class="row">
                 <div class="col-sm-4">
-                    <a class="btn btn-block btn-success" href="admin/posts/{{$post->id}}/edit" role="button">Editar</a>
+                    <a class="btn btn-block btn-success" href="{{$post->id}}/edit" role="button">Editar</a>
                 </div>
             </div>
             <div class="row">

@@ -7,7 +7,7 @@
     </div>
     <div class="row">
         <div class="col-sm-4">
-            {{  Form::open(array('url' => 'admin/posts' )) }}
+            {{  Form::open(array('url' => 'admin.posts.store' )) }}
 
             {{ Form::openGroup('title', 'Titulo: ') }}
             {{ Form::text('title') }}

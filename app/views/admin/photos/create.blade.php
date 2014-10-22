@@ -7,7 +7,7 @@
     </div>
     <div class="row">
         <div class="col-sm-6">
-            {{ Form::open(array('url' => 'photos', 'files' => true)) }}
+            {{ Form::open(array('url' => 'admin/photos', 'files' => true)) }}
 
                 {{ Form::file('image') }}
 
@@ -35,7 +35,7 @@
                         {{ Form::submit('Guardar Foto', array('class'=>'btn btn-sm-3 btn-success')) }}
                     </div>
                     <div class="col-sm-3">
-                        <a class="btn btn-block btn-danger" href="/photos" role="button">Cancelar</a>
+                        <a class="btn btn-block btn-danger" href="/admin/photos" role="button">Cancelar</a>
                     </div>
                 </div>
 
