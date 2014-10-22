@@ -5,12 +5,12 @@
         <div class="col-sm-4">
             <div class="row">
                 <div class="col-sm-4">
-                    <a class="btn btn-block btn-success" href="/posts/{{$post->id}}/edit" role="button">Editar</a>
+                    <a class="btn btn-block btn-success" href="admin/posts/{{$post->id}}/edit" role="button">Editar</a>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-4">
-                    {{ Form::open(['method' => 'delete', 'route' => ['posts.destroy', $post->id]]) }}
+                    {{ Form::open(['method' => 'delete', 'route' => ['admin.posts.destroy', $post->id]]) }}
                         {{ Form::submit('Eliminar', array('class'=>'btn btn-block btn-sm-4 btn-danger')) }}
                     {{ Form::close() }}
                 </div>

@@ -10,7 +10,7 @@
             <ul class="list-group">
                 @foreach($posts as $post)
                     <li class="list-group-item list-group-item-info">
-                        {{ link_to("/posts/{$post->id}", $post->title) }}
+                        {{ link_to("admin/posts/{$post->id}", $post->title) }}
                     </li>
                 @endforeach
             </ul>

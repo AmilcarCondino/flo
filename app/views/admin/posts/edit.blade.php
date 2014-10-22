@@ -7,7 +7,7 @@
     </div>
     <div class="row">
         <div class="col-sm-4">
-            {{  Form::model($post, ['method' => 'PATCH', 'route' => ['posts.update', $post->id]]) }}
+            {{  Form::model($post, ['method' => 'PATCH', 'route' => ['admin.posts.update', $post->id]]) }}
 
                 {{ Form::openGroup('title', 'Titlo: ') }}<br />
                     {{ Form::text('title') }}

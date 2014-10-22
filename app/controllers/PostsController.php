@@ -13,13 +13,10 @@ class PostsController extends \BaseController
      */
     public function index()
     {
-        if (Auth::user()->isAdmin()) {
-        $this->layout->content = View::make('posts.index')
-            ->with('posts', Post::all());
-        } else {
+
         $this->layout->content = View::make('guest.posts.index')
             ->with('posts', Post::all());
-        }
+
     }
 
     /**
@@ -30,14 +27,7 @@ class PostsController extends \BaseController
      */
     public function create()
     {
-        if (Auth::check()) {
-            //Render Create View
-            $this->layout->content = View::make('posts.create');
-        } else {
-            return Redirect::to('/')
-                ->with('flash_message', 'Solo el administrador puede crear nuevos articulos')
-                ->with('flash_type', 'alert-danger');
-        }
+
     }
 
     /**
@@ -48,27 +38,6 @@ class PostsController extends \BaseController
      */
     public function store()
     {
-        try {
-            $post = new Post;
-
-            $post->title = Input::get('title');
-            $post->body = Input::get('body');
-
-            //Try to save in the DB and check for errors
-            if ($post->save()) {
-                //If it's tru, redirect at posts page with a successful message.
-                return Redirect::to('posts')
-                    ->with('flash_message', 'El Post "' . $post->title . '" se ha guardado correctamente')
-                    ->with('flash_type', 'alert-success');
-            }
-            //If it's false, don't pass de validation checks. Redirect to the previous page with details of the problem.
-            return Redirect::back()->withInput()->withErrors($post->getErrors());
-        } catch (\Exception $e) {
-            return Redirect::back()
-                ->withInput()
-                ->with('flash_message', 'Algo salio mal. ' . $e->getMessage())
-                ->with('flash_type', 'alert-danger');
-        }
     }
 
     /**
@@ -82,17 +51,10 @@ class PostsController extends \BaseController
     {
         //Error handler
         try {
-            if (Auth::check()) {
             //Instantiate the record to show
             $post = Post::findOrFail($id);
             //Render show page with the record data
             $this->layout->content = View::make('posts.show', compact('post'));
-            } else {
-                //Instantiate the record to show
-                $post = Post::findOrFail($id);
-                //Render show page with the record data
-                $this->layout->content = View::make('guest.posts.show', compact('post'));
-            }
         } catch (\Exception $e) {
             return Redirect::to('posts')
                 ->with('flash_message', 'Algo salio mal. Error: ' . $e->getMessage())
@@ -109,21 +71,6 @@ class PostsController extends \BaseController
      */
     public function edit($id)
     {
-        //Error handler
-        try {
-            if (Auth::check()) {
-                //Instantiate the record to show
-                $post = Post::findOrFail($id);
-                //Render show page with the record data
-                $this->layout->content = View::make('posts.edit', compact('post'));
-            } else {
-                throw new Exception('El Post solo puede ser modificado por el administrador');
-            }
-        } catch (\Exception $e) {
-            return Redirect::to('posts')
-                ->with('flash_message', 'Algo salio mal. Error: ' . $e->getMessage())
-                ->with('flash_type', 'alert-danger');
-        }
     }
 
     /**
@@ -135,25 +82,6 @@ class PostsController extends \BaseController
      */
     public function update($id)
     {
-        try {
-            $post = Post::findOrFail($id);
-
-            $post->title = Input::get('title');
-            $post->body = Input::get('body');
-
-            if ($post->save()) {
-                return Redirect::to('posts')
-                    ->with('flash_message', 'El post "' . $post->title . '" se ha editado correctamente')
-                    ->with('flash_type', 'alert-success');
-            }
-            //If errors exist, don't pass de validation checks. Redirect to the previous page with details of the problem.
-            return Redirect::back()->withInput()->withErrors($post->getErrors());
-        } catch (\Exception $e) {
-            return Redirect::back()
-                ->withInput()
-                ->with('flash_message', 'Algo salio mal. Error: ' . $e->getMessage())
-                ->with('flash_type', 'alert-danger');
-        }
     }
 
     /**
@@ -165,30 +93,6 @@ class PostsController extends \BaseController
      */
     public function destroy($id)
     {
-        try {
-            if (Auth::check()) {
-                //Instantiate the record to edit
-                $posts = Post::findOrFail($id);
 
-                //Delete the record from the DB
-                Post::find($id)->delete();
-
-                //Check register still exist in the DB
-                if (empty(Post::find($id))) {
-                    //Redirect to the photo.index page
-                    return Redirect::to('posts')
-                        ->with('flash_message', 'El Post "' . $posts->title . '" se ha eliminado correctamente')
-                        ->with('flash_type', 'alert-success');
-                } else {
-                    throw new Exception('El Post solo puede ser eliminado por el administrador');
-                }
-            }
-            throw new Exception('El Post "' . $posts->title . '" no se puedo eliminar. Si el error continua, contacte con su administrador');
-        } catch (\Exception $e) {
-            return Redirect::to('posts')
-                ->with('flash_message', 'Algo salio mal. Error: ' . $e->getMessage())
-                ->with('flash_type', 'alert-danger');
-        }
     }
-
 }

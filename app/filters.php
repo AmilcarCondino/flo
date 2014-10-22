@@ -105,3 +105,12 @@ Route::filter('admin', function($route, $request)
     }
 });
 
+
+
+Route::filter('auth.admin', function($route, $request, $args){
+    // Check if the user is logged in, if not redirect to login url
+    if (Auth::guest()) return Redirect::guest('login');
+
+    // Check user type admin/general etc
+    if (Auth::user()->type != 'admin') return Redirect::to('/'); // home
+});

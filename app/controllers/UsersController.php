@@ -52,11 +52,6 @@ class UsersController extends \BaseController {
             ->with('flash_type', 'alert-success');
 	}
 
-    public function isAdmin()
-    {
 
-        $this->user === 'admin';
-
-    }
 
 }

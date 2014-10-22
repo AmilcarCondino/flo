@@ -14,7 +14,7 @@
             {{ Form::closeGroup() }}
 
             {{ Form::openGroup('password', 'Password: ') }}
-            {{ Form::text('password') }}
+            {{ Form::password('password') }}
             {{ Form::closeGroup() }}
 
             <div class="row">

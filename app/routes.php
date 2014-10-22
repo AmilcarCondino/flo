@@ -16,6 +16,14 @@ Route::get('/', function()
 	return View::make('index');
 });
 
+Route::group(array('prefix' => 'admin', 'before' => array('auth|admin')), function()
+{
+
+    Route::resource('/posts', 'Admin\\PostsController');
+    Route::resource('/photos', 'Admin\\PhotosController');
+
+});
+
 Route::resource('posts', 'PostsController');
 
 Route::resource('photos', 'PhotosController');
