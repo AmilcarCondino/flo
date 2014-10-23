@@ -18,10 +18,11 @@ Route::get('/', function()
 
 Route::group(array('prefix' => 'admin', 'before' => array('auth|admin')), function()
 {
-
     Route::resource('posts', 'Admin\\PostsController');
     Route::resource('photos', 'Admin\\PhotosController');
-
+    Route::resource('categories', 'Admin\\CategoriesController');
+    Route::resource('collections', 'Admin\\CollectionsController');
+    Route::resource('tags', 'Admin\\TagsController');
 });
 
 Route::resource('posts', 'PostsController');
@@ -32,3 +33,8 @@ Route::get('login', 'UsersController@create');
 Route::get('logout', 'UsersController@destroy');
 
 Route::resource('users', 'UsersController', ['only' => ['create', 'destroy', 'store']]);
+
+//Routes for complete de photos crud
+//Route::resource('categories', 'CategoriesController');
+//Route::resource('collections', 'CollectionsController');
+//Route::resource('tags', 'TagsController');

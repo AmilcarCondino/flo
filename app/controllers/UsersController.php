@@ -22,7 +22,7 @@ class UsersController extends \BaseController {
             $input = Input::all();
 
             $attempt = Auth::attempt([
-                'user' => $input['user'],
+                'username' => $input['user'],
                 'password' => $input['password']
             ]);
 

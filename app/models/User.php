@@ -26,7 +26,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     public function isAdmin()
     {
 
-        return Auth::user()->user === 'admin';
+        return Auth::user()->rol === 'admin';
 
     }
 

@@ -32,6 +32,9 @@
                         <li>{{ HTML::link('admin/photos', 'Fotos') }}</li>
                         <li>{{ HTML::link('login', 'Log in') }}</li>
                         <li>{{ HTML::link('logout', 'Log out') }}</li>
+                        <li>{{ HTML::link('admin/categories', 'categorias') }}</li>
+                        <li>{{ HTML::link('admin/collections', 'colecciones') }}</li>
+                        <li>{{ HTML::link('admin/tags', 'etiquetas') }}</li>
                     </ul>
                     @else
                     <ul class="nav navbar-nav">
