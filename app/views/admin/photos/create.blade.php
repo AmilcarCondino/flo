@@ -12,11 +12,11 @@
                 {{ Form::file('image') }}
 
                 {{ Form::openGroup('title', 'Titulo: ') }}
-                {{ Form::text('title') }}
+                    {{ Form::text('title') }}
                 {{ Form::closeGroup() }}
 
                 {{ Form::openGroup('description', 'Descripción: ') }}
-                {{ Form::textarea('description') }}
+                    {{ Form::textarea('description') }}
                 {{ Form::closeGroup() }}
 
                 <div class="row">
@@ -26,8 +26,17 @@
                     </div>
 
                 </div>
+
                 {{ Form::openGroup('category', 'Categoria: ') }}
-                {{ Form::text('category') }}
+                    {{ Form::select('category', $categories) }}
+                {{ Form::closeGroup() }}
+
+                {{ Form::openGroup('collection', 'Coleccion: ') }}
+                    {{ Form::select('collection', $collections) }}
+                {{ Form::closeGroup() }}
+
+                {{ Form::openGroup('tag', 'Etiquetas: ') }}
+                    {{ Form::select('tag', $tags) }}
                 {{ Form::closeGroup() }}
 
                 <div class="row">

@@ -7,6 +7,9 @@ use Input;
 use Redirect;
 use DB;
 use Exception;
+use Category;
+use Tag;
+Use Collection;
 
 
 class PhotosController extends \BaseController {
@@ -34,8 +37,12 @@ class PhotosController extends \BaseController {
 	 */
 	public function create()
 	{
-		//Render the "create" view
-        $this->layout->content = View::make('admin.photos.create');
+        $categories = Category::lists('title', 'id');
+        $tags = Tag::lists('title', 'id');
+        $collections = Collection::lists('title', 'id');
+
+        //Render the "create" view
+        $this->layout->content = View::make('admin.photos.create', compact('categories', 'tags', 'collections'));
 	}
 
 	/**
@@ -93,6 +100,8 @@ class PhotosController extends \BaseController {
             $photo->category = Input::get('category');
             $photo->show = Input::get('show');
             $photo->img_name = $filename;
+            $photo->tags = Input::get('tag');
+            $photo->collection = Input::get('collection');
 
 
             //Move the image in to the server
@@ -158,11 +167,16 @@ class PhotosController extends \BaseController {
 	{
         //Error handler
         try {
+
+            $categories = Category::lists('title', 'id');
+            $tags = Tag::lists('title', 'id');
+            $collections = Collection::lists('title', 'id');
+
             //Instantiate the record to edit
             $photo = Photo::findOrFail($id);
 
             //Render edit page with the record data
-            $this->layout->content = View::make('admin.photos.edit', compact('photo'));
+            $this->layout->content = View::make('admin.photos.edit', compact('photo', 'categories', 'tags', 'collections'));
             //Error handler response
         }
         catch (\Exception $e) {
@@ -209,6 +223,8 @@ class PhotosController extends \BaseController {
             $photo->description = Input::get('description');
             $photo->category = Input::get('category');
             $photo->show = Input::get('show');
+            $photo->tags = Input::get('tag');
+            $photo->collection = Input::get('collection');
 
             //Try to update the register in the DB and check for errors
             if ($photo->save()) {
