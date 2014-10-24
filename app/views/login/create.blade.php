@@ -7,14 +7,14 @@
     </div>
     <div class="row">
         <div class="col-sm-4">
-            {{  Form::open(array('route' => 'users.store' )) }}
+            {{  Form::open(array('route' => 'sessions.store' )) }}
 
-            {{ Form::openGroup('user', 'Usuario: ') }}
-            {{ Form::text('user') }}
+            {{ Form::openGroup('username', 'Usuario: ') }}
+                {{ Form::text('username') }}
             {{ Form::closeGroup() }}
 
             {{ Form::openGroup('password', 'Password: ') }}
-            {{ Form::password('password') }}
+                {{ Form::password('password') }}
             {{ Form::closeGroup() }}
 
             <div class="row">

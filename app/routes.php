@@ -11,11 +11,14 @@
 |
 */
 
+//Home index route
 Route::get('/', function()
 {
 	return View::make('index');
 });
 
+
+//Admin rotes
 Route::group(array('prefix' => 'admin', 'before' => array('auth|admin')), function()
 {
     Route::resource('posts', 'Admin\\PostsController');
@@ -25,16 +28,18 @@ Route::group(array('prefix' => 'admin', 'before' => array('auth|admin')), functi
     Route::resource('tags', 'Admin\\TagsController');
 });
 
-Route::resource('posts', 'PostsController');
 
+//Public routes
+Route::resource('posts', 'PostsController');
 Route::resource('photos', 'PhotosController');
 
-Route::get('login', 'UsersController@create');
-Route::get('logout', 'UsersController@destroy');
+Route::resource('posts', 'PostsController', ['only' => ['index', 'show']]);
+Route::resource('photos', 'PhotosController', ['only' => ['index', 'show']]);
 
-Route::resource('users', 'UsersController', ['only' => ['create', 'destroy', 'store']]);
 
-//Routes for complete de photos crud
-//Route::resource('categories', 'CategoriesController');
-//Route::resource('collections', 'CollectionsController');
-//Route::resource('tags', 'TagsController');
+//Log in and atuth routes
+Route::get('login', 'SessionsController@create');
+Route::get('logout', 'SessionsController@destroy');
+
+Route::resource('sessions', 'SessionsController', ['only' => ['create', 'destroy', 'store']]);
+

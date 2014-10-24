@@ -18,28 +18,6 @@ class PhotosController extends \BaseController {
 	}
 
 	/**
-	 * Show the form for creating a new resource.
-	 * GET /photos/create
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 * POST /photos
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-
-	}
-
-	/**
 	 * Display the specified resource.
 	 * GET /photos/{id}
 	 *
@@ -60,42 +38,6 @@ class PhotosController extends \BaseController {
                 ->with('flash_message', 'Algo salio mal. Error: ' .  $e->getMessage())
                 ->with('flash_type', 'alert-danger');
         }
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 * GET /photos/{id}/edit
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 * PUT /photos/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 * DELETE /photos/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-
 	}
 
 }

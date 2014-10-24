@@ -7,7 +7,7 @@ class SessionsController extends \BaseController {
 
 	public function create()
 	{
-        $this->layout->content = View::make('sessions.create');
+        $this->layout->content = View::make('login.create');
 	}
 
 	/**
@@ -22,13 +22,13 @@ class SessionsController extends \BaseController {
             $input = Input::all();
 
             $attempt = Auth::attempt([
-                'user' => $input['user'],
+                'username' => $input['username'],
                 'password' => $input['password']
             ]);
 
             if ($attempt) {
                 return Redirect::to('/')
-                    ->with('flash_message', 'Bienvenido '. Auth::user()->user)
+                    ->with('flash_message', 'Bienvenido '. Auth::user()->username)
                     ->with('flash_type', 'alert-success');
             } throw new Exception('La combinacion de usuario y contraseña no es valida.');
         } catch (\Exception $e) {
@@ -43,12 +43,12 @@ class SessionsController extends \BaseController {
 	public function destroy()
 	{
 
-        $user = Auth::user()->user;
+        $username = Auth::user()->username;
 
         Auth::logout();
 
         return Redirect::to('/')
-            ->with('flash_message', 'Adios ' . $user)
+            ->with('flash_message', 'Adios ' . $username)
             ->with('flash_type', 'alert-success');
 	}
 
