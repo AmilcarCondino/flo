@@ -27,7 +27,7 @@ class SessionsController extends \BaseController {
             ]);
 
             if ($attempt) {
-                return Redirect::to('/')
+                return Redirect::to('/admin')
                     ->with('flash_message', 'Bienvenido '. Auth::user()->username)
                     ->with('flash_type', 'alert-success');
             } throw new Exception('La combinacion de usuario y contraseña no es valida.');

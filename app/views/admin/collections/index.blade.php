@@ -12,7 +12,7 @@
                     <li class="list-group-item list-group-item-info">
                         <div class="row">
                             <div class="col-sm-6">
-                                {{ link_to("admin/collections/{$collection->id}", $collection->title) }}
+                                {{ $collection->title }}
                             </div>
                             <div class="col-sm-3">
                                 <a class="btn btn-block btn-success" href="collections/{{$collection->id}}/edit" role="button">Editar</a>

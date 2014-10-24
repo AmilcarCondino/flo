@@ -11,7 +11,7 @@ use Exception;
 class PostsController extends BaseController
 {
 
-    protected $layout = 'layouts.default';
+    protected $layout = 'layouts.admin';
 
     /**
      * Display a listing of the resource.

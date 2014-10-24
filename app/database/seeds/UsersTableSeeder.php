@@ -10,11 +10,11 @@ class UsersTableSeeder extends Seeder {
 
         User::create([
 
-            'username' => 'kelek',
+            'username' => 'admin',
             'password' => Hash::make('456'),
-            'email' => 'feakelek@gmail.com',
+            'email' => 'somemail@gmail.com',
             'rol' => 'admin',
-            'first_name' => 'Amilcar',
+            'first_name' => 'Jhon Doe',
             'country' => 'Argentina',
             'city' => 'CABA',
             'gender' => 'Masculino',

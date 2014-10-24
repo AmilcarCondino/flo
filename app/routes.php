@@ -19,20 +19,24 @@ Route::get('/', function()
 
 
 //Admin rotes
+Route::get('admin', function()
+{
+    return View::make('admin');
+})->before('auth');
+
+
 Route::group(array('prefix' => 'admin', 'before' => array('auth|admin')), function()
 {
     Route::resource('posts', 'Admin\\PostsController');
     Route::resource('photos', 'Admin\\PhotosController');
-    Route::resource('categories', 'Admin\\CategoriesController');
-    Route::resource('collections', 'Admin\\CollectionsController');
-    Route::resource('tags', 'Admin\\TagsController');
+    Route::resource('categories', 'Admin\\CategoriesController',['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]);
+    Route::resource('collections', 'Admin\\CollectionsController',['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]);
+    Route::resource('tags', 'Admin\\TagsController',['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]);
+
 });
 
 
 //Public routes
-Route::resource('posts', 'PostsController');
-Route::resource('photos', 'PhotosController');
-
 Route::resource('posts', 'PostsController', ['only' => ['index', 'show']]);
 Route::resource('photos', 'PhotosController', ['only' => ['index', 'show']]);
 

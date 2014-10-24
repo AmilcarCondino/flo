@@ -22,15 +22,19 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">C.R.U.D</a>
+                    <a class="navbar-brand" href="/admin">C.R.U.D</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li>{{ HTML::link('/', 'Home') }}</li>
-                        <li>{{ HTML::link('posts', 'Posts') }}</li>
-                        <li>{{ HTML::link('photos', 'Fotos') }}</li>
-                        <li>{{ HTML::link('login', 'Log in') }}</li>
+                        <li>{{ HTML::link('/admin', 'Home') }}</li>
+                        <li>{{ HTML::link('admin/posts', 'Posts') }}</li>
+                        <li>{{ HTML::link('admin/photos', 'Fotos') }}</li>
+                        <li>{{ HTML::link('admin/categories', 'categorias') }}</li>
+                        <li>{{ HTML::link('admin/collections', 'colecciones') }}</li>
+                        <li>{{ HTML::link('admin/tags', 'etiquetas') }}</li>
+                        <li>{{ HTML::link('logout', 'Log out') }}</li>
                     </ul>
+
                 </div>
             </div>
         </div>
