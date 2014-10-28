@@ -13,4 +13,10 @@ class Collection extends \Eloquent {
 
 
     ];
+
+    public function tags()
+    {
+        return $this->belongsToMany('Photo');
+    }
+
 }

@@ -14,4 +14,10 @@ class Tag extends \Eloquent {
 
 
     ];
+
+    public function tags()
+    {
+        return $this->belongsToMany('Photo');
+    }
+
 }

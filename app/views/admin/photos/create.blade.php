@@ -35,9 +35,14 @@
                     {{ Form::select('collection', $collections) }}
                 {{ Form::closeGroup() }}
 
-                {{ Form::openGroup('tag', 'Etiquetas: ') }}
-                    {{ Form::select('tag', $tags) }}
+                {{ Form::openGroup('tags', 'Etiquetas: ') }}
+                    {{ Form::select('tags[]', $tags, Input::old('tags'), ['multiple' => true]) }}
                 {{ Form::closeGroup() }}
+
+
+
+
+
 
                 <div class="row">
                     <div class="col-sm-3">

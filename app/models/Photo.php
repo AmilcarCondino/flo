@@ -20,7 +20,20 @@ class Photo extends Model {
       'description.max' => 'La descripcion de la foto, no puede superar los 140 caracteres.',
       'description.alpha_dash' => 'La descripcion posee caracteres prohividos'
 
-
     ];
 
+    public function tags()
+    {
+        return $this->belongsToMany('Tag');
+    }
+
+    public function collection()
+    {
+        return $this->belongsToMany('Collection');
+    }
+
+    public function category()
+    {
+        return $this->belongsToMany('Category');
+    }
 }

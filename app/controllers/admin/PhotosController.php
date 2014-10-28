@@ -76,7 +76,7 @@ class PhotosController extends \BaseController {
             //Get the target file original name
             $original_name = $image->getClientOriginalName();
 
-            //Check if the file extension, is in the allowed ones
+            //Check if the file extension, is in to the allowed ones
             if ( !in_array(strtolower($extension), $allowed_extensions)) {
                 //If isn't an allowed extension, then throw a new Exceptio, with a reason.
                 throw new Exception('El archivo nos es de un formato valido.');
@@ -100,9 +100,8 @@ class PhotosController extends \BaseController {
             $photo->category = Input::get('category');
             $photo->show = Input::get('show');
             $photo->img_name = $filename;
-            $photo->tags = Input::get('tag');
+            $photo->tags = ('testing');;
             $photo->collection = Input::get('collection');
-
 
             //Move the image in to the server
             $filename = $photo->img_name;
@@ -116,7 +115,15 @@ class PhotosController extends \BaseController {
 
             //Try to save in the DB and check for true or false
             if ($photo->save()) {
-                //If it's tru, redirect at photos page with a successful message.
+                //If it's tru, them prepare te pivot tables data, and populate
+                $pivot = Photo::orderBy('id', 'DESC')->first();
+
+
+                $pivot->tags()->sync(array($pivot->tags->id));
+                $pivot->collection()->attach($pivot->collection);
+                $pivot->category()->attach($pivot->category);
+
+                //Then redirect at photos page with a successful message.
                 return Redirect::to('admin/photos')
                     ->with('flash_message','El archivo "' . $original_name . '" se ha guardado correctamente')
                     ->with('flash_type', 'alert-success');
@@ -223,12 +230,24 @@ class PhotosController extends \BaseController {
             $photo->description = Input::get('description');
             $photo->category = Input::get('category');
             $photo->show = Input::get('show');
-            $photo->tags = Input::get('tag');
+            $photo->tags = Input::get('tags');
             $photo->collection = Input::get('collection');
 
             //Try to update the register in the DB and check for errors
             if ($photo->save()) {
-                //If it's tru, redirect at photos page with a successful message.
+                //If it's tru, them prepare te pivot tables data, and populate
+
+                $photo->tags()->detach();
+                $photo->tags()->attach($photo->tags);
+
+                $photo->collection()->detach();
+                $photo->collection()->attach($photo->collection);
+
+                $photo->category()->detach();
+                $photo->category()->attach($photo->category);
+
+
+                //Then redirect at photos page with a successful message.
                  if (!empty ($image)) {
                     //Target the save path location
                     $destination_path = 'public/uploads/images/';
@@ -271,6 +290,14 @@ class PhotosController extends \BaseController {
 
             //Delete the record from the DB
             Photo::find($id)->delete();
+
+            //Delete records of pivot tables
+
+            $photo->tags()->detach();
+
+            $photo->collection()->detach();
+
+            $photo->category()->detach();
 
             //Check register still exist in the DB
             if (empty(Photo::find($id))) {
