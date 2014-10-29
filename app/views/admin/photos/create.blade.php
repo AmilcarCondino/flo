@@ -28,14 +28,17 @@
                 </div>
 
                 {{ Form::openGroup('categories', 'Categoria: ') }}
-                   {{ Form::select('categories[]', $categories, Input::old('categories'), ['multiple' => true]) }}
+                    <h6>(Utilizar control para seleccionar mas de una opcion)</h6>
+                    {{ Form::select('categories[]', $categories, Input::old('categories'), ['multiple' => true]) }}
                 {{ Form::closeGroup() }}
 
                 {{ Form::openGroup('collections', 'Coleccion: ') }}
-                   {{ Form::select('collections[]', $collections, Input::old('collections'), ['multiple' => true]) }}
+                    <h6>(Utilizar control para seleccionar mas de una opcion)</h6>
+                    {{ Form::select('collections[]', $collections, Input::old('collections'), ['multiple' => true]) }}
                 {{ Form::closeGroup() }}
 
                 {{ Form::openGroup('tags', 'Etiquetas: ') }}
+                    <h6>(Utilizar control para seleccionar mas de una opcion)</h6>
                     {{ Form::select('tags[]', $tags, Input::old('tags'), ['multiple' => true]) }}
                 {{ Form::closeGroup() }}
 

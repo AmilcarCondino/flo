@@ -24,15 +24,15 @@
                 </div>
 
                 {{ Form::openGroup('category', 'Categoria: ') }}
-                    {{ Form::select('category', $categories) }}
+                    {{ Form::select('categories[]', $categories, $photo->categories()->getRelatedIds(), ['multiple' => true]) }}
                 {{ Form::closeGroup() }}
 
                 {{ Form::openGroup('collection', 'Coleccion: ') }}
-                    {{ Form::select('collection', $collections) }}
+                    {{ Form::select('collections[]', $collections, $photo->collections()->getRelatedIds(), ['multiple' => true]) }}
                 {{ Form::closeGroup() }}
 
                 {{ Form::openGroup('tags', 'Etiquetas: ') }}
-                  {{ Form::select('tags[]', $tags, Input::old('tags'), ['multiple' => true]) }}
+                    {{ Form::select('tags[]', $tags, $photo->tags()->getRelatedIds(), ['multiple' => true]) }}
                 {{ Form::closeGroup() }}
 
                 <div class="row">
@@ -46,7 +46,6 @@
 
 
                 {{ Form::close() }}
-
 
             </div>
 

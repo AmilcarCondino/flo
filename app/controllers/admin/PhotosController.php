@@ -194,12 +194,14 @@ class PhotosController extends \BaseController {
         //Error handler
         try {
 
+            //Instantiate the record to edit
+            $photo = Photo::findOrFail($id);
+
             $categories = Category::lists('title', 'id');
             $tags = Tag::lists('title', 'id');
             $collections = Collection::lists('title', 'id');
 
-            //Instantiate the record to edit
-            $photo = Photo::findOrFail($id);
+
 
             //Render edit page with the record data
             $this->layout->content = View::make('admin.photos.edit', compact('photo', 'categories', 'tags', 'collections'));
@@ -247,23 +249,46 @@ class PhotosController extends \BaseController {
             //Assign the data at the appropriate fields
             $photo->title = Input::get('title');
             $photo->description = Input::get('description');
-            $photo->category = Input::get('category');
-            $photo->show = Input::get('show');
-            $photo->tags = Input::get('tags');
-            $photo->collection = Input::get('collection');
+
+            //Create an empty array for the collection data.
+            $array_collections = [];
+            //Grab de tags input data from de form, and populate the array
+            foreach(Input::get('collections') as $collection_id){
+                $collection = Collection::findOrFail($collection_id);
+                $array_collections[] = $collection;
+            }
+
+            //Create an empty array for the categories data.
+            $array_categories = [];
+            //Grab de tags input data from de form, and populate the array
+            foreach(Input::get('categories') as $category_id){
+                $category = Category::findOrFail($category_id);
+                $array_categories[] = $category;
+            }
+
+            //Create an empty array for the tags data.
+            $array_tags = [];
+            //Grab de tags input data from de form, and populate the array
+            foreach(Input::get('tags') as $tag_id){
+                $tag = Tag::findOrFail($tag_id);
+                $array_tags[] = $tag;
+            }
 
             //Try to update the register in the DB and check for errors
             if ($photo->save()) {
-                //If it's tru, them prepare te pivot tables data, and populate
 
+
+
+                //First erase the olda data, and then save the array of categories
+                $photo->categories()->detach();
+                $photo->categories()->saveMany($array_categories);
+                //First erase the olda data, and then save the array of collections
+                $photo->collections()->detach();
+                $photo->collections()->saveMany($array_collections);
+                //First erase the olda data, and then save the array of tags
                 $photo->tags()->detach();
-                $photo->tags()->attach($photo->tags);
+                $photo->tags()->saveMany($array_tags);
 
-                $photo->collection()->detach();
-                $photo->collection()->attach($photo->collection);
-
-                $photo->category()->detach();
-                $photo->category()->attach($photo->category);
 
 
                 //Then redirect at photos page with a successful message.
