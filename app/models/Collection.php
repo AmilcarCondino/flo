@@ -1,6 +1,6 @@
 <?php
 
-class Collection extends \Eloquent {
+class Collection extends Model {
 	protected $fillable = [];
 
     protected static $rules = [
@@ -14,7 +14,7 @@ class Collection extends \Eloquent {
 
     ];
 
-    public function tags()
+    public function photos()
     {
         return $this->belongsToMany('Photo');
     }

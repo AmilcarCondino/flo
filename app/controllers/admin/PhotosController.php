@@ -97,11 +97,32 @@ class PhotosController extends \BaseController {
             //Assign the data at the appropriate fields
             $photo->title = Input::get('title');
             $photo->description = Input::get('description');
-            $photo->category = Input::get('category');
             $photo->show = Input::get('show');
             $photo->img_name = $filename;
-            $photo->tags = ('testing');;
-            $photo->collection = Input::get('collection');
+
+            //Create an empty array for the collection data.
+            $array_collections = [];
+            //Grab de tags input data from de form, and populate the array
+            foreach(Input::get('collections') as $collection_id){
+                $collection = Collection::findOrFail($collection_id);
+                $array_collections[] = $collection;
+            }
+
+            //Create an empty array for the categories data.
+            $array_categories = [];
+            //Grab de tags input data from de form, and populate the array
+            foreach(Input::get('categories') as $category_id){
+                $category = Category::findOrFail($category_id);
+                $array_categories[] = $category;
+            }
+
+            //Create an empty array for the tags data.
+            $array_tags = [];
+            //Grab de tags input data from de form, and populate the array
+            foreach(Input::get('tags') as $tag_id){
+                $tag = Tag::findOrFail($tag_id);
+                $array_tags[] = $tag;
+            }
 
             //Move the image in to the server
             $filename = $photo->img_name;
@@ -115,15 +136,13 @@ class PhotosController extends \BaseController {
 
             //Try to save in the DB and check for true or false
             if ($photo->save()) {
-                //If it's tru, them prepare te pivot tables data, and populate
-                $pivot = Photo::orderBy('id', 'DESC')->first();
-
-
-                $pivot->tags()->sync(array($pivot->tags->id));
-                $pivot->collection()->attach($pivot->collection);
-                $pivot->category()->attach($pivot->category);
-
-                //Then redirect at photos page with a successful message.
+                //Save the array of tags
+                $photo->categories()->saveMany($array_categories);
+                //Save the array of tags
+                $photo->collections()->saveMany($array_collections);
+                //Save the array of tags
+                $photo->tags()->saveMany($array_tags);
+                //If its true, redirect to photos page with a successful message.
                 return Redirect::to('admin/photos')
                     ->with('flash_message','El archivo "' . $original_name . '" se ha guardado correctamente')
                     ->with('flash_type', 'alert-success');

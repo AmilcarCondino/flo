@@ -18,10 +18,7 @@ class CreatePhotosTable extends Migration {
 			$table->string('title')->unique();
 			$table->text('description');
 			$table->string('img_name');
-			$table->string('category');
 			$table->boolean('show');
-            $table->string('collection');
-            $table->string('tags');
 			$table->timestamps();
 		});
 	}

@@ -27,12 +27,12 @@ class Photo extends Model {
         return $this->belongsToMany('Tag');
     }
 
-    public function collection()
+    public function collections()
     {
         return $this->belongsToMany('Collection');
     }
 
-    public function category()
+    public function categories()
     {
         return $this->belongsToMany('Category');
     }

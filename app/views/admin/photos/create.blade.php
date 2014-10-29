@@ -27,12 +27,12 @@
 
                 </div>
 
-                {{ Form::openGroup('category', 'Categoria: ') }}
-                    {{ Form::select('category', $categories) }}
+                {{ Form::openGroup('categories', 'Categoria: ') }}
+                   {{ Form::select('categories[]', $categories, Input::old('categories'), ['multiple' => true]) }}
                 {{ Form::closeGroup() }}
 
-                {{ Form::openGroup('collection', 'Coleccion: ') }}
-                    {{ Form::select('collection', $collections) }}
+                {{ Form::openGroup('collections', 'Coleccion: ') }}
+                   {{ Form::select('collections[]', $collections, Input::old('collections'), ['multiple' => true]) }}
                 {{ Form::closeGroup() }}
 
                 {{ Form::openGroup('tags', 'Etiquetas: ') }}

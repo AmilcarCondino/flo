@@ -1,6 +1,6 @@
 <?php
 
-class Tag extends \Eloquent {
+class Tag extends Model {
 	protected $fillable = [];
 
 
@@ -15,7 +15,7 @@ class Tag extends \Eloquent {
 
     ];
 
-    public function tags()
+    public function photos()
     {
         return $this->belongsToMany('Photo');
     }
