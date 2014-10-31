@@ -9,6 +9,14 @@
         <link href="/css/bootstrap.css" rel="stylesheet">
         <!-- Custom CSS -->
         <link href="/css/crud.css" rel="stylesheet">
+        <!-- Core jquery -->
+        <script src="/js/jquery-2.1.1.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <!-- Include the multi select plugin's CSS and JS: -->
+        <script src="/js/bootstrap-multiselect.js"></script>
+        <script src="/js/prettify.js"></script>
+        <link rel="stylesheet" href="/css/bootstrap-multiselect.css">
+        <link rel="stylesheet" href="/css/prettify.css">
 
 
     </head>

@@ -32,9 +32,13 @@
                 {{ Form::closeGroup() }}
 
                 {{ Form::openGroup('tags', 'Etiquetas: ') }}
-                    {{ Form::select('tags[]', $tags, $photo->tags()->getRelatedIds(), ['multiple' => true]) }}
+                <script>
+                    $(document).ready(function() {
+                        $('#tags').multiselect();
+                    });
+                </script>
+                    {{ Form::select('tags[]', $tags, $photo->tags()->getRelatedIds(), array('id' => 'tags', 'multiple' => 'multiple')) }}
                 {{ Form::closeGroup() }}
-
                 <div class="row">
                     <div class="col-sm-6">
                         {{ Form::submit('Editar Foto', array('class'=>'btn btn-sm btn-success')) }}

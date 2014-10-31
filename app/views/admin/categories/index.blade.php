@@ -9,7 +9,7 @@
         <div class="col-sm-8">
             <ul class="list-group">
                 @foreach($categories as $category)
-                    <li class="list-group-item list-group-item-info">
+                    <li class="list-group-item list-group-item-content">
                         <div class="row">
                             <div class="col-sm-6">
                                 {{ $category->title }}
