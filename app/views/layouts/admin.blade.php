@@ -13,10 +13,14 @@
         <script src="/js/jquery-2.1.1.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
         <!-- Include the multi select plugin's CSS and JS: -->
-        <script src="/js/bootstrap-multiselect.js"></script>
-        <script src="/js/prettify.js"></script>
-        <link rel="stylesheet" href="/css/bootstrap-multiselect.css">
-        <link rel="stylesheet" href="/css/prettify.css">
+        <script src="/js/bootstrap-select.js"></script>
+        <link rel="stylesheet" href="/css/bootstrap-select.css">
+        <!-- Include the JASNY plugin's CSS and JS: -->
+        <script src="/js/jasny-bootstrap.js"></script>
+        <link rel="stylesheet" href="/css/jasny-bootstrap.css">
+        <!-- Include the MASONRY plugin's CSS and JS: -->
+        <script src="/js/masonry-docs.js"></script>
+<!--        <link rel="stylesheet" href="/css/masonry-docs.css">-->
 
 
     </head>
@@ -60,11 +64,12 @@
                 <p class="text-muted">Just a c.r.u.d, by KeleK.</p>
             </div>
         </div>
-
-
-            <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-            <!-- Include all compiled plugins (below), or include individual files as needed -->
-            <script src="/js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('.selectpicker').selectpicker({
+                style:,
+                size: 4});
+            });
+        </script>
     </body>
 </html>

@@ -9,7 +9,17 @@
         <div class="col-sm-6">
             {{ Form::open(array('url' => 'admin/photos', 'files' => true)) }}
 
-                {{ Form::file('image') }}
+                <div class="fileinput fileinput-new" data-provides="fileinput">
+                    <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                        <img data-src="holder.js/100%x100%" alt="...">
+                    </div>
+                    <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                    <div>
+                        <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" name="image"></span>
+                        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                    </div>
+                </div>
+
 
                 {{ Form::openGroup('title', 'Titulo: ') }}
                     {{ Form::text('title') }}
@@ -28,18 +38,15 @@
                 </div>
 
                 {{ Form::openGroup('categories', 'Categoria: ') }}
-                    <h6>(Utilizar control para seleccionar mas de una opcion)</h6>
-                    {{ Form::select('categories[]', $categories, Input::old('categories'), ['multiple' => true]) }}
+                    {{ Form::select('categories[]', $categories, Input::old('categories'), array('id' => 'tags', 'multiple' => 'multiple', 'class' => 'selectpicker', 'title' => 'Selecione las categorias que desee', 'data-live-search' => 'data-live-search')) }}
                 {{ Form::closeGroup() }}
 
                 {{ Form::openGroup('collections', 'Coleccion: ') }}
-                    <h6>(Utilizar control para seleccionar mas de una opcion)</h6>
-                    {{ Form::select('collections[]', $collections, Input::old('collections'), ['multiple' => true]) }}
+                    {{ Form::select('collections[]', $collections, Input::old('collections'), array('id' => 'tags', 'multiple' => 'multiple', 'class' => 'selectpicker', 'title' => 'Selecione las colecciones que desee', 'data-live-search' => 'data-live-search')) }}
                 {{ Form::closeGroup() }}
 
                 {{ Form::openGroup('tags', 'Etiquetas: ') }}
-                    <h6>(Utilizar control para seleccionar mas de una opcion)</h6>
-                    {{ Form::select('tags[]', $tags, Input::old('tags'), ['multiple' => true]) }}
+                    {{ Form::select('tags[]', $tags, Input::old('tags'), array('id' => 'tags', 'multiple' => 'multiple', 'class' => 'selectpicker', 'title' => 'Selecione las etiquetas que desee', 'data-live-search' => 'data-live-search')) }}
                 {{ Form::closeGroup() }}
 
 

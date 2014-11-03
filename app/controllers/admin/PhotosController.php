@@ -249,6 +249,7 @@ class PhotosController extends \BaseController {
             //Assign the data at the appropriate fields
             $photo->title = Input::get('title');
             $photo->description = Input::get('description');
+            $photo->show = Input::get('show');
 
             //Create an empty array for the collection data.
             $array_collections = [];
