@@ -17,12 +17,19 @@
 </div>
 
 <script>
+
+    var container = document.querySelector('#container');
+    var msnry = new Masonry( container, {
+        // options
+        columnWidth: 60,
+        itemSelector: '.item'
+    });
     $(document).ready(function(){
-        var container = document.querySelector('#container');
-        var msnry = new Masonry( container, {
-            // options
-            columnWidth: 60,
+        $('#content').msnry({
+            columnWidth: 320,
             itemSelector: '.item'
+        }).imagesLoaded(function() {
+            $('#content').msnry('reload');
         });
     });
 </script>
