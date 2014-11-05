@@ -1,34 +1,29 @@
 
 @section('content')
-<div class="container">
-    <ul class="row" id="container">
-        @foreach($photos as $photo)
-            @if($photo->show === 1)
-                <div class="item">
+
+<div id="masonry-container">
+    {{ $i = 0;}}
+    @foreach($photos as $photo)
+        @if($photo->show === 1)
                 <a href="/photos/{{ $photo->id }}">
-                    <img src="/uploads/images/{{$photo->img_name}}"class="img-responsive" alt="Responsive image" style=" height: 230px">
+                    <img class="item {{ ($i % 2 == 0) ? 'quarter' : null }}" src="/uploads/images/{{$photo->img_name}}">
                 </a>
-                </div>
-            @endif
-        @endforeach
-    </ul>
+        @endif
+        {{ $i++;}}
+    @endforeach
 </div>
 
 <script>
 
-    var container = document.querySelector('#container');
-    var msnry = new Masonry( container, {
-        // options
-        columnWidth: 60,
-        itemSelector: '.item'
-    });
-    $(document).ready(function(){
-        $('#content').msnry({
-            itemSelector: '.item'
-        }).imagesLoaded(function() {
-            $('#content').msnry('reload');
+    $( window ).load(function(){
+        var container = document.querySelector('#masonry-container');
+        var msnry = new Masonry( container, {
+          // options
+          //columnWidth: 200,
+          itemSelector: '.item'
         });
     });
+
 </script>
 
 @stop
