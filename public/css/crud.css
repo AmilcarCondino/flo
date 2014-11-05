@@ -26,15 +26,22 @@ body {
     background-color: #222;
     padding-top: 10px;
 }
-.item   { width: 190px; height: 190px; overflow: hidden; }
-.item.a { width: 380px; }
-.item.b { width: 285px; }
-.item.c { width: 570px; }
-.item.d { height: 380px; }
-.item.e { height: 285px; }
-.item.f { height: 570px; }
 
+.item {
+  width:  190px;
+  height: 190px;
+  float: left;
+  overflow: hidden;
+  margin: 0;
+}
 
+.item.w2 { width:  380px; }
+.item.w3 { width:  285px; }
+.item.w4 { width:  570px; }
+
+.item.h2 { height: 380px; }
+.item.h3 { height: 285px; }
+.item.h4 { height: 570px; }
 
 
 

@@ -1,28 +1,20 @@
+<?php $pattern = [null, 'w2 h2', 'h3', 'h2', 'w3', null, null, 'h2', 'w2 h3', null, 'h2', null, 'w2 h2', 'w2', null, 'h2', null, null, 'h3', 'h2', null, null, 'h2']; ?>
 
 @section('content')
 
 <div id="masonry-container">
-
-
-    <?php $i = ''; ?>
-
-    @foreach($photos as $photo)
-        @if ( $i === '1' || $i === 'g')
-             <?php $i = 'a'; ?>
-        @endif
-        @if($photo->show === 1)
-            <div class="item {{$i}}">
-                <a href="/photos/{{ $photo->id }}">
-                    <img  class="img-rounded" src="/uploads/images/{{$photo->img_name}}" alt="alt">
+    @for($i = 0; $i < count($photos); $i++)
+        @if($photos[$i]->show === 1)
+            <div class="item {{ $pattern[ ($i % count($pattern) ) ] }}">
+                <a href="/photos/{{ $photos[$i]->id }}">
+                    <img src="/uploads/images/{{$photos[$i]->img_name}}" alt="alt">
                 </a>
             </div>
         @endif
-    <?php $i++;?>
-    @endforeach
+    @endfor
 </div>
 
 <script>
-
     $( window ).load(function(){
         var container = document.querySelector('#masonry-container');
         var msnry = new Masonry( container, {
@@ -31,7 +23,6 @@
           itemSelector: '.item'
         });
     });
-
 </script>
 
 @stop
