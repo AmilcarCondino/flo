@@ -1,7 +1,7 @@
 
 @section('content')
 <div class="container">
-    <ul class="row" id="container">
+    <div class="row" id="container">
         @foreach($photos as $photo)
             @if($photo->show === 1)
                 <div class="item">
@@ -11,23 +11,21 @@
                 </div>
             @endif
         @endforeach
-    </ul>
+    </div>
 </div>
 
 <script>
 
-    var container = document.querySelector('#container');
-    var msnry = new Masonry( container, {
-        // options
-        columnWidth: 60,
-        itemSelector: '.item'
-    });
-    $(document).ready(function(){
-        $('#content').msnry({
+
+    $( window ).load(function(){
+        var container = document.querySelector('#container');
+        var msnry = new Masonry( container, {
+            // options
+            isFitWidth:true,
+            columnWidth: 200,
             itemSelector: '.item'
-        }).imagesLoaded(function() {
-            $('#content').msnry('reload');
         });
+        
     });
 </script>
 
