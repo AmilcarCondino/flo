@@ -27,7 +27,7 @@
         var container = document.querySelector('#masonry-container');
         var msnry = new Masonry( container, {
           // options
-          //columnWidth: 600,
+          columnWidth: 190,
           itemSelector: '.item'
         });
     });

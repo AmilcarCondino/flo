@@ -26,10 +26,15 @@ body {
     background-color: #222;
     padding-top: 10px;
 }
-.item { width: 600px; height: 200px; overflow: hidden; }
-.item.a { width: 300px; height: 200px; overflow: hidden; }
-.item.b { width: 200px; height: 250px; overflow: hidden; }
-.item.c { width: 200px; height: 250px; overflow: hidden; }
-.item.d { width: 200px; height: 250px; overflow: hidden; }
-.item.e { width: 125px; height: 500px; overflow: hidden; }
-.item.f { width: 125px; height: 500px; overflow: hidden; }
+.item   { width: 190px; height: 190px; overflow: hidden; }
+.item.a { width: 380px; }
+.item.b { width: 285px; }
+.item.c { width: 570px; }
+.item.d { height: 380px; }
+.item.e { height: 285px; }
+.item.f { height: 570px; }
+
+
+
+
+
