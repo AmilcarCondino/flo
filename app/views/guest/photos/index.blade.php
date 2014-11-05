@@ -2,14 +2,22 @@
 @section('content')
 
 <div id="masonry-container">
-    {{ $i = 0;}}
+
+
+    <?php $i = ''; ?>
+
     @foreach($photos as $photo)
-        @if($photo->show === 1)
-                <a href="/photos/{{ $photo->id }}">
-                    <img class="item {{ ($i % 2 == 0) ? 'quarter' : null }}" src="/uploads/images/{{$photo->img_name}}">
-                </a>
+        @if ( $i === '1' || $i === 'g')
+             <?php $i = 'a'; ?>
         @endif
-        {{ $i++;}}
+        @if($photo->show === 1)
+            <div class="item {{$i}}">
+                <a href="/photos/{{ $photo->id }}">
+                    <img  class="img-rounded" src="/uploads/images/{{$photo->img_name}}" alt="alt">
+                </a>
+            </div>
+        @endif
+    <?php $i++;?>
     @endforeach
 </div>
 
@@ -19,7 +27,7 @@
         var container = document.querySelector('#masonry-container');
         var msnry = new Masonry( container, {
           // options
-          //columnWidth: 200,
+          //columnWidth: 600,
           itemSelector: '.item'
         });
     });

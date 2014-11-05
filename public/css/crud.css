@@ -26,5 +26,10 @@ body {
     background-color: #222;
     padding-top: 10px;
 }
-.item { width: 50%; }
-.item.quarter { width: 25%; }
+.item { width: 600px; height: 200px; overflow: hidden; }
+.item.a { width: 300px; height: 200px; overflow: hidden; }
+.item.b { width: 200px; height: 250px; overflow: hidden; }
+.item.c { width: 200px; height: 250px; overflow: hidden; }
+.item.d { width: 200px; height: 250px; overflow: hidden; }
+.item.e { width: 125px; height: 500px; overflow: hidden; }
+.item.f { width: 125px; height: 500px; overflow: hidden; }
