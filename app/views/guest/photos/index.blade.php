@@ -25,15 +25,25 @@
 
         $('.item').each(function(){
             var img = $(this).find('img');
-            if(img.width() > img.height()){
+            var tall_brick = ($(this).height() > $(this).width());
+            var tall_img = (img.height() > img.width());
+
+            if(tall_brick){
                 img.css({'max-height': $(this).height()});
                 var margin = ( img.width()-$(this).width() )/2;
                 img.css({'margin-left': -margin});
             }else{
-                img.css({'max-width': $(this).width()});
-                var margin = ( img.height()-$(this).height() )/2;
-                img.css({'margin-top': -margin});
+                if(tall_img){
+                    img.css({'max-width': $(this).width()});
+                    var margin = ( img.height()-$(this).height() )/2;
+                    img.css({'margin-top': -margin});
+                }else{
+                    img.css({'max-height': $(this).height()});
+                    var margin = ( img.width()-$(this).width() )/2;
+                    img.css({'margin-left': -margin});
+                }
             }
+
         });
     });
 </script>
