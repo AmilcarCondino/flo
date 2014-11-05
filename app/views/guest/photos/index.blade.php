@@ -24,6 +24,19 @@
           columnWidth: 190,
           itemSelector: '.item'
         });
+
+        $('.item').each(function(){
+            var img = $(this).find('img');
+            if(img.width() > img.height()){
+                img.css({'max-height': $(this).height()});
+                var margin = ( img.width()-$(this).width() )/2;
+                img.css({'margin-left': -margin});
+            }else{
+                img.css({'max-width': $(this).width()});
+                var margin = ( img.height()-$(this).height() )/2;
+                img.css({'margin-top': -margin});
+            }
+        });
     });
 </script>
 
