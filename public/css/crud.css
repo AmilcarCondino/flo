@@ -26,3 +26,10 @@ body {
     background-color: #222;
     padding-top: 10px;
 }
+.item.a { width: 570px; height: 200px; overflow: hidden; }
+.item.b { width: 570px; height: 480px; overflow: hidden; }
+.item.c { width: 285px; height: 280px; overflow: hidden; }
+.item.d { width: 285px; height: 280px; overflow: hidden; }
+.item.e { width: 285px; height: 480px; overflow: hidden; }
+.item.f { width: 850px; height: 240px; overflow: hidden; }
+.item.g { width: 850px; height: 240px; overflow: hidden; }
