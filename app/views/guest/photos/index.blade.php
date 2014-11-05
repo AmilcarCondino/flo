@@ -4,10 +4,10 @@
 <div id="masonry-container">
 
 
-    <?php $i = ''; ?>
+    <?php $i = 'a'; ?>
 
     @foreach($photos as $photo)
-        @if ( $i === '1' || $i === 'g')
+        @if ( $i === 'h')
              <?php $i = 'a'; ?>
         @endif
         @if($photo->show === 1)
@@ -27,7 +27,8 @@
         var container = document.querySelector('#masonry-container');
         var msnry = new Masonry( container, {
           // options
-          columnWidth: 190,
+            
+          columnWidth: 285,
           itemSelector: '.item'
         });
     });
