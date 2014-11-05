@@ -34,6 +34,7 @@ body {
   overflow: hidden;
   margin: 0;
 }
+.item img { max-width: 190px; }
 
 .item.w2 { width:  380px; }
 .item.w3 { width:  285px; }
@@ -42,6 +43,11 @@ body {
 .item.h2 { height: 380px; }
 .item.h3 { height: 285px; }
 .item.h4 { height: 570px; }
+
+.item.w2 img{ max-width:  380px; }
+.item.w3 img{ max-width:  285px; }
+.item.w4 img{ max-width:  570px; }
+
 
 
 
