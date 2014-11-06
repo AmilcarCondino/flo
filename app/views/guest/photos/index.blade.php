@@ -20,7 +20,6 @@
         var container = document.querySelector('#masonry-container');
         var msnry = new Masonry( container, {
           // options
-          gutter: 1,
           columnWidth: 190,
           itemSelector: '.item'
         });
@@ -45,19 +44,26 @@
                     img.css({'margin-left': -margin});
                 }
             }
-
         });
 
-        eventie.bind( container, 'click', function( event ) {
-            // don't proceed if item was not clicked on
-            if ( !classie.has( event.target, 'item {{ $pattern[ ($i % count($pattern) ) ] }}' ) ) {
-                return;
+        $('.item').click(function(){
+            $(this).toggleClass('gigante');
+            var img = $(this).find('img');
+            img.removeAttr('style');
+            var tall_img = (img.height() > img.width());
+
+            if(tall_img){
+                img.css({'max-width': $(this).width()});
+                var margin = ( img.height()-$(this).height() )/2;
+                img.css({'margin-top': -margin});
+            }else{
+                img.css({'max-height': $(this).height()});
+                var margin = ( img.width()-$(this).width() )/2;
+                img.css({'margin-left': -margin});
             }
-            // change size of item via class
-            classie.toggle( event.target, 'gigante' );
-            // trigger layout
             msnry.layout();
         });
+
     });
 
 
