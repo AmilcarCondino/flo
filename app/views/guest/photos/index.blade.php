@@ -7,9 +7,9 @@
     @for($i = 0; $i < count($photos); $i++)
         @if($photos[$i]->show === 1)
             <div class="item {{ $pattern[ ($i % count($pattern) ) ] }}">
-                <a href="/photos/{{ $photos[$i]->id }}">
+<!--                <a href="/photos/{{ $photos[$i]->id }}">-->
                     <img src="/uploads/images/{{$photos[$i]->img_name}}" alt="alt">
-                </a>
+<!--                </a>-->
             </div>
         @endif
     @endfor
@@ -20,7 +20,7 @@
         var container = document.querySelector('#masonry-container');
         var msnry = new Masonry( container, {
           // options
-            
+          gutter: 1,
           columnWidth: 190,
           itemSelector: '.item'
         });
@@ -47,7 +47,20 @@
             }
 
         });
+
+        eventie.bind( container, 'click', function( event ) {
+            // don't proceed if item was not clicked on
+            if ( !classie.has( event.target, 'item {{ $pattern[ ($i % count($pattern) ) ] }}' ) ) {
+                return;
+            }
+            // change size of item via class
+            classie.toggle( event.target, 'gigante' );
+            // trigger layout
+            msnry.layout();
+        });
     });
+
+
 </script>
 
 @stop
