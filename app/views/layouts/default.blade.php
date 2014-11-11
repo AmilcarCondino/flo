@@ -11,6 +11,9 @@
         <link href="/css/bootstrap.css" rel="stylesheet">
         <!-- Ferroslider CSS -->
         <link href="/css/jquery.ferro.ferroSlider.css" rel="stylesheet">
+        <link href="/css/font-awesome-ie7.min.css" rel="stylesheet">
+        <link href="/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/css/jquery.ferro.ferroSlider.css" rel="stylesheet">
         <!-- Custom CSS -->
         <link href="/css/crud.css" rel="stylesheet">
         <!-- jQuery ( JavaScript plugins) -->
