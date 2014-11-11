@@ -5,17 +5,18 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>C.R.U.D</title>
+
+
         <!-- Core Bootstrap -->
         <link href="/css/bootstrap.css" rel="stylesheet">
-        <!-- Custom CSS -->
-        <link href="/css/crud.css" rel="stylesheet">
         <!-- Ferroslider CSS -->
         <link href="/css/jquery.ferro.ferroSlider.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="/css/crud.css" rel="stylesheet">
         <!-- jQuery ( JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="/js/bootstrap.min.js"></script>
-        <script src="/js/jquery-1.9.1.min.js"></script>
         <script src="/js/jquery.transit.min.js"></script>
 
 

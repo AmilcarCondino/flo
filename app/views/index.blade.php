@@ -23,22 +23,21 @@
 
 <script>
 
-//    var matrix = [
-//        [
-//            {full:0},{full:1,moveDirection:'yx'},{full:0}
-//        ],
-//        [
-//            {full:1},{full:1,first:true},{full:1}
-//        ],
-//        [
-//            {full:0},{full:1,moveDirection:'yx'},{full:0}
-//        ]
-//    ];
-
+    var matrix = [
+        [
+            {full:0},{full:1,moveDirection:'yx'},{full:0}
+        ],
+        [
+            {full:1},{full:1,first:true},{full:1}
+        ],
+        [
+            {full:0},{full:1,moveDirection:'yx'},{full:0}
+        ]
+    ];
     $(document).ready(function() {
-        $('.slidingSpaces').ferroSlider({
+        $(".slidingSpaces").ferroSlider({
             axis                    : 'xy',
-            displace                : true,
+            displace                : false,
             createMap               : true,
             mapPosition             : '85%_center',
             createSensibleAreas     : true
