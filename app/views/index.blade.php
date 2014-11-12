@@ -26,22 +26,6 @@
                 Content of div4
             </span>
         </div>
-
-<!--        <div id="div1" class="slidingSpaces" title="Page 1">-->
-<!--            <img src="/uploads/images/tucci_web_6.jpg"alt="Responsive image">-->
-<!--        </div>-->
-<!--        <div id="div2" class="slidingSpaces" title="Page 2">-->
-<!--            <img src="/uploads/images/tucci_web_7.jpg" alt="Responsive image">-->
-<!--        </div>-->
-<!--        <div id="div3" class="slidingSpaces" title="Page 3">-->
-<!--            <img src="/uploads/images/tucci_web_9.jpg" alt="Responsive image">-->
-<!--        </div>-->
-<!--        <div id="div4" class="slidingSpaces" title="Page 4">-->
-<!--            <img src="/uploads/images/tucci_web_16.jpg" alt="Responsive image">-->
-<!--        </div>-->
-<!--        <div id="div5" class="slidingSpaces" title="Page 5">-->
-<!--            <img src="/uploads/images/tucci_web_19.jpg" alt="Responsive image">-->
-<!--        </div>-->
     </div>
 
 
@@ -61,16 +45,16 @@
     ];
     $(document).ready(function() {
         $(".slidingSpaces").ferroSlider({
+            autoSlide               : true,
+            container               : ".slider",
+            time                    : 1600,
+            createPlayer			: true,
             createMap               : true,
-            mapPosition             : 'top_right',
             createSensibleAreas     : true,
             createTimeBar           : true,
             displace                : displace,
-            autoSlide               : true,
-            autoSlideTime           : 3000,
-            createTimeBar           : true,
-
-            container               : ".slider"
+            mapPosition             : 'top_right',
+            playerPosition          : 'bottom_right'
         });
     });
 
