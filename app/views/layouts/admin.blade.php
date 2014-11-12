@@ -26,12 +26,10 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li>{{ HTML::link('/admin', 'Home') }}</li>
+                        <li>{{ HTML::link('/admin', 'Admin Panel') }}</li>
                         <li>{{ HTML::link('admin/posts', 'Posts') }}</li>
                         <li>{{ HTML::link('admin/photos', 'Fotos') }}</li>
-                        <li>{{ HTML::link('admin/categories', 'categorias') }}</li>
-                        <li>{{ HTML::link('admin/collections', 'colecciones') }}</li>
-                        <li>{{ HTML::link('admin/tags', 'etiquetas') }}</li>
+                        <li>{{ HTML::link('logout', 'Log out') }}</li>
                         <li>{{ HTML::link('logout', 'Log out') }}</li>
                     </ul>
 
