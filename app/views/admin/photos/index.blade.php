@@ -46,37 +46,19 @@
                                     @endif
                                 </th>
                                 <th>
-                                    <?php
-                                    $photoCollectionsId = DB::table('collection_photo')->where('photo_id',  $photo->id)->get();
-
-                                    foreach ($photoCollectionsId as $collectionId) {
-
-                                        $colection = DB::table('collections')->where('id', $collectionId->collection_id)->get();
-
-                                        echo ($colection[0]->title).', '; }
-                                    ?>
+                                    @foreach($photo->collections as $collection)
+                                        {{ $collection->title }}
+                                    @endforeach
                                 </th>
                                 <th>
-                                    <?php
-                                    $photoCategoriesId = DB::table('category_photo')->where('photo_id',  $photo->id)->get();
-
-                                    foreach ($photoCategoriesId as $categoryId) {
-
-                                        $category = DB::table('categories')->where('id', $categoryId->category_id)->get();
-
-                                        echo ($category[0]->title).', '; }
-                                    ?>
+                                    @foreach($photo->categories as $category)
+                                        {{ $category->title }}
+                                    @endforeach
                                 </th>
                                 <th>
-                                    <?php
-                                    $photoTagsId = DB::table('photo_tag')->where('photo_id',  $photo->id)->get();
-
-                                    foreach ($photoTagsId as $tagId) {
-
-                                        $tag = DB::table('tags')->where('id', $tagId->tag_id)->get();
-
-                                        echo ($tag[0]->title).', '; }
-                                    ?>
+                                    @foreach($photo->tags as $tag)
+                                        {{ $tag->title }}
+                                    @endforeach
                                 </th>
                                 <th>
                                     {{$photo->created_at}}
