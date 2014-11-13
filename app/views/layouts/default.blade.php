@@ -11,17 +11,17 @@
         <link href="/css/bootstrap.css" rel="stylesheet">
         <!-- Ferroslider CSS -->
         <link href="/css/jquery.ferro.ferroSlider.css" rel="stylesheet">
-        <link href="/css/font-awesome-ie7.min.css" rel="stylesheet">
-        <link href="/css/font-awesome.min.css" rel="stylesheet">
-        <link href="/css/jquery.ferro.ferroSlider.css" rel="stylesheet">
+<!--        <link href="/css/font-awesome-ie7.min.css" rel="stylesheet">-->
+<!--        <link href="/css/font-awesome.min.css" rel="stylesheet">-->
+<!--        <link href="/css/jquery.ferro.ferroSlider.css" rel="stylesheet">-->
         <!-- Custom CSS -->
         <link href="/css/crud.css" rel="stylesheet">
         <!-- jQuery ( JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="/js/bootstrap.min.js"></script>
-        <script src="/js/jquery.ferro.ferroSlider-2.3.3.min.js"></script>
-        <script src="/js/jquery.transit.min.js"></script>
+<!--        <script src="/js/jquery.ferro.ferroSlider-2.3.3.min.js"></script>-->
+<!--        <script src="/js/jquery.transit.min.js"></script>-->
 
 
     </head>
