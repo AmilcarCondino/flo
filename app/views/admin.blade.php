@@ -22,7 +22,7 @@
                         </div>
                         <div class="col-sm-3 btn-group btn-xs">
                             {{ Form::open(['method' => 'delete', 'route' => ['admin.categories.destroy', $category->id]]) }}
-                            {{ Form::submit('Eliminar', array('class'=>'btn-group btn-xs btn-danger')) }}
+                                {{ Form::submit('Eliminar', array('class'=>'btn-group btn-xs btn-danger')) }}
                             {{ Form::close() }}
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                         </div>
                         <div class="col-sm-3 btn-group btn-xs">
                             {{ Form::open(['method' => 'delete', 'route' => ['admin.collections.destroy', $collection->id]]) }}
-                            {{ Form::submit('Eliminar', array('class'=>'btn-group btn-xs btn-danger')) }}
+                                {{ Form::submit('Eliminar', array('class'=>'btn-group btn-xs btn-danger')) }}
                             {{ Form::close() }}
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                         </div>
                         <div class="col-sm-3 btn-group btn-xs">
                             {{ Form::open(['method' => 'delete', 'route' => ['admin.tags.destroy', $tag->id]]) }}
-                            {{ Form::submit('Eliminar', array('class'=>'btn-group btn-xs btn-danger')) }}
+                                {{ Form::submit('Eliminar', array('class'=>'btn-group btn-xs btn-danger')) }}
                             {{ Form::close() }}
                         </div>
                     </div>

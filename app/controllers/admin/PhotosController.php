@@ -26,6 +26,9 @@ class PhotosController extends \BaseController {
 	{
 	//Render the "photos" page, with all records instantiated
     $this->layout->content =  View::make('admin.photos.index')
+        ->with('collections', Collection::all())
+        ->with('categories', Category::all())
+        ->with('tags', Tag::all())
         ->with('photos', Photo::all());
 	}
 
