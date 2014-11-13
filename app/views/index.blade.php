@@ -3,7 +3,9 @@
 @section('content')
 
 <div id="carousel" class="carousel slide" width="1140px">
-
+    <div class="carousel-title">
+        <img src="/images/flo_tucci.png"/>
+    </div>
     <!-- Indicators -->
     <ol class="carousel-indicators">
         <li data-target="#carousel" data-slide-to="0" class="active"></li>
