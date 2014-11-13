@@ -10,7 +10,7 @@
         <!-- Core Bootstrap -->
         <link href="/css/bootstrap.css" rel="stylesheet">
         <!-- Ferroslider CSS -->
-        <link href="/css/jquery.ferro.ferroSlider.css" rel="stylesheet">
+<!--        <link href="/css/jquery.ferro.ferroSlider.css" rel="stylesheet">-->
 <!--        <link href="/css/font-awesome-ie7.min.css" rel="stylesheet">-->
 <!--        <link href="/css/font-awesome.min.css" rel="stylesheet">-->
 <!--        <link href="/css/jquery.ferro.ferroSlider.css" rel="stylesheet">-->
@@ -53,9 +53,10 @@
                 {{ Session::get('flash_message') }}
             </div>
             @endif
+        </div>
 
             @yield('content')
-        </div>
+
         <div class="footer">
             <div class="container">
                 <p class="text-muted">Just a c.r.u.d, by KeleK.</p>

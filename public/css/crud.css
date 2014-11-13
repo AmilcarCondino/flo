@@ -1,8 +1,13 @@
 body {
-    padding-top: 65px;
+    padding-top: 51px;
+    width:100%;
+    background-color: #222;
 }
 
-
+.carousel .item  {width:100%;}
+.carousel .item img {width:100%;}
+.active {width:100%;}
+.carousel-inner {width:100%;}
 
 
 /* Sticky footer styles
