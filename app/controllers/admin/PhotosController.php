@@ -99,29 +99,45 @@ class PhotosController extends \BaseController {
             $photo->description = Input::get('description');
             $photo->show = Input::get('show');
             $photo->img_name = $filename;
+            $collection_id = 10;
+            $category_id = 6;
 
-            //Create an empty array for the collection data.
-            $array_collections = [];
-            //Grab de tags input data from de form, and populate the array
-            foreach(Input::get('collections') as $collection_id){
+            if (!is_null (Input::get('collections'))) {
+                //Create an empty array for the collection data.
+                $array_collections = [];
+                //Grab de tags input data from de form, and populate the array
+                foreach(Input::get('collections') as $collection_id){
+                    $collection = Collection::findOrFail($collection_id);
+                    $array_collections[] = $collection;
+                }
+            } else {
+                $array_collections = [];
                 $collection = Collection::findOrFail($collection_id);
                 $array_collections[] = $collection;
             }
 
-            //Create an empty array for the categories data.
-            $array_categories = [];
-            //Grab de tags input data from de form, and populate the array
-            foreach(Input::get('categories') as $category_id){
+            if (!is_null (Input::get('categories'))) {
+                //Create an empty array for the categories data.
+                $array_categories = [];
+                //Grab de tags input data from de form, and populate the array
+                foreach(Input::get('categories') as $category_id){
+                    $category = Category::findOrFail($category_id);
+                    $array_categories[] = $category;
+                }
+            } else {
+                $array_categories = [];
                 $category = Category::findOrFail($category_id);
                 $array_categories[] = $category;
             }
 
-            //Create an empty array for the tags data.
-            $array_tags = [];
-            //Grab de tags input data from de form, and populate the array
-            foreach(Input::get('tags') as $tag_id){
-                $tag = Tag::findOrFail($tag_id);
-                $array_tags[] = $tag;
+            if (!is_null(Input::get('tags'))) {
+                //Create an empty array for the tags data.
+                $array_tags = [];
+                //Grab de tags input data from de form, and populate the array
+                foreach(Input::get('tags') as $tag_id){
+                    $tag = Tag::findOrFail($tag_id);
+                    $array_tags[] = $tag;
+                }
             }
 
             //Move the image in to the server
@@ -141,7 +157,9 @@ class PhotosController extends \BaseController {
                 //Save the array of tags
                 $photo->collections()->saveMany($array_collections);
                 //Save the array of tags
-                $photo->tags()->saveMany($array_tags);
+                if (!empty($array_tags)) {
+                    $photo->tags()->saveMany($array_tags);
+                }
                 //If its true, redirect to photos page with a successful message.
                 return Redirect::to('admin/photos')
                     ->with('flash_message','El archivo "' . $original_name . '" se ha guardado correctamente')
@@ -250,29 +268,45 @@ class PhotosController extends \BaseController {
             $photo->title = Input::get('title');
             $photo->description = Input::get('description');
             $photo->show = Input::get('show');
+            $collection_id = 10;
+            $category_id = 6;
 
-            //Create an empty array for the collection data.
-            $array_collections = [];
-            //Grab de tags input data from de form, and populate the array
-            foreach(Input::get('collections') as $collection_id){
+            if (!is_null (Input::get('collections'))) {
+                //Create an empty array for the collection data.
+                $array_collections = [];
+                //Grab de tags input data from de form, and populate the array
+                foreach(Input::get('collections') as $collection_id){
+                    $collection = Collection::findOrFail($collection_id);
+                    $array_collections[] = $collection;
+                }
+            } else {
+                $array_collections = [];
                 $collection = Collection::findOrFail($collection_id);
                 $array_collections[] = $collection;
             }
 
-            //Create an empty array for the categories data.
-            $array_categories = [];
-            //Grab de tags input data from de form, and populate the array
-            foreach(Input::get('categories') as $category_id){
+            if (!is_null (Input::get('categories'))) {
+                //Create an empty array for the categories data.
+                $array_categories = [];
+                //Grab de tags input data from de form, and populate the array
+                foreach(Input::get('categories') as $category_id){
+                    $category = Category::findOrFail($category_id);
+                    $array_categories[] = $category;
+                }
+            } else {
+                $array_categories = [];
                 $category = Category::findOrFail($category_id);
                 $array_categories[] = $category;
             }
 
-            //Create an empty array for the tags data.
-            $array_tags = [];
-            //Grab de tags input data from de form, and populate the array
-            foreach(Input::get('tags') as $tag_id){
-                $tag = Tag::findOrFail($tag_id);
-                $array_tags[] = $tag;
+            if (!is_null(Input::get('tags'))) {
+                //Create an empty array for the tags data.
+                $array_tags = [];
+                //Grab de tags input data from de form, and populate the array
+                foreach(Input::get('tags') as $tag_id){
+                    $tag = Tag::findOrFail($tag_id);
+                    $array_tags[] = $tag;
+                }
             }
 
             //Try to update the register in the DB and check for errors
@@ -288,7 +322,9 @@ class PhotosController extends \BaseController {
                 $photo->collections()->saveMany($array_collections);
                 //First erase the olda data, and then save the array of tags
                 $photo->tags()->detach();
-                $photo->tags()->saveMany($array_tags);
+                if (!empty($array_tags)) {
+                    $photo->tags()->saveMany($array_tags);
+                }
 
 
 
@@ -335,14 +371,6 @@ class PhotosController extends \BaseController {
 
             //Delete the record from the DB
             Photo::find($id)->delete();
-
-            //Delete records of pivot tables
-
-            $photo->tags()->detach();
-
-            $photo->collection()->detach();
-
-            $photo->category()->detach();
 
             //Check register still exist in the DB
             if (empty(Photo::find($id))) {
