@@ -99,8 +99,6 @@ class PhotosController extends \BaseController {
             $photo->description = Input::get('description');
             $photo->show = Input::get('show');
             $photo->img_name = $filename;
-            $collection_id = 10;
-            $category_id = 6;
 
             if (!is_null (Input::get('collections'))) {
                 //Create an empty array for the collection data.
@@ -110,10 +108,6 @@ class PhotosController extends \BaseController {
                     $collection = Collection::findOrFail($collection_id);
                     $array_collections[] = $collection;
                 }
-            } else {
-                $array_collections = [];
-                $collection = Collection::findOrFail($collection_id);
-                $array_collections[] = $collection;
             }
 
             if (!is_null (Input::get('categories'))) {
@@ -124,10 +118,6 @@ class PhotosController extends \BaseController {
                     $category = Category::findOrFail($category_id);
                     $array_categories[] = $category;
                 }
-            } else {
-                $array_categories = [];
-                $category = Category::findOrFail($category_id);
-                $array_categories[] = $category;
             }
 
             if (!is_null(Input::get('tags'))) {
@@ -153,9 +143,13 @@ class PhotosController extends \BaseController {
             //Try to save in the DB and check for true or false
             if ($photo->save()) {
                 //Save the array of tags
-                $photo->categories()->saveMany($array_categories);
+                if (!empty($array_categories)) {
+                    $photo->categories()->saveMany($array_categories);
+                }
                 //Save the array of tags
-                $photo->collections()->saveMany($array_collections);
+                if (!empty($array_collections)) {
+                    $photo->collections()->saveMany($array_collections);
+                }
                 //Save the array of tags
                 if (!empty($array_tags)) {
                     $photo->tags()->saveMany($array_tags);
@@ -279,10 +273,6 @@ class PhotosController extends \BaseController {
                     $collection = Collection::findOrFail($collection_id);
                     $array_collections[] = $collection;
                 }
-            } else {
-                $array_collections = [];
-                $collection = Collection::findOrFail($collection_id);
-                $array_collections[] = $collection;
             }
 
             if (!is_null (Input::get('categories'))) {
@@ -293,10 +283,6 @@ class PhotosController extends \BaseController {
                     $category = Category::findOrFail($category_id);
                     $array_categories[] = $category;
                 }
-            } else {
-                $array_categories = [];
-                $category = Category::findOrFail($category_id);
-                $array_categories[] = $category;
             }
 
             if (!is_null(Input::get('tags'))) {
@@ -316,10 +302,14 @@ class PhotosController extends \BaseController {
 
                 //First erase the olda data, and then save the array of categories
                 $photo->categories()->detach();
-                $photo->categories()->saveMany($array_categories);
+                if (!empty($array_categories)) {
+                    $photo->categories()->saveMany($array_categories);
+                }
                 //First erase the olda data, and then save the array of collections
                 $photo->collections()->detach();
-                $photo->collections()->saveMany($array_collections);
+                if (!empty($array_collections)) {
+                    $photo->collections()->saveMany($array_collections);
+                }
                 //First erase the olda data, and then save the array of tags
                 $photo->tags()->detach();
                 if (!empty($array_tags)) {
