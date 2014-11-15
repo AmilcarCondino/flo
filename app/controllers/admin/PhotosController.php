@@ -392,7 +392,7 @@ class PhotosController extends \BaseController {
             array($nameAttribute => $rules)
         );
 
-        if(empty ($validator->failedRules)){
+        if($validator->fails()){
             dd();
         }
     }
