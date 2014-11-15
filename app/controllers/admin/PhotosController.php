@@ -1,6 +1,7 @@
 <?php namespace Admin;
 
 use BaseController;
+use Illuminate\Support\Facades\Validator;
 use View;
 use Photo;
 use Input;
@@ -377,5 +378,24 @@ class PhotosController extends \BaseController {
                 ->with('flash_type', 'alert-danger');
         }
 	}
+
+    public function validateAttribute()
+    {
+
+        $nameAttribute = Input::get('name');
+        $valueAttribute = Input::get('value');
+
+        $rules = Photo::$rules[$nameAttribute];
+
+        $validator = Validator::make(
+            array($nameAttribute => $valueAttribute),
+            array($nameAttribute => $rules)
+        );
+
+        if(empty ($validator->failedRules)){
+            dd();
+        }
+    }
+
 
 }

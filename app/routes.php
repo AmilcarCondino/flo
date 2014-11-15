@@ -29,6 +29,7 @@ Route::group(array('prefix' => 'admin', 'before' => array('auth|admin')), functi
 {
     Route::resource('posts', 'Admin\\PostsController');
     Route::resource('photos', 'Admin\\PhotosController');
+    Route::post('validate', 'Admin\\PhotosController@validateAttribute');
     Route::resource('categories', 'Admin\\CategoriesController',['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]);
     Route::resource('collections', 'Admin\\CollectionsController',['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]);
     Route::resource('tags', 'Admin\\TagsController',['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]);

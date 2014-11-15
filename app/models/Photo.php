@@ -3,7 +3,7 @@
 class Photo extends Model {
 	protected $fillable = [];
 
-    protected static $rules = [
+    public static $rules = [
         'title' => array('required', 'unique:photos,title,[id]', 'min:3'),
         'img_name' => 'required',
         'show' => array('required', 'boolean'),
@@ -11,7 +11,7 @@ class Photo extends Model {
 
     ];
 
-    protected static $messages = [
+    public static $messages = [
       'title.required' => 'El campo "Titulo", es obligatorio.',
       'title.unique' => 'Este Titulo ya existe en otra publicacion.',
       'title.min' => 'El Titulo debe ser mayor a 3 caracteres.',
