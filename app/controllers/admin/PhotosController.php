@@ -1,6 +1,7 @@
 <?php namespace Admin;
 
 use BaseController;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Validator;
 use View;
 use Photo;
@@ -11,6 +12,7 @@ use Exception;
 use Category;
 use Tag;
 Use Collection;
+Use Response;
 
 
 class PhotosController extends \BaseController {
@@ -393,9 +395,13 @@ class PhotosController extends \BaseController {
         );
 
         if($validator->fails()){
-            dd();
+            return Response::json ([
+                'succes' => false,
+                'errors' => $validator->getMessageBag()->toArray()
+            ]);
         }
     }
 
 
 }
+

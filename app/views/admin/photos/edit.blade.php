@@ -54,7 +54,9 @@
                         data: { name: $(this).attr('name'), value: $(this).val() }
                     })
                         .done(function( response ) {
-                            // no sabemos
+                            if (response == false) {
+                                
+                            }
                         });
                 });
             </script>
