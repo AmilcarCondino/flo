@@ -397,6 +397,7 @@ class PhotosController extends \BaseController {
         if($validator->fails()){
             return Response::json ([
                 'succes' => false,
+                'attributeName' => $nameAttribute,
                 'errors' => $validator->getMessageBag()->toArray()
             ]);
         }

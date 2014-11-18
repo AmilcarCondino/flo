@@ -5,11 +5,11 @@
             <div class="col-md-4">
                 {{  Form::model($photo, ['method' => 'PATCH', 'files' => true, 'route' => ['admin.photos.update', $photo->id]]) }}
 
-                {{ Form::openGroup('title', 'Titulo: ') }}
+                {{ Form::openGroup('title', 'Titulo: ', ['id' => 'titleDiv']) }}
                     {{ Form::text('title', null, ['class' => 'validate']) }}
                 {{ Form::closeGroup() }}
 
-                {{ Form::openGroup('description', 'Descripción: ') }}
+                {{ Form::openGroup('description', 'Descripción: ', ['id' => 'descriptionDiv']) }}
                     {{ Form::textarea('description', null, ['class' => 'validate']) }}
                 {{ Form::closeGroup() }}
 
@@ -54,8 +54,14 @@
                         data: { name: $(this).attr('name'), value: $(this).val() }
                     })
                         .done(function( response ) {
-                            if (response == false) {
-                                
+                            if (!response.success) {
+
+                                var attributte = response.attributeName;
+
+                                console.log(attributte);
+
+                                $("input[name= attributte]").parent("div").addClass("has-error");
+
                             }
                         });
                 });

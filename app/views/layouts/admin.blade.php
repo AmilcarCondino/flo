@@ -67,7 +67,6 @@
         <script>
             $(document).ready(function(){
                 $('.selectpicker').selectpicker({
-                style:,
                 size: 4});
             });
         </script>
