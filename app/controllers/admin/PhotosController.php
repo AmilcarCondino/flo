@@ -402,7 +402,14 @@ class PhotosController extends \BaseController {
                 'succes' => false,
                 'attributeName' => $nameAttribute,
                 'errors' => $validator->getMessageBag()
-        ]);}
+        ]);} else {
+            return Response::json([
+               'success' => true,
+               'attributeName' => $nameAttribute
+            ]);
+        }
+
+
     }
 
 

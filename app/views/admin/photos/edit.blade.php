@@ -54,6 +54,15 @@
                         data: { name: $(this).attr('name'), value: $(this).val() }
                     })
                         .done(function( response ) {
+
+                            if (response.success) {
+
+                                var attributte = response.attributeName;
+                                $("input[name="+attributte+"]").parent("div").addClass("has-success");
+                                $("textarea[name="+attributte+"]").parent("div").addClass("has-success");
+
+                            }
+
                             if (!response.success) {
 
                                 var attributte = response.attributeName;
@@ -77,7 +86,7 @@
 
                                     $( "textarea[name="+attributte+"]").parent("div").children("p").remove();
                                 }
-                                
+
                                 $("textarea[name="+attributte+"]").parent("div").append(" <p class= 'help-block' >"+error);
 
                             }
