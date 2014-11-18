@@ -5,11 +5,11 @@
             <div class="col-md-4">
                 {{  Form::model($photo, ['method' => 'PATCH', 'files' => true, 'route' => ['admin.photos.update', $photo->id]]) }}
 
-                {{ Form::openGroup('title', 'Titulo: ', ['id' => 'titleDiv']) }}
+                {{ Form::openGroup('title', 'Titulo: ') }}
                     {{ Form::text('title', null, ['class' => 'validate']) }}
                 {{ Form::closeGroup() }}
 
-                {{ Form::openGroup('description', 'Descripción: ', ['id' => 'descriptionDiv']) }}
+                {{ Form::openGroup('description', 'Descripción: ') }}
                     {{ Form::textarea('description', null, ['class' => 'validate']) }}
                 {{ Form::closeGroup() }}
 
@@ -57,10 +57,28 @@
                             if (!response.success) {
 
                                 var attributte = response.attributeName;
+                                var errors = response.errors;
+                                var error  = $.map( errors, function( value, key ) {
+                                    return value;
+                                });
 
-                                console.log(attributte);
+                                $("input[name="+attributte+"]").parent("div").addClass("has-error");
 
-                                $("input[name= attributte]").parent("div").addClass("has-error");
+                                if ( $( "input[name="+attributte+"]").parent("div").children("p") ) {
+
+                                    $( "input[name="+attributte+"]").parent("div").children("p").remove();
+                                }
+
+                                $("input[name="+attributte+"]").parent("div").append(" <p class= 'help-block' >"+error);
+
+                                $("textarea[name="+attributte+"]").parent("div").addClass("has-error");
+
+                                if ( $( "textarea[name="+attributte+"]").parent("div").children("p") ) {
+
+                                    $( "textarea[name="+attributte+"]").parent("div").children("p").remove();
+                                }
+                                
+                                $("textarea[name="+attributte+"]").parent("div").append(" <p class= 'help-block' >"+error);
 
                             }
                         });

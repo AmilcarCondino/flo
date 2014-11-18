@@ -388,19 +388,21 @@ class PhotosController extends \BaseController {
         $valueAttribute = Input::get('value');
 
         $rules = Photo::$rules[$nameAttribute];
+        $messages = Photo::$messages;
+
 
         $validator = Validator::make(
             array($nameAttribute => $valueAttribute),
-            array($nameAttribute => $rules)
+            array($nameAttribute => $rules),
+            $messages
         );
 
         if($validator->fails()){
             return Response::json ([
                 'succes' => false,
                 'attributeName' => $nameAttribute,
-                'errors' => $validator->getMessageBag()->toArray()
-            ]);
-        }
+                'errors' => $validator->getMessageBag()
+        ]);}
     }
 
 
