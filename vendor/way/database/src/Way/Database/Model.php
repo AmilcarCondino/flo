@@ -103,4 +103,22 @@ class Model extends Eloquent {
         return ! empty($this->errors);
     }
 
+
+    /**
+     * Validate only one value of a form
+     */
+    public  function validateOneField($nameAttribute, $valueAttribute)
+    {
+
+        $v = $this->validator->make( array($nameAttribute => $valueAttribute), static::$rules, static::$messages);
+
+
+        if ($v->passes())
+        {
+            return true;
+        }
+
+        $this->setErrors($v->messages());
+
+    }
 }
