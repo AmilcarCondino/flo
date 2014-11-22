@@ -51,7 +51,7 @@
                     $.ajax({
                         type: "POST",
                         url: "/admin/validate",
-                        data: { name: $(this).attr('name'), value: $(this).val() }
+                        data: { photoId: <?php echo $photo->id; ?>, name: $(this).attr('name'), value: $(this).val() }
                     })
                         .done(function( response ) {
 
@@ -65,29 +65,23 @@
 
                             if (!response.success) {
 
+
+                                console.log(response);
+
                                 var attributte = response.attributeName;
                                 var errors = response.errors;
                                 var error  = $.map( errors, function( value, key ) {
                                     return value;
                                 });
 
-                                $("input[name="+attributte+"]").parent("div").addClass("has-error");
+                                $("[name="+attributte+"]").parent("div").addClass("has-error");
 
-                                if ( $( "input[name="+attributte+"]").parent("div").children("p") ) {
+                                if ( $( "[name="+attributte+"]").parent("div").children("p") ) {
 
-                                    $( "input[name="+attributte+"]").parent("div").children("p").remove();
+                                    $( "[name="+attributte+"]").parent("div").children("p").remove();
                                 }
 
-                                $("input[name="+attributte+"]").parent("div").append(" <p class= 'help-block' >"+error);
-
-                                $("textarea[name="+attributte+"]").parent("div").addClass("has-error");
-
-                                if ( $( "textarea[name="+attributte+"]").parent("div").children("p") ) {
-
-                                    $( "textarea[name="+attributte+"]").parent("div").children("p").remove();
-                                }
-
-                                $("textarea[name="+attributte+"]").parent("div").append(" <p class= 'help-block' >"+error);
+                                $("[name="+attributte+"]").parent("div").append(" <p class= 'help-block' >"+error);
 
                             }
                         });

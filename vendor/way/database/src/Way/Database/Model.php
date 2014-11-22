@@ -110,15 +110,33 @@ class Model extends Eloquent {
     public  function validateOneField($nameAttribute, $valueAttribute)
     {
 
-        $v = $this->validator->make( array($nameAttribute => $valueAttribute), static::$rules, static::$messages);
 
+//        $replace = ($this->getKey() > 0) ? $this->getKey() : '';
+//        foreach (static::$rules as $key => $rule)
+//        {
+//            static::$rules[$key] = str_replace('[id]', $replace, $rule);
+//        }
+        //array('title' => array('required', 'unique', 'min:3'))
+
+
+
+        $v = $this->validator->make( array($nameAttribute => $valueAttribute),
+                                     array($nameAttribute => static::$rules[$nameAttribute]),
+                                     static::$messages);
+
+
+            if ($v->fails()){
+                $bar =  $v->messages();
+            }
 
         if ($v->passes())
         {
             return true;
+        } else {
+
+            $this->setErrors($v->messages());
+
+            return redire
         }
-
-        $this->setErrors($v->messages());
-
     }
 }
