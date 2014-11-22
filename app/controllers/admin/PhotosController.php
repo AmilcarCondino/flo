@@ -387,15 +387,24 @@ class PhotosController extends \BaseController {
         $nameAttribute = Input::get('name');
         $valueAttribute = Input::get('value');
 
-        $rules = Photo::$rules[$nameAttribute];
-        $messages = Photo::$messages;
+//        $rules = Photo::$rules[$nameAttribute];
+//        $messages = Photo::$messages;
 
 
-        $validator = Validator::make(
-            array($nameAttribute => $valueAttribute),
-            array($nameAttribute => $rules),
-            $messages
-        );
+//        $validator = Validator::make(
+//            array($nameAttribute => $valueAttribute),
+//            array($nameAttribute => $rules),
+//            $messages
+//        );
+
+
+
+
+        $validator = Validator::validateOneField($nameAttribute, $valueAttribute);
+
+
+
+
 
         if($validator->fails()){
             return Response::json ([

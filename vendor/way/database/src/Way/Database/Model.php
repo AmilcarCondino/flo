@@ -105,7 +105,7 @@ class Model extends Eloquent {
 
 
     /**
-     * Validate only one value of a form
+     * Validate only one field of a form
      */
     public  function validateOneField($nameAttribute, $valueAttribute)
     {
