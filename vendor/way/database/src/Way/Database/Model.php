@@ -111,12 +111,11 @@ class Model extends Eloquent {
     {
 
 
-//        $replace = ($this->getKey() > 0) ? $this->getKey() : '';
-//        foreach (static::$rules as $key => $rule)
-//        {
-//            static::$rules[$key] = str_replace('[id]', $replace, $rule);
-//        }
-        //array('title' => array('required', 'unique', 'min:3'))
+        $replace = ($this->getKey() > 0) ? $this->getKey() : '';
+        foreach (static::$rules as $key => $rule)
+        {
+            static::$rules[$key] = str_replace('[id]', $replace, $rule);
+        }
 
 
 
@@ -125,18 +124,14 @@ class Model extends Eloquent {
                                      static::$messages);
 
 
-            if ($v->fails()){
-                $bar =  $v->messages();
-            }
-
-        if ($v->passes())
+        if ($v->fails())
         {
-            return true;
+
+            return $v->messages();
+
         } else {
 
-            $this->setErrors($v->messages());
-
-            return redire
+            return true;
         }
     }
 }

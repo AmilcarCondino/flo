@@ -55,32 +55,31 @@
                     })
                         .done(function( response ) {
 
+                            var attributte = response.attributeName;
+
+
+
+
+                            if (    $( "[name="+attributte+"]").parent("div").children("p") ) {
+                                    $( "[name="+attributte+"]").parent("div").children("p").remove();
+                            }
+
                             if (response.success) {
 
-                                var attributte = response.attributeName;
-                                $("input[name="+attributte+"]").parent("div").addClass("has-success");
-                                $("textarea[name="+attributte+"]").parent("div").addClass("has-success");
+                                $("[name="+attributte+"]").parent("div").removeClass("has-error");
+                                $("[name="+attributte+"]").parent("div").addClass("has-success");
 
                             }
 
                             if (!response.success) {
 
-
-                                console.log(response);
-
-                                var attributte = response.attributeName;
+                                $("[name="+attributte+"]").parent("div").removeClass("has-success");
                                 var errors = response.errors;
                                 var error  = $.map( errors, function( value, key ) {
                                     return value;
                                 });
 
                                 $("[name="+attributte+"]").parent("div").addClass("has-error");
-
-                                if ( $( "[name="+attributte+"]").parent("div").children("p") ) {
-
-                                    $( "[name="+attributte+"]").parent("div").children("p").remove();
-                                }
-
                                 $("[name="+attributte+"]").parent("div").append(" <p class= 'help-block' >"+error);
 
                             }

@@ -392,14 +392,11 @@ class PhotosController extends \BaseController {
         $nameAttribute = Input::get('name');
         $valueAttribute = Input::get('value');
 
-        $photo->$nameAttribute = $valueAttribute;
 
         $validate = $photo->validateOneField($nameAttribute, $valueAttribute);
 
 
 
-
-dd();
 
 
 //        $rules = Photo::$rules[$nameAttribute];
@@ -412,15 +409,18 @@ dd();
 //            $messages
 //        );
 
-        if($validate === false){
-            return Response::json ([
-                'succes' => false,
-                'attributeName' => $nameAttribute,
-                'errors' => $validate->getMessageBag()
-        ]);} else {
+        if($validate === true){
+
             return Response::json([
-               'success' => true,
-               'attributeName' => $nameAttribute
+                'success' => true,
+                'attributeName' => $nameAttribute
+
+        ]);} else {
+                $foo = 'dentro del if';
+                return Response::json ([
+                'errors' => $validate,
+                'succes' => false,
+                'attributeName' => $nameAttribute
             ]);
         }
 
