@@ -22,11 +22,11 @@
 
 
                 {{ Form::openGroup('title', 'Titulo: ') }}
-                    {{ Form::text('title') }}
+                    {{ Form::text('title', null, ['class' => 'validate']) }}
                 {{ Form::closeGroup() }}
 
                 {{ Form::openGroup('description', 'Descripción: ') }}
-                    {{ Form::textarea('description') }}
+                    {{ Form::textarea('description', null, ['class' => 'validate']) }}
                 {{ Form::closeGroup() }}
 
                 <div class="row">
@@ -65,6 +65,46 @@
 
             {{ Form::close() }}
         </div>
+        <script>
+            $(".validate").blur(function() {
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/validate",
+                    data: { name: $(this).attr('name'), value: $(this).val() }
+                })
+                    .done(function( response ) {
+
+                        var attributte = response.attributeName;
+
+
+
+
+                        if (    $( "[name="+attributte+"]").parent("div").children("p") ) {
+                            $( "[name="+attributte+"]").parent("div").children("p").remove();
+                        }
+
+                        if (response.success) {
+
+                            $("[name="+attributte+"]").parent("div").removeClass("has-error");
+                            $("[name="+attributte+"]").parent("div").addClass("has-success");
+
+                        }
+
+                        if (!response.success) {
+
+                            $("[name="+attributte+"]").parent("div").removeClass("has-success");
+                            var errors = response.errors;
+                            var error  = $.map( errors, function( value, key ) {
+                                return value;
+                            });
+
+                            $("[name="+attributte+"]").parent("div").addClass("has-error");
+                            $("[name="+attributte+"]").parent("div").append(" <p class= 'help-block' >"+error);
+
+                        }
+                    });
+            });
+        </script>
     </div>
 </div>
 @stop

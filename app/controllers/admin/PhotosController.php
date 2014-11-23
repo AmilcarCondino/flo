@@ -384,9 +384,12 @@ class PhotosController extends \BaseController {
     public function validateAttribute()
     {
 
-        $id = Input::get('photoId');
-
-        $photo = Photo::findOrFail($id);
+        if (!Input::get('photoId') === null) {
+            $id = Input::get('photoId');
+            $photo = Photo::findOrFail($id);
+        } else {
+            $photo = new Photo();
+        }
 
 
         $nameAttribute = Input::get('name');
@@ -394,20 +397,6 @@ class PhotosController extends \BaseController {
 
 
         $validate = $photo->validateOneField($nameAttribute, $valueAttribute);
-
-
-
-
-
-//        $rules = Photo::$rules[$nameAttribute];
-//        $messages = Photo::$messages;
-
-
-//        $validator = Validator::make(
-//            array($nameAttribute => $valueAttribute),
-//            array($nameAttribute => $rules),
-//            $messages
-//        );
 
         if($validate === true){
 
