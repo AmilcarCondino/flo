@@ -6,7 +6,7 @@
 
     @for($i = 0; $i < count($photos); $i++)
     @if($photos[$i]->show === 1)
-    <div class="item {{ $pattern[ ($i % count($pattern) ) ] }}">
+    <div class="picture {{ $pattern[ ($i % count($pattern) ) ] }}">
         <!--                <a href="/photos/{{ $photos[$i]->id }}">-->
         <img src="/uploads/images/{{$photos[$i]->img_name}}" alt="alt">
         <!--                </a>-->
@@ -21,10 +21,10 @@
         var msnry = new Masonry( container, {
             // options
             columnWidth: 190,
-            itemSelector: '.item'
+            itemSelector: '.picture'
         });
 
-        $('.item').each(function(){
+        $('.picture').each(function(){
             var img = $(this).find('img');
             var tall_brick = ($(this).height() > $(this).width());
             var tall_img = (img.height() > img.width());
@@ -46,7 +46,7 @@
             }
         });
 
-        $('.item').click(function(){
+        $('.picture').click(function(){
             $(this).toggleClass('gigante');
             var img = $(this).find('img');
             img.removeAttr('style');
