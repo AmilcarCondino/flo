@@ -43,22 +43,12 @@ body {
     background-color: #222;
     padding-top: 10px;
 }
-<<<<<<< HEAD
-.item.a { width: 570px; height: 200px; overflow: hidden; }
-.item.b { width: 570px; height: 480px; overflow: hidden; }
-.item.c { width: 285px; height: 280px; overflow: hidden; }
-.item.d { width: 285px; height: 280px; overflow: hidden; }
-.item.e { width: 285px; height: 480px; overflow: hidden; }
-.item.f { width: 850px; height: 240px; overflow: hidden; }
-.item.g { width: 850px; height: 240px; overflow: hidden; }
-=======
-
 .item {
-  width:  190px;
-  height: 190px;
-  float: left;
-  overflow: hidden;
-  margin: 0;
+    width:  190px;
+    height: 190px;
+    float: left;
+    overflow: hidden;
+    margin: 0;
 }
 
 .item.w2 { width:  380px; }
@@ -70,18 +60,22 @@ body {
 .item.h4 { height: 570px; }
 
 .item img {
-  filter: url(filters.svg#grayscale); /* Firefox 3.5+ */
-  filter: gray; /* IE6-9 */
-  -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
-  transition: filter 500ms linear;
-  -webkit-transition : -webkit-filter 500ms linear
+    filter: url(filters.svg#grayscale); /* Firefox 3.5+ */
+    filter: gray; /* IE6-9 */
+    -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+    transition: filter 500ms linear;
+    -webkit-transition : -webkit-filter 500ms linear
 }
 
-.item img:hover { 
-  filter: none;
-  -webkit-filter: grayscale(0);
+.item img:hover {
+    filter: none;
+    -webkit-filter: grayscale(0);
 }
 
 
 .gigante { width: 570px !important; height: 570px !important; }
->>>>>>> marto
+
+.item img:hover {
+  filter: none;
+  -webkit-filter: grayscale(0);
+}
