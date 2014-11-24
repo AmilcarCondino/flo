@@ -384,7 +384,7 @@ class PhotosController extends \BaseController {
     public function validateAttribute()
     {
 
-        if (!Input::get('photoId') === null) {
+        if (!is_null(Input::get('photoId'))) {
             $id = Input::get('photoId');
             $photo = Photo::findOrFail($id);
         } else {
