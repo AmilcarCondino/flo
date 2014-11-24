@@ -16,8 +16,7 @@
         <script src="/js/jasny-bootstrap.js"></script>
         <link rel="stylesheet" href="/css/jasny-bootstrap.css">
         <!-- Include the MASONRY plugin's CSS and JS: -->
-        <script src="/js/masonry-docs.js"></script>
-        <link rel="stylesheet" href="/css/masonry-docs.css">
+        <script src="/js/masonry.pkgd.min.js"></script>
         <!-- Custom CSS -->
         <link href="/css/crud.css" rel="stylesheet">
         <!-- jQuery ( JavaScript plugins) -->
