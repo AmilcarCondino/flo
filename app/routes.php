@@ -21,7 +21,14 @@ Route::get('/', function()
 //Admin rotes
 Route::get('admin', function()
 {
-    return View::make('admin');
+    $category = DB::table('categories')->get();
+    $collections = DB::table('collections')->get();
+    $tag = DB::table('tags')->get();
+
+    return View::make('admin')
+        ->with('categories', $category)
+        ->with('collections', $collections)
+        ->with('tags', $tag);
 })->before('auth');
 
 
@@ -30,9 +37,10 @@ Route::group(array('prefix' => 'admin', 'before' => array('auth|admin')), functi
     Route::resource('posts', 'Admin\\PostsController');
     Route::resource('photos', 'Admin\\PhotosController');
     Route::post('validate', 'Admin\\PhotosController@validateAttribute');
-    Route::resource('categories', 'Admin\\CategoriesController',['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]);
-    Route::resource('collections', 'Admin\\CollectionsController',['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]);
-    Route::resource('tags', 'Admin\\TagsController',['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]);
+    Route::resource('categories', 'Admin\\CategoriesController',['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
+    Route::resource('collections', 'Admin\\CollectionsController',['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
+    Route::resource('tags', 'Admin\\TagsController',['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
+
 
 });
 
