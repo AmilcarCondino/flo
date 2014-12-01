@@ -18,7 +18,7 @@
                     {{ Form::submit('Guardar', array('class'=>'btn btn-sm btn-success')) }}
                 </div>
                 <div class="col-sm-6">
-                    <a class="btn btn-block btn-danger" href="/admin" role="button">Cancelar</a>
+                    <a class="btn btn-block btn-danger" href="{{ url('admin') }}" role="button">Cancelar</a>
                 </div>
             </div>
             {{ Form::close() }}

@@ -42,7 +42,6 @@
                         <li>{{ HTML::link('admin/posts', 'Posts') }}</li>
                         <li>{{ HTML::link('admin/photos', 'Fotos') }}</li>
                         <li>{{ HTML::link('logout', 'Log out') }}</li>
-                        <li>{{ HTML::link('logout', 'Log out') }}</li>
                     </ul>
 
                 </div>

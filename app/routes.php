@@ -21,14 +21,14 @@ Route::get('/', function()
 //Admin rotes
 Route::get('admin', function()
 {
-    $category = DB::table('categories')->get();
+    $categories = DB::table('categories')->get();
     $collections = DB::table('collections')->get();
-    $tag = DB::table('tags')->get();
+    $tags = DB::table('tags')->get();
 
     return View::make('admin')
-        ->with('categories', $category)
+        ->with('categories', $categories)
         ->with('collections', $collections)
-        ->with('tags', $tag);
+        ->with('tags', $tags);
 })->before('auth');
 
 

@@ -64,7 +64,7 @@
                                     {{$photo->created_at}}
                                 </th>
                                 <th>
-                                    <a class="btn btn-xs btn-success" href="/admin/photos/{{$photo->id}}/edit" role="button">Editar</a>
+                                    <a class="btn btn-xs btn-success" href="{{ route('admin.photos.edit', $photo->id) }}" role="button">Editar</a>
                                 </th>
                                 <th>
                                     {{ Form::open(['method' => 'delete', 'route' => ['admin.photos.destroy', $photo->id]]) }}

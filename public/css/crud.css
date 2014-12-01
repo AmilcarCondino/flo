@@ -60,16 +60,16 @@ body {
 .picture.h4 { height: 570px; }
 
 .picture img {
+    filter: none;
+    -webkit-filter: grayscale(0);
+}
+
+.picture img:hover {
     filter: url(filters.svg#grayscale); /* Firefox 3.5+ */
     filter: gray; /* IE6-9 */
     -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
     transition: filter 500ms linear;
     -webkit-transition : -webkit-filter 500ms linear
-}
-
-.picture img:hover {
-    filter: none;
-    -webkit-filter: grayscale(0);
 }
 
 

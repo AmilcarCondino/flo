@@ -15,7 +15,7 @@
                                 {{ $category->title }}
                             </div>
                             <div class="col-sm-3">
-                                <a class="btn btn-block btn-success" href="categories/{{$category->id}}/edit" role="button">Editar</a>
+                                <a class="btn btn-block btn-success" href="{{ route['admin.categories.edit', $category->id] }}" role="button">Editar</a>
                             </div>
                             <div class="col-sm-3">
                                 {{ Form::open(['method' => 'delete', 'route' => ['admin.categories.destroy', $category->id]]) }}
