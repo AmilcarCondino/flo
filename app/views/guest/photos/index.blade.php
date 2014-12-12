@@ -7,9 +7,9 @@
     @for($i = 0; $i < count($photos); $i++)
     @if($photos[$i]->show === 1)
     <div class="picture {{ $pattern[ ($i % count($pattern) ) ] }}">
-        <a href="/photos/{{ $photos[$i]->id }}">
-            <img src="/uploads/images/{{$photos[$i]->img_name}}" alt="alt">
-        </a>
+<!--        <a href="/photos/{{ $photos[$i]->id }}">-->
+            <img src="/uploads/images/{{$photos[$i]->img_name}}" alt="alt" class="photo">
+<!--        </a>-->
     </div>
     @endif
     @endfor
@@ -45,6 +45,7 @@
                 }
             }
         });
+    });
 
 //        $('.picture').click(function(){
 //            $(this).toggleClass('gigante');
@@ -63,8 +64,22 @@
 //            }
 //            msnry.layout();
 //        });
+//    });
 
+
+</script>
+<script>
+
+    $('img').click(function () {
+        if (screenfull.enabled) {
+            // We can use `this` since we want the clicked element
+            screenfull.toggle(this);
+        }
     });
+</script>
+<script>
+
+
 
 
 </script>
