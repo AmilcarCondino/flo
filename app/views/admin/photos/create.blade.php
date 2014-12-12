@@ -1,9 +1,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-sm-12">
-            <h1>Agreguemos una Nueva Foto</h1>
-        </div>
+        <div class="col-sm-12"><h1>Nueva Foto</h1></div>
     </div>
     <div class="row">
         <div class="col-sm-6">
@@ -49,17 +47,12 @@
                     {{ Form::select('tags[]', $tags, Input::old('tags'), array('id' => 'tags', 'multiple' => 'multiple', 'class' => 'selectpicker', 'title' => 'Selecione las etiquetas que desee', 'data-live-search' => 'data-live-search')) }}
                 {{ Form::closeGroup() }}
 
-
-
-
-
-
                 <div class="row">
-                    <div class="col-sm-3">
-                        {{ Form::submit('Guardar Foto', array('class'=>'btn btn-sm-3 btn-success')) }}
-                    </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-6">
                         <a class="btn btn-block btn-danger" href="/admin/photos" role="button">Cancelar</a>
+                    </div>
+                    <div class="col-sm-6">
+                        {{ Form::submit('Guardar Foto', array('class'=>'btn btn-sm btn-success', 'id' => 'btn')) }}
                     </div>
                 </div>
 

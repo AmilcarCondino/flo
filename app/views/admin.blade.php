@@ -2,79 +2,77 @@
 
 @section('content')
     <div class="row">
-        <div class="col-sm-12">
-            <h1>Panel de administracion</h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-3 panel" style="margin-left: 2px">
-            <h3 class="text-info">Categorias</h3>
-            <a class="btn btn-sm btn-success " href="{{ route('admin.categories.create') }}" role="button" style="margin-bottom: 5px;">Crear una nueva categoria</a>
-            <ul class="list-group">
-                @foreach($categories as $category)
-                <li class="list-group-item list-group-item-info">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h5>{{ $category->title }}</h5>
-                        </div>
-                        <div class="col-sm-3 btn-group" style="margin-top: 3px;">
-                            <a class="btn btn-sm btn-success" href="{{ route('admin.categories.edit', $category->id) }}" role="button">Editar</a>
-                        </div>
-                        <div class="col-sm-3 btn-group btn-xs">
+        <div class="col-sm-4">
+            <h2>Categorías
+                <small><a class="btn btn-sm btn-success pull-right" href="{{ route('admin.categories.create') }}" role="button">Nueva Categoría</a></small>
+            </h2>
+            <table class="table table-hover table-condensed">
+                <tbody>
+                    @foreach($categories as $category)
+                    <tr>
+                        <td style="width: 50%">{{ $category->title }}</td>
+                        <td>
+                            {{ Form::open(['method' => 'get', 'route' => ['admin.categories.edit', $category->id]]) }}
+                                {{ Form::submit('Editar', array('class'=>'btn btn-xs btn-primary')) }}
+                            {{ Form::close() }}
+                        </td>
+                        <td>
                             {{ Form::open(['method' => 'delete', 'route' => ['admin.categories.destroy', $category->id]]) }}
-                                {{ Form::submit('Eliminar', array('class'=>'btn-group btn-xs btn-danger')) }}
+                                {{ Form::submit('Eliminar', array('class'=>'btn btn-xs btn-danger')) }}
                             {{ Form::close() }}
-                        </div>
-                    </div>
-                </li>
-                @endforeach
-            </ul>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
-        <div class="col-sm-3 panel" style="margin-left: 2px">
-            <h3 class="text-info">Colecciones</h3>
-            <a class="btn btn-sm btn-success " href="{{ route('admin.collections.create') }}" role="button" style="margin-bottom: 5px;">Crear una nueva coleccion</a>
-            <ul class="list-group">
-                @foreach($collections as $collection)
-                <li class="list-group-item list-group-item-info">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h5>{{ $collection->title }}</h5>
-                        </div>
-                        <div class="col-sm-3 btn-group" style="margin-top: 3px;">
-                            <a class="btn btn-sm btn-success" href="{{ route('admin.collections.edit', $collection->id) }}" role="button" >Editar</a>
-                        </div>
-                        <div class="col-sm-3 btn-group btn-xs">
-                            {{ Form::open(['method' => 'delete', 'route' => ['admin.collections.destroy', $collection->id]]) }}
-                                {{ Form::submit('Eliminar', array('class'=>'btn-group btn-xs btn-danger')) }}
+        <div class="col-sm-4">
+            <h2>Colecciones
+                <small><a class="btn btn-sm btn-success pull-right" href="{{ route('admin.collections.create') }}" role="button">Nueva Colección</a></small>
+            </h2>
+            <table class="table table-hover table-condensed">
+                <tbody>
+                    @foreach($collections as $category)
+                    <tr>
+                        <td style="width: 50%">{{ $category->title }}</td>
+                        <td>
+                            {{ Form::open(['method' => 'get', 'route' => ['admin.collections.edit', $category->id]]) }}
+                                {{ Form::submit('Editar', array('class'=>'btn btn-xs btn-primary')) }}
                             {{ Form::close() }}
-                        </div>
-                    </div>
-                </li>
-                @endforeach
-            </ul>
+                        </td>
+                        <td>
+                            {{ Form::open(['method' => 'delete', 'route' => ['admin.collections.destroy', $category->id]]) }}
+                                {{ Form::submit('Eliminar', array('class'=>'btn btn-xs btn-danger')) }}
+                            {{ Form::close() }}
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
-        <div class="col-sm-3 panel" style="margin-left: 2px">
-            <h3 class="text-info">Etiquetas</h3>
-            <a class="btn btn-sm btn-success " href="{{ route('admin.tags.create') }}" role="button" style="margin-bottom: 5px;">Crear una nueva etiqueta</a>
-            <ul class="list-group">
-                @foreach($tags as $tag)
-                <li class="list-group-item list-group-item-info">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h5>{{ $tag->title }}</h5>
-                        </div>
-                        <div class="col-sm-3 btn-group" style="margin-top: 3px;">
-                            <a class="btn btn-sm btn-success" href="{{ route('admin.tags.edit', $tag->id) }}" role="button">Editar</a>
-                        </div>
-                        <div class="col-sm-3 btn-group btn-xs">
+        <div class="col-sm-4">
+            <h2>Etiquetas
+                <small><a class="btn btn-sm btn-success pull-right" href="{{ route('admin.tags.create') }}" role="button">Nueva Etiqueta</a></small>
+            </h2>
+            <table class="table table-hover table-condensed">
+                <tbody>
+                    @foreach($tags as $tag)
+                    <tr>
+                        <td style="width: 50%">{{ $tag->title }}</td>
+                        <td>
+                            {{ Form::open(['method' => 'get', 'route' => ['admin.tags.edit', $tag->id]]) }}
+                                {{ Form::submit('Editar', array('class'=>'btn btn-xs btn-primary')) }}
+                            {{ Form::close() }}
+                        </td>
+                        <td>
                             {{ Form::open(['method' => 'delete', 'route' => ['admin.tags.destroy', $tag->id]]) }}
-                                {{ Form::submit('Eliminar', array('class'=>'btn-group btn-xs btn-danger')) }}
+                                {{ Form::submit('Eliminar', array('class'=>'btn btn-xs btn-danger')) }}
                             {{ Form::close() }}
-                        </div>
-                    </div>
-                </li>
-                @endforeach
-            </ul>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 @stop

@@ -2,8 +2,8 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-sm-3">
-            <a class="btn btn-success" href="photos/create" role="button">Nueva Foto</a>
+        <div class="col-sm-12">
+            <h1>Listado de Fotos<small><a class="btn btn-success pull-right" href="photos/create" role="button">Nueva Foto</a></small></h1>
         </div>
     </div>
 
@@ -13,66 +13,74 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Titulo</th>
+                        <th>Imagen</th>
+                        <th>Título</th>
                         <th>Comentario</th>
-                        <th>Show</th>
-                        <th>Coleccion</th>
-                        <th>Categoria</th>
+                        <th>Visible?</th>
+                        <th>Colección</th>
+                        <th>Categoría</th>
                         <th>Etiqueta</th>
-                        <th>Creacion</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
+                        <th>Creación</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                     <tbody>
                         @foreach($photos as $photo)
                             <tr>
-                                <th>
+                                <td>
+                                    {{$photo->id}}
+                                </td>
+                                <td>
                                     <a href="/admin/photos/{{ $photo->id }}">
-                                        <img src="/uploads/images/{{$photo->img_name}}"class="img-responsive img-rounded" alt="Responsive image" style=" width: 250px">
+                                        <img src="/uploads/images/{{$photo->img_name}}" class="img-responsive" style="height: 50px">
                                     </a>
-                                </th>
-                                <th>
+                                </td>
+                                <td>
                                     {{$photo->title}}
-                                </th>
-                                <th>
+                                </td>
+                                <td>
                                     {{$photo->description}}
-                                </th>
-                                <th>
+                                </td>
+                                <td>
                                     @if($photo->show === 1)
                                         Si
                                     @else
                                         No
                                     @endif
-                                </th>
-                                <th>
+                                </td>
+                                <td>
                                     @foreach($photo->collections as $collection)
                                         {{ $collection->title }}
                                     @endforeach
-                                </th>
-                                <th>
+                                </td>
+                                <td>
                                     @foreach($photo->categories as $category)
                                         {{ $category->title }}
                                     @endforeach
-                                </th>
-                                <th>
+                                </td>
+                                <td>
                                     @foreach($photo->tags as $tag)
                                         {{ $tag->title }}
                                     @endforeach
-                                </th>
-                                <th>
+                                </td>
+                                <td>
                                     {{$photo->created_at}}
-                                </th>
-                                <th>
-                                    <a class="btn btn-xs btn-success" href="{{ route('admin.photos.edit', $photo->id) }}" role="button">Editar</a>
-                                </th>
-                                <th>
-                                    {{ Form::open(['method' => 'delete', 'route' => ['admin.photos.destroy', $photo->id]]) }}
+                                </td>
+                                <td>
+                                    {{ Form::open(['method' => 'get', 'route' => ['admin.photos.edit', $photo->id]]) }}
 
-                                        {{ Form::submit('Eliminar', array('class'=>'btn btn-xs btn-danger')) }}
+                                        {{ Form::submit('Editar', array('class'=>'btn btn-sm btn-primary')) }}
 
                                     {{ Form::close() }}
-                                </th>
+                                </td>
+                                <td>
+                                    {{ Form::open(['method' => 'delete', 'route' => ['admin.photos.destroy', $photo->id]]) }}
+
+                                        {{ Form::submit('Eliminar', array('class'=>'btn btn-sm btn-danger')) }}
+
+                                    {{ Form::close() }}
+                                </td>
 
                             </tr>
                         @endforeach

@@ -25,7 +25,7 @@
         <div class="col-md-8">
             <div class="row">
                 <div class="col-sm-8">
-                {{ HTML::image("/uploads/images/{$photo->img_name}", 'foto', array('width' => '500')) }}
+                {{ HTML::image("/uploads/images/{$photo->img_name}", 'foto') }}
                 </div>
             </div>
             <div class="row">

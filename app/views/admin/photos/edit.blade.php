@@ -1,8 +1,10 @@
 @section('content')
-    <h1>Editar foto</h1>
     <div class="container">
-        <div class="row show-grid">
-            <div class="col-md-4">
+        <div class="row">
+            <div class="col-sm-12"><h1>Editar foto</h1></div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
                 {{  Form::model($photo, ['method' => 'PATCH', 'files' => true, 'route' => ['admin.photos.update', $photo->id]]) }}
 
                 {{ Form::openGroup('title', 'Titulo: ') }}
@@ -34,10 +36,10 @@
                 {{ Form::closeGroup() }}
                 <div class="row">
                     <div class="col-sm-6">
-                        {{ Form::submit('Editar Foto', array('class'=>'btn btn-sm btn-success', 'id' => 'btn')) }}
+                        <a class="btn btn-block btn-danger" href="/admin/photos" role="button">Cancelar</a>
                     </div>
                     <div class="col-sm-6">
-                        <a class="btn btn-block btn-danger" href="/admin/photos" role="button">Cancelar</a>
+                        {{ Form::submit('Editar Foto', array('class'=>'btn btn-sm btn-success', 'id' => 'btn')) }}
                     </div>
                 </div>
 
@@ -90,8 +92,8 @@
 
 
 
-            <div class="col-md-8">
-                {{ HTML::image("/uploads/images/{$photo->img_name}", 'foto', array('width' => '500')) }}
+            <div class="col-md-6">
+                {{ HTML::image("/uploads/images/{$photo->img_name}", 'foto', array('width' => '100%')) }}
             </div>
         </div>
     </div>

@@ -8,7 +8,7 @@
         <!-- Core Bootstrap -->
         <link href="/css/bootstrap.css" rel="stylesheet">
         <!-- Custom CSS -->
-        <link href="/css/crud.css" rel="stylesheet">
+        <link href="/css/admin.css" rel="stylesheet">
         <!-- Core jquery -->
         <script src="/js/jquery-2.1.1.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
@@ -18,11 +18,6 @@
         <!-- Include the JASNY plugin's CSS and JS: -->
         <script src="/js/jasny-bootstrap.js"></script>
         <link rel="stylesheet" href="/css/jasny-bootstrap.css">
-        <!-- Include the MASONRY plugin's CSS and JS: -->
-        <script src="/js/masonry-docs.js"></script>
-<!--        <link rel="stylesheet" href="/css/masonry-docs.css">-->
-
-
     </head>
     <body>
         <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -38,7 +33,7 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li>{{ HTML::link('/admin', 'Admin Panel') }}</li>
+                        <li>{{ HTML::link('/admin', 'Dashboard') }}</li>
                         <li>{{ HTML::link('admin/posts', 'Posts') }}</li>
                         <li>{{ HTML::link('admin/photos', 'Fotos') }}</li>
                         <li>{{ HTML::link('logout', 'Log out') }}</li>

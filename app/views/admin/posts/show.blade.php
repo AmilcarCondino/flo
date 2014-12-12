@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-12">
             <div class="row">
                 <div class="col-sm-4">
                     <a class="btn btn-block btn-success" href="{{$post->id}}/edit" role="button">Editar</a>
@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-12">
             <h2  class="text-center">{{ $post->title }}</h2>
             <p>{{ $post->body }}</p>
         </div>
