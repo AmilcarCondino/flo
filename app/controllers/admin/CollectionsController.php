@@ -53,7 +53,7 @@ class CollectionsController extends \BaseController
             //Try to save in the DB and check for errors
             if ($collection->save()) {
                 //If it's tru, redirect at posts page with a successful message.
-                return Redirect::to('admin/collections')
+                return Redirect::to('admin')
                     ->with('flash_message', 'La coleccion "' . $collection->title . '" se ha creado correctamente')
                     ->with('flash_type', 'alert-success');
             }
@@ -83,7 +83,7 @@ class CollectionsController extends \BaseController
             //Render show page with the record data
             $this->layout->content = View::make('admin.collection.show', compact('collection'));
         } catch (\Exception $e) {
-            return Redirect::to('admin.collections')
+            return Redirect::to('admin')
                 ->with('flash_message', 'Algo salio mal. Error: ' . $e->getMessage())
                 ->with('flash_type', 'alert-danger');
         }
@@ -105,7 +105,7 @@ class CollectionsController extends \BaseController
             //Render show page with the record data
             $this->layout->content = View::make('admin.collections.edit', compact('collection'));
         } catch (\Exception $e) {
-            return Redirect::to('collection')
+            return Redirect::to('admin')
                 ->with('flash_message', 'Algo salio mal. Error: ' . $e->getMessage())
                 ->with('flash_type', 'alert-danger');
         }
@@ -126,7 +126,7 @@ class CollectionsController extends \BaseController
             $collection->title = Input::get('title');
 
             if ($collection->save()) {
-                return Redirect::to('admin/collections')
+                return Redirect::to('admin')
                     ->with('flash_message', 'La coleccion "' . $collection->title . '" se ha editado correctamente')
                     ->with('flash_type', 'alert-success');
             }
@@ -159,13 +159,13 @@ class CollectionsController extends \BaseController
             //Check register still exist in the DB
             if (empty(Collection::find($id))) {
                 //Redirect to the photo.index page
-                return Redirect::to('admin/collections')
+                return Redirect::to('admin')
                     ->with('flash_message', 'La coleccion "' . $collection->title . '" se ha eliminado correctamente')
                     ->with('flash_type', 'alert-success');
             }
             throw new Exception('La categoria "' . $collection->title . '" no se puedo eliminar. Si el error continua, contacte con su administrador');
         } catch (\Exception $e) {
-            return Redirect::to('admin/collections')
+            return Redirect::to('admin')
                 ->with('flash_message', 'Algo salio mal. Error: ' . $e->getMessage())
                 ->with('flash_type', 'alert-danger');
         }
