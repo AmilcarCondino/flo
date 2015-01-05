@@ -38,14 +38,17 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">C.R.U.D</a>
+                    <a class="navbar-brand" href="/">HOME</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li>{{ HTML::link('/', 'Home') }}</li>
+                        @if ( Auth::check() )
+                            <li>{{ HTML::link('admin', 'Dashboard') }}</li>
+                        @else
+                            <li>{{ HTML::link('login', 'Login') }}</li>
+                        @endif
                         <li>{{ HTML::link('posts', 'Posts') }}</li>
                         <li>{{ HTML::link('photos', 'Fotos') }}</li>
-                        <li>{{ HTML::link('login', 'Log in') }}</li>
                     </ul>
                 </div>
             </div>
