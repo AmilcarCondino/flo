@@ -253,7 +253,28 @@ class SlidersController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+        //Error handler
+        try {
+            //Instantiate the record to edit
+            $slide = Slider::findOrFail($id);
+
+            //Delete the record from the DB
+            Slider::find($id)->delete();
+
+            //Check register still exist in the DB
+            if (empty(Slider::find($id))) {
+                //Redirect to the sliders.index page
+                return Redirect::to('admin/sliders')
+                    ->with('flash_message','La slide "' . $slide->headline . '" se ha eliminado correctamente')
+                    ->with('flash_type', 'alert-success');
+            }
+            throw new Exception('El archivo "' . $slide->title . '" no se puedo eliminar. Si el error continua, contacte con su administrador');
+        }
+        catch (\Exception $e) {
+            return Redirect::to('sliders')
+                ->with('flash_message', 'Algo salio mal. Error: ' .  $e->getMessage())
+                ->with('flash_type', 'alert-danger');
+        }
 	}
 
 }
