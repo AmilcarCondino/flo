@@ -8,34 +8,26 @@
     </div>
     <!-- Indicators -->
     <ol class="carousel-indicators">
-        <li data-target="#carousel" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel" data-slide-to="1"></li>
-        <li data-target="#carousel" data-slide-to="2"></li>
+        @for($i = 0; $i < count($sliders); $i++)
+            @if($sliders[$i]->show === 1)
+                <li data-target="#carousel" data-slide-to=" {{ $i }} " class="{{ ($sliders[$i]->order === 1) ? 'active' : null; }}"></li>
+            @endif
+        @endfor
     </ol>
     <!-- Wrapper for slides -->
     <!--Carrousel images must be 1024px x 523px-->
     <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <img src="/uploads/slider/slide_1.jpg">
-            <div class="carousel-caption">
-                <h3>Primera imagen</h3>
-                <p>esta es la primera imagen del slide</p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="/uploads/slider/slide_2.jpg">
-            <div class="carousel-caption">
-                <h3>Segunda imagen</h3>
-                <p>esta es la segunda imagen del slide</p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="/uploads/slider/slide_3.jpg">
-            <div class="carousel-caption">
-                <h3>Tercera imagen</h3>
-                <p>esta es la tercera imagen del slide</p>
-            </div>
-        </div>
+        @foreach ($sliders as $slider)
+            @if($slider->show === 1)
+                <div class="item {{ ($slider->order === 1) ? 'active' : null; }} ">
+                    <img src="/uploads/slider/{{ $slider->img_name }}">
+                    <div class="carousel-caption">
+                        <h3>{{ $slider->headline }}</h3>
+                        <p>{{ $slider->paragraph }}</p>
+                    </div>
+                </div>
+            @endif
+        @endforeach
     </div>
 </div>
 

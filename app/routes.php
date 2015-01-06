@@ -14,7 +14,9 @@
 //Home index route
 Route::get('/', function()
 {
-	return View::make('index');
+    $sliders = DB::table('sliders')->orderBy('order')->get();
+	return View::make('index')
+        ->with('sliders', $sliders);
 });
 
 
@@ -40,7 +42,7 @@ Route::group(array('prefix' => 'admin', 'before' => array('auth|admin')), functi
     Route::resource('categories', 'Admin\\CategoriesController',['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
     Route::resource('collections', 'Admin\\CollectionsController',['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
     Route::resource('tags', 'Admin\\TagsController',['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
-
+    Route::resource('sliders', 'Admin\\SlidersController');
 
 });
 
