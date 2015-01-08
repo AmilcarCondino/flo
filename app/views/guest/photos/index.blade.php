@@ -14,7 +14,7 @@
     @endif
     @endfor
 </div>
-
+<div id="fullscreen-image" class="hidden"><img /></div>
 <script>
     $( window ).load(function(){
         var container = document.querySelector('#masonry-container');
@@ -70,12 +70,21 @@
 </script>
 <script>
 
-    $('img').click(function () {
+    $('.picture img').click(function () {
         if (screenfull.enabled) {
             // We can use `this` since we want the clicked element
-            screenfull.toggle(this);
+            $('#fullscreen-image img').attr('src', $(this).attr('src'));
+            $('#fullscreen-image').removeClass('hidden');
+            screenfull.request( $('#fullscreen-image img')[0] );
         }
     });
+
+    $(document).on(screenfull.raw.fullscreenchange, function () {
+        if( !screenfull.isFullscreen ){
+            $('#fullscreen-image').addClass('hidden');
+        }
+    });
+
 </script>
 <script>
 
