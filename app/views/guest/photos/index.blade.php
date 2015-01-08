@@ -15,6 +15,8 @@
     @endfor
 </div>
 
+<div id="fullscreen-image" class="hidden"><img /></div>
+
 <script>
     $( window ).load(function(){
         var container = document.querySelector('#masonry-container');
@@ -47,40 +49,28 @@
         });
     });
 
-//        $('.picture').click(function(){
-//            $(this).toggleClass('gigante');
-//            var img = $(this).find('img');
-//            img.removeAttr('style');
-//            var tall_img = (img.height() > img.width());
-//
-//            if(tall_img){
-//                img.css({'max-width': $(this).width()});
-//                var margin = ( img.height()-$(this).height() )/2;
-//                img.css({'margin-top': -margin});
-//            }else{
-//                img.css({'max-height': $(this).height()});
-//                var margin = ( img.width()-$(this).width() )/2;
-//                img.css({'margin-left': -margin});
-//            }
-//            msnry.layout();
-//        });
-//    });
-
-
 </script>
+
 <script>
 
-    $('img').click(function () {
+    $('.picture img').click(function () {
         if (screenfull.enabled) {
             // We can use `this` since we want the clicked element
-            screenfull.toggle(this);
+            $('#fullscreen-image img').attr('src', $(this).attr('src'));
+            $('#fullscreen-image').removeClass('hidden');
+            screenfull.request( $('#fullscreen-image img')[0] );
         }
     });
-</script>
-<script>
 
+    $('#fullscreen-image img').click(function() {
+        screenfull.exit(this);
+    });
 
-
+    $(document).on(screenfull.raw.fullscreenchange, function () {
+        if( !screenfull.isFullscreen ){
+            $('#fullscreen-image').addClass('hidden');
+        }
+    });
 
 </script>
 
