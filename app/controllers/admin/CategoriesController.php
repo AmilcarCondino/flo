@@ -157,7 +157,8 @@ class CategoriesController extends \BaseController
             Category::find($id)->delete();
 
             //Check register still exist in the DB
-            if (empty(Category::find($id))) {
+            $cat = Category::find($id);
+            if (empty($cat))) {
                 //Redirect to the photo.index page
                 return Redirect::to('admin')
                     ->with('flash_message', 'La categoria "' . $category->title . '" se ha eliminado correctamente')

@@ -160,7 +160,8 @@ class PostsController extends BaseController
             Post::find($id)->delete();
 
             //Check register still exist in the DB
-            if (empty(Post::find($id))) {
+            $pos = Post::find($id);
+            if (empty($pos)) {
                 //Redirect to the photo.index page
                 return Redirect::to('admin/posts')
                     ->with('flash_message', 'El Post "' . $posts->title . '" se ha eliminado correctamente')

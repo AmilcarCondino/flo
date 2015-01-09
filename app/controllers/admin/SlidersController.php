@@ -262,7 +262,8 @@ class SlidersController extends \BaseController {
             Slider::find($id)->delete();
 
             //Check register still exist in the DB
-            if (empty(Slider::find($id))) {
+            $sli = Slider::find($id);
+            if (empty($sli) {
                 //Redirect to the sliders.index page
                 return Redirect::to('admin/sliders')
                     ->with('flash_message','La slide "' . $slide->headline . '" se ha eliminado correctamente')
