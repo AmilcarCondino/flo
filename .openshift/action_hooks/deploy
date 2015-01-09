@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# This deploy hook gets executed after dependencies are resolved and the
+# build hook has been run but before the application has been started back
+# up again.  This script gets executed directly, so it could be python, php,
+# ruby, etc.
+
+
+echo "Creating Uploads Directory if not found"
+if [ ! -d ${OPENSHIFT_DATA_DIR}uploads ]; then
+    mkdir ${OPENSHIFT_DATA_DIR}uploads
+    mkdir ${OPENSHIFT_DATA_DIR}uploads/images
+fi
+
+echo "Copying symlink for app repository"
+ln -sf ${OPENSHIFT_DATA_DIR}uploads ${OPENSHIFT_REPO_DIR}public/uploads
+
+echo "Copying database config from .openshift/config"
+cp $OPENSHIFT_REPO_DIR/.openshift/config/database.php $OPENSHIFT_REPO_DIR/app/config/database.php 2>/dev/null
