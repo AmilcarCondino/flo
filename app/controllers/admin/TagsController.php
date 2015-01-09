@@ -158,7 +158,7 @@ class TagsController extends \BaseController
 
             //Check register still exist in the DB
             $tag = Tag::find($id);
-            if (empty($tag) {
+            if (empty($tag)) {
                 //Redirect to the photo.index page
                 return Redirect::to('admin')
                     ->with('flash_message', 'La etiqueta "' . $tag->title . '" se ha eliminado correctamente')

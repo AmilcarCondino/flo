@@ -158,7 +158,7 @@ class CollectionsController extends \BaseController
 
             $col = Collection::find($id);
             //Check register still exist in the DB
-            if (empty($col) {
+            if (empty($col)) {
                 //Redirect to the photo.index page
                 return Redirect::to('admin')
                     ->with('flash_message', 'La coleccion "' . $collection->title . '" se ha eliminado correctamente')
