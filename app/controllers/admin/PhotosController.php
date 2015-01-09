@@ -98,7 +98,7 @@ class PhotosController extends \BaseController {
             $filename = 'tucci_web_' . $next_id . '.' . $image->getClientOriginalExtension();
 
             //Target the save path location
-            $destination_path = 'public/uploads/images/';
+            $destination_path = public_path().'/uploads/images/';
 
             //Assign the data at the appropriate fields
             $photo->title = Input::get('title');
@@ -141,7 +141,7 @@ class PhotosController extends \BaseController {
             $image->move($destination_path, $filename);
 
             //Check if the if the image was created in the server
-            if ( !file_exists("public/uploads/images/{$filename}")) {
+            if ( !file_exists(public_path()."/uploads/images/{$filename}")) {
                 //Don't exist. Then fails, redirect to create page and send a flash error message.
                 throw new Exception('El archivo "' . $original_name . '" no se puedo guardar. Si el error continua, contacte con su administrador');
             }
@@ -327,7 +327,7 @@ class PhotosController extends \BaseController {
                 //Then redirect at photos page with a successful message.
                  if (!empty ($image)) {
                     //Target the save path location
-                    $destination_path = 'public/uploads/images/';
+                    $destination_path = public_path().'/uploads/images/';
 
                     $photo_name = $photo->img_name;
                     //Copy the new image

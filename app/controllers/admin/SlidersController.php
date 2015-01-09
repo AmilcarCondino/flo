@@ -91,7 +91,7 @@ class SlidersController extends \BaseController {
             $filename = 'slide_' . $next_id . '.' . $image->getClientOriginalExtension();
 
             //Target the save path location
-            $destination_path = 'public/uploads/slider/';
+            $destination_path = public_path().'/uploads/slider/';
 
             //Assign the data at the appropriate fields
             $slide->headline = Input::get('headline');
@@ -106,7 +106,7 @@ class SlidersController extends \BaseController {
             $image->move($destination_path, $filename);
 
             //Check if the if the image was created in the server
-            if ( !file_exists("public/uploads/slider/{$filename}")) {
+            if ( !file_exists(public_path()."/uploads/slider/{$filename}")) {
                 //Don't exist. Then fails, redirect to create page and send a flash error message.
                 throw new Exception('El archivo "' . $original_name . '" no se puedo guardar. Si el error continua, contacte con su administrador');
             }
