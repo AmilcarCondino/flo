@@ -8,11 +8,11 @@ use Input;
 use Redirect;
 use DB;
 use Exception;
-Use Response;
-Use Slider;
+use Response;
+use Slider;
 
 
-class SlidersController extends \BaseController {
+class SlidersController extends BaseController {
 
 
     protected $layout = 'layouts.admin';
