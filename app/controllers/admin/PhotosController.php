@@ -370,7 +370,7 @@ class PhotosController extends \BaseController {
 
             $pho = Photo::find($id);
             //Check register still exist in the DB
-            if (empty($pho) {
+            if (empty($pho) ){
                 //Redirect to the photo.index page
                     return Redirect::to('admin/photos')
                         ->with('flash_message','La foto "' . $photo->title . '" se ha eliminado correctamente')
