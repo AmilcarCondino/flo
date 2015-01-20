@@ -93,19 +93,10 @@
                 duration: 300 // don't foget to change the duration also in CSS
             },
             image: {
-                markup: '<div class="mfp-figure">'+
-                    '<div class="mfp-close"></div>'+
-                    '<div class="mfp-img"></div>'+
-                    '<div class="mfp-bottom-bar">'+
-                    '<div class="mfp-title"></div>'+
-                    '<div class="mfp-description"></div>'+
-                    '<div class="mfp-counter"></div>'+
-                    '</div>'+
-                    '</div>',
                 tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
                 titleSrc: function(item) {
 
-                    return item.el.attr('title') + '<small>by Flo Tucci</small>';
+                    return item.el.attr('title') + '<small>'+ item.el.attr('description') +'</small>';
                 }
             }
         });
