@@ -2,14 +2,14 @@
 
 @section('content')
 
-<div id="masonry-container">
+<div id="masonry-container" class="popup-gallery">
 
     @for($i = 0; $i < count($photos); $i++)
     @if($photos[$i]->show === 1)
     <div class="picture {{ $pattern[ ($i % count($pattern) ) ] }}">
-<!--        <a href="/photos/{{ $photos[$i]->id }}">-->
+        <a href="/uploads/images/{{$photos[$i]->img_name}}" title="{{$photos[$i]->title}}" description="{{$photos[$i]->description}}">
             <img src="/uploads/images/{{$photos[$i]->img_name}}" alt="alt" class="photo">
-<!--        </a>-->
+        </a>
     </div>
     @endif
     @endfor
@@ -51,25 +51,64 @@
 
 </script>
 
+<!--<script>-->
+<!---->
+<!--    $('.picture img').click(function () {-->
+<!--        if (screenfull.enabled) {-->
+<!--            // We can use `this` since we want the clicked element-->
+<!--            $('#fullscreen-image img').attr('src', $(this).attr('src'));-->
+<!--            $('#fullscreen-image').removeClass('hidden');-->
+<!--            screenfull.request( $('#fullscreen-image img')[0] );-->
+<!--        }-->
+<!--    });-->
+<!---->
+<!--    $('#fullscreen-image img').click(function() {-->
+<!--        screenfull.exit(this);-->
+<!--    });-->
+<!---->
+<!--    $(document).on(screenfull.raw.fullscreenchange, function () {-->
+<!--        if( !screenfull.isFullscreen ){-->
+<!--            $('#fullscreen-image').addClass('hidden');-->
+<!--        }-->
+<!--    });-->
+<!---->
+<!--</script>-->
+
+
 <script>
 
-    $('.picture img').click(function () {
-        if (screenfull.enabled) {
-            // We can use `this` since we want the clicked element
-            $('#fullscreen-image img').attr('src', $(this).attr('src'));
-            $('#fullscreen-image').removeClass('hidden');
-            screenfull.request( $('#fullscreen-image img')[0] );
-        }
-    });
+    $(document).ready(function() {
+        $('.popup-gallery').magnificPopup({
+            delegate: 'a',
+            type: 'image',
+            tLoading: 'Loading image #%curr%...',
+            mainClass: 'mfp-img-mobile',
+            gallery: {
+                enabled: true,
+                navigateByImgClick: true,
+                preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+            },
+            zoom: {
+                enabled: true,
+                duration: 300 // don't foget to change the duration also in CSS
+            },
+            image: {
+                markup: '<div class="mfp-figure">'+
+                    '<div class="mfp-close"></div>'+
+                    '<div class="mfp-img"></div>'+
+                    '<div class="mfp-bottom-bar">'+
+                    '<div class="mfp-title"></div>'+
+                    '<div class="mfp-description"></div>'+
+                    '<div class="mfp-counter"></div>'+
+                    '</div>'+
+                    '</div>',
+                tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+                titleSrc: function(item) {
 
-    $('#fullscreen-image img').click(function() {
-        screenfull.exit(this);
-    });
-
-    $(document).on(screenfull.raw.fullscreenchange, function () {
-        if( !screenfull.isFullscreen ){
-            $('#fullscreen-image').addClass('hidden');
-        }
+                    return item.el.attr('title') + '<small>by Flo Tucci</small>';
+                }
+            }
+        });
     });
 
 </script>

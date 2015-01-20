@@ -25,6 +25,11 @@
         <script src="/js/bootstrap.min.js"></script>
         <!-- Include screenfull js -->
         <script src="/js/screenfull.js"></script>
+        <!-- jQuery 1.7.2+ or Zepto.js 1.0+ -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <!-- Include the Magnific Popup plugin's CSS and JS: -->
+        <script src="/js/Magnific-Popup-v1.0.0.js"></script>
+        <link rel="stylesheet" href="/css/Mafnic-Popup.css">
 
 
     </head>
