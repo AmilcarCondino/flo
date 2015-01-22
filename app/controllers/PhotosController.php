@@ -14,7 +14,6 @@ class PhotosController extends \BaseController {
 	{
         $this->layout->content =  View::make('guest.photos.index')
             ->with('photos', Photo::all());
-
 	}
 
 	/**
@@ -39,5 +38,30 @@ class PhotosController extends \BaseController {
                 ->with('flash_type', 'alert-danger');
         }
 	}
+
+    public function imagesFilter()
+    {
+
+        $filter = Input::get('filter');
+        $filter_id = Input::get('id');
+
+
+        $photos = Photo::whereHas($filter, function($q)
+            {
+                $q->where('$filter'.'_id', '=', '$filter_id');
+
+            })->get();
+
+        if (!empty ($photos)){
+            return Response::json([
+                'success' => true,
+                'photos' => $photos
+            ]);
+        }
+
+//        $this->layout->content =  View::make('guest.photos.index')
+//            ->with('photos', $photos);
+
+    }
 
 }

@@ -66,6 +66,7 @@
             {{ Form::close() }}
         </div>
         <script>
+<!--            Validate AJAX script       -->
             $(".validate").blur(function() {
                 $.ajax({
                     type: "POST",
