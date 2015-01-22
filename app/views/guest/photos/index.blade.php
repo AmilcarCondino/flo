@@ -1,8 +1,9 @@
 <?php $pattern = ['w1', 'w2', 'w3', 'w4','w5', 'w6', 'w7', 'w8', 'w9', 'w10', 'w11']; ?>
 
 @section('content')
-<div class="filters">
-    <label><input type="checkbox" class="colections" val="4" />Dolls</label>
+<div>
+    <label><input type="checkbox" class="filters" table="collections" column= "collection_id" val="4" />Dolls</label>
+    <label><input type="checkbox" class="filters" table="categories" column= "colection_id" val="8" />test</label>
 </div>
 
 <div id="masonry-container" class="popup-gallery">
@@ -25,6 +26,13 @@
 <script>
 <!--    Massonery  -->
     $( window ).load(function(){
+
+        function getItemElement() {
+            var elem = document.createElement('div');
+            elem.className = 'picture '+ {{ $pattern[ ($i % count($pattern) ) ] }};
+            return elem;
+        }
+
         var container = document.querySelector('#masonry-container');
         var msnry = new Masonry( container, {
             // options
@@ -53,6 +61,47 @@
                 }
             }
         });
+
+
+
+
+        $(".filters").click(function() {
+            $.ajax({
+                type: "POST",
+                url: "/filter",
+                data: { id: $(this).attr("val"), filterTable: $(this).attr("table"), filterColumn: $(this).attr("column") }
+
+            })
+
+                .done(function( response ) {
+
+                    var photos = response.photos;
+
+                   
+
+                        eventie.bind(function() {
+                            var elems = [];
+                            var fragment = document.createDocumentFragment();
+                            for ( var i = 0; i < 3; i++ ) {
+                                var elem = getItemElement();
+                                fragment.appendChild( elem );
+                                elems.push( elem );
+                            }
+                            // prepend elements to container
+                            container.insertBefore( fragment, container.firstChild );
+                            // add and lay out newly prepended elements
+                            msnry.prepended( elems );
+                        });
+
+
+
+                })
+
+
+        });
+
+
+
     });
 
 </script>
@@ -85,23 +134,33 @@
     });
 
 </script>
-<script>
-
-    $(".filters").click(function() {
-        $.ajax({
-            type: "POST",
-            url: "/filter",
-            data: { id: $(this).children('input').attr("val"), filther: $(this).children('input').attr('class')}
-
-        })
-
-            .done(function( response ) {
-
-                var photos = response.photos;
-        })
-
-
-    });
-
-</script>
+<!--<script>-->
+<!---->
+<!--    $(".filters").click(function() {-->
+<!--        $.ajax({-->
+<!--            type: "POST",-->
+<!--            url: "/filter",-->
+<!--            data: { id: $(this).attr("val"), filterTable: $(this).attr("table"), filterColumn: $(this).attr("column") }-->
+<!---->
+<!--        })-->
+<!---->
+<!--            .done(function( response ) {-->
+<!---->
+<!--                var photos = response.photos;-->
+<!---->
+<!---->
+<!--                <!--    Massonery  -->-->
+<!---->
+<!--                if (response.success) {-->
+<!---->
+<!--                    msnry.reloadItems();-->
+<!---->
+<!--                }-->
+<!---->
+<!--            })-->
+<!---->
+<!---->
+<!--    });-->
+<!---->
+<!--</script>-->
 @stop
