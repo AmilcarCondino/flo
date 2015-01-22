@@ -42,15 +42,13 @@ class PhotosController extends \BaseController {
     public function imagesFilter()
     {
 
+        $filther = Input::get('filter');
+        $filter_id = Input::get('id');
 
 
-
-        $photos = Photo::whereHas($filter, function($q)
+        $photos = Photo::whereHas($filther, function($q)
             {
-                $filter = Input::get('filter');
-                $filter_id = Input::get('id');
-
-                $q->where( $filter .'_id', '=', $filter_id);
+                $q->where( $filther .'_id', '=', $filter_id);
 
             })->get();
 

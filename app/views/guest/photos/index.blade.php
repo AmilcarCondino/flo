@@ -1,7 +1,7 @@
 <?php $pattern = ['w1', 'w2', 'w3', 'w4','w5', 'w6', 'w7', 'w8', 'w9', 'w10', 'w11']; ?>
 
 @section('content')
-<div class="filter">
+<div class="filters">
     <label><input type="checkbox" class="colections" val="4" />Dolls</label>
 </div>
 
@@ -87,11 +87,11 @@
 </script>
 <script>
 
-    $(".filter").click(function() {
+    $(".filters").click(function() {
         $.ajax({
             type: "POST",
             url: "/filter",
-            data: { id: $(this).children('input').attr("val"), filter: $(this).children('input').attr('class')}
+            data: { id: $(this).children('input').attr("val"), filther: $(this).children('input').attr('class')}
 
         })
 
