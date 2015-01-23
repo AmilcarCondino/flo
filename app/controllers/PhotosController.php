@@ -12,8 +12,15 @@ class PhotosController extends \BaseController {
 	 */
 	public function index()
 	{
-        $this->layout->content =  View::make('guest.photos.index')
-            ->with('photos', Photo::all());
+        $foo = Input::all();
+
+        $categories = Category::lists('title', 'id');
+        $tags = Tag::lists('title', 'id');
+        $collections = Collection::lists('title', 'id');
+        $photos = Photo::all();
+
+        //Render the "create" view
+        $this->layout->content = View::make('guest.photos.index', compact('photos', 'categories', 'tags', 'collections'));
 	}
 
 	/**

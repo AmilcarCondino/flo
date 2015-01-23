@@ -1,9 +1,17 @@
 <?php $pattern = ['w1', 'w2', 'w3', 'w4','w5', 'w6', 'w7', 'w8', 'w9', 'w10', 'w11']; ?>
 
 @section('content')
-<div>
-    <label><input type="checkbox" class="filters" table="collections" column= "collection_id" val="4" />Dolls</label>
-    <label><input type="checkbox" class="filters" table="categories" column= "colection_id" val="8" />test</label>
+<div class="row">
+    {{ Form::open(array('url' => 'photos')) }}
+    <div class="col-sm-3">
+        {{ Form::openGroup('filter') }}
+            {{ Form::select('categories[]', array('Null' => 'Seleccione', 'Categotia' => $categories, 'Colecciones' => $collections), array('id' => 'tags', 'multiple' => 'multiple', 'class' => 'selectpicker', 'title' => 'Selecione la categria que desee', 'data-live-search' => 'data-live-search')) }}
+        {{ Form::closeGroup() }}
+    </div>
+    <div class="col-sm-3">
+        {{ Form::submit('Filtrar', array('class'=>'btn btn-sm-3 btn-success')) }}
+    </div>
+    {{ Form::close() }}
 </div>
 
 <div id="masonry-container" class="popup-gallery">
@@ -27,11 +35,7 @@
 <!--    Massonery  -->
     $( window ).load(function(){
 
-        function getItemElement() {
-            var elem = document.createElement('div');
-            elem.className = 'picture '+ {{ $pattern[ ($i % count($pattern) ) ] }};
-            return elem;
-        }
+
 
         var container = document.querySelector('#masonry-container');
         var msnry = new Masonry( container, {
@@ -61,48 +65,8 @@
                 }
             }
         });
-
-
-
-
-        $(".filters").click(function() {
-            $.ajax({
-                type: "POST",
-                url: "/filter",
-                data: { id: $(this).attr("val"), filterTable: $(this).attr("table"), filterColumn: $(this).attr("column") }
-
-            })
-
-                .done(function( response ) {
-
-                    var photos = response.photos;
-
-                   
-
-                        eventie.bind(function() {
-                            var elems = [];
-                            var fragment = document.createDocumentFragment();
-                            for ( var i = 0; i < 3; i++ ) {
-                                var elem = getItemElement();
-                                fragment.appendChild( elem );
-                                elems.push( elem );
-                            }
-                            // prepend elements to container
-                            container.insertBefore( fragment, container.firstChild );
-                            // add and lay out newly prepended elements
-                            msnry.prepended( elems );
-                        });
-
-
-
-                })
-
-
-        });
-
-
-
     });
+
 
 </script>
 
