@@ -3,17 +3,17 @@
 @section('content')
 <div class="row">
     {{ Form::open(array('url' => 'photos', 'method' => 'get', 'id' => 'filter')) }}
-    <div class="col-sm-3">
+    <div class="col-sm-2">
         {{ Form::openGroup('filter') }}
             {{ Form::select('categories', array('' => 'Categorias', 'Selecione para filtrar' => $categories), array('id' => 'tags', 'class' => 'selectpicker')) }}
         {{ Form::closeGroup() }}
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-2">
         {{ Form::openGroup('filter') }}
             {{ Form::select('collections', array('' => 'Colecciones', 'Selecione para filtrar' => $collections), array('id' => 'tags', 'class' => 'selectpicker')) }}
         {{ Form::closeGroup() }}
     </div>
-    
+
     {{ Form::close() }}
 </div>
 

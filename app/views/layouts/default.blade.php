@@ -52,10 +52,11 @@
                         @else
                             <li>{{ HTML::link('login', 'Login') }}</li>
                         @endif
-                        <li>{{ HTML::link('posts', 'Posts') }}</li>
-                        <li>{{ HTML::link('photos', 'Fotos') }}</li>
+                            <li>{{ HTML::link('posts', 'Posts') }}</li>
+                            <li>{{ HTML::link('photos', 'Fotos') }}</li>
                     </ul>
                 </div>
+
             </div>
         </div>
         <div class="container">
