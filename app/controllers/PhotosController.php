@@ -12,12 +12,36 @@ class PhotosController extends \BaseController {
 	 */
 	public function index()
 	{
-        $foo = Input::all();
+        $filter = Input::all();
+
+
+
 
         $categories = Category::lists('title', 'id');
         $tags = Tag::lists('title', 'id');
         $collections = Collection::lists('title', 'id');
         $photos = Photo::all();
+
+        if (!empty($filter)) {
+            if (!empty($filter['categories'])) {
+
+                $photos = Photo::whereHas('categories', function($q)
+                    {
+                        $filter = Input::all();
+                        $q->where( 'category_id', '=', $filter['categories']);
+
+                    })->get();
+            }
+            if (!empty($filter['collections'])) {
+
+                $photos = Photo::whereHas('collections', function($q)
+                {
+                    $filter = Input::all();
+                    $q->where( 'collection_id', '=', $filter['collections']);
+
+                })->get();
+            }
+        }
 
         //Render the "create" view
         $this->layout->content = View::make('guest.photos.index', compact('photos', 'categories', 'tags', 'collections'));

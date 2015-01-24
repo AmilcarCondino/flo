@@ -2,15 +2,18 @@
 
 @section('content')
 <div class="row">
-    {{ Form::open(array('url' => 'photos')) }}
+    {{ Form::open(array('url' => 'photos', 'method' => 'get', 'id' => 'filter')) }}
     <div class="col-sm-3">
         {{ Form::openGroup('filter') }}
-            {{ Form::select('categories[]', array('Null' => 'Seleccione', 'Categotia' => $categories, 'Colecciones' => $collections), array('id' => 'tags', 'multiple' => 'multiple', 'class' => 'selectpicker', 'title' => 'Selecione la categria que desee', 'data-live-search' => 'data-live-search')) }}
+            {{ Form::select('categories', array('' => 'Categorias', 'Selecione para filtrar' => $categories), array('id' => 'tags', 'class' => 'selectpicker')) }}
         {{ Form::closeGroup() }}
     </div>
     <div class="col-sm-3">
-        {{ Form::submit('Filtrar', array('class'=>'btn btn-sm-3 btn-success')) }}
+        {{ Form::openGroup('filter') }}
+            {{ Form::select('collections', array('' => 'Colecciones', 'Selecione para filtrar' => $collections), array('id' => 'tags', 'class' => 'selectpicker')) }}
+        {{ Form::closeGroup() }}
     </div>
+    
     {{ Form::close() }}
 </div>
 
@@ -32,7 +35,7 @@
 <div id="fullscreen-image" class="hidden"><img /></div>
 
 <script>
-<!--    Massonery  -->
+//       Massonery
     $( window ).load(function(){
 
 
@@ -71,7 +74,7 @@
 </script>
 
 <script>
-<!--    Magnific Popup  -->
+//        Magnific Popup
     $(document).ready(function() {
         $('.popup-gallery').magnificPopup({
             delegate: 'a',
@@ -98,33 +101,16 @@
     });
 
 </script>
-<!--<script>-->
-<!---->
-<!--    $(".filters").click(function() {-->
-<!--        $.ajax({-->
-<!--            type: "POST",-->
-<!--            url: "/filter",-->
-<!--            data: { id: $(this).attr("val"), filterTable: $(this).attr("table"), filterColumn: $(this).attr("column") }-->
-<!---->
-<!--        })-->
-<!---->
-<!--            .done(function( response ) {-->
-<!---->
-<!--                var photos = response.photos;-->
-<!---->
-<!---->
-<!--                <!--    Massonery  -->-->
-<!---->
-<!--                if (response.success) {-->
-<!---->
-<!--                    msnry.reloadItems();-->
-<!---->
-<!--                }-->
-<!---->
-<!--            })-->
-<!---->
-<!---->
-<!--    });-->
-<!---->
-<!--</script>-->
+
+<script>
+    $('#filter').change(
+        function(){
+            $(this).closest('form').trigger('submit');
+            /* or:
+             $('#formElementId').trigger('submit');
+             or:
+             $('#formElementId').submit();
+             */
+        });
+</script>
 @stop

@@ -50,7 +50,7 @@ Route::group(array('prefix' => 'admin', 'before' => array('auth|admin')), functi
 //Public routes
 Route::resource('posts', 'PostsController', ['only' => ['index', 'show']]);
 Route::resource('photos', 'PhotosController', ['only' => ['index', 'show', 'filter']]);
-Route::post('filter', 'PhotosController@imagesFilter');
+
 
 
 //Log in and atuth routes
