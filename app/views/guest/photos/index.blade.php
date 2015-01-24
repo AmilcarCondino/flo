@@ -1,22 +1,22 @@
 <?php $pattern = ['w1', 'w2', 'w3', 'w4','w5', 'w6', 'w7', 'w8', 'w9', 'w10', 'w11']; ?>
 
 @section('content')
-<div class="row">
-    {{ Form::open(array('url' => 'photos', 'method' => 'get', 'id' => 'filter')) }}
-    <div class="col-sm-2">
+<div class="navbar navbar-inverse" >
+<div class="navbar-form navbar-right">
+    {{ Form::open(array('url' => 'photos', 'method' => 'get', 'id' => 'filter', 'class' => 'form-group')) }}
+
         {{ Form::openGroup('filter') }}
             {{ Form::select('categories', array('' => 'Categorias', 'Selecione para filtrar' => $categories), array('id' => 'tags', 'class' => 'selectpicker')) }}
         {{ Form::closeGroup() }}
-    </div>
-    <div class="col-sm-2">
+
         {{ Form::openGroup('filter') }}
             {{ Form::select('collections', array('' => 'Colecciones', 'Selecione para filtrar' => $collections), array('id' => 'tags', 'class' => 'selectpicker')) }}
         {{ Form::closeGroup() }}
-    </div>
+
 
     {{ Form::close() }}
 </div>
-
+</div>
 <div id="masonry-container" class="popup-gallery">
 <!--Pseudo randomizer of image size-->
     @for($i = 0; $i < count($photos); $i++)

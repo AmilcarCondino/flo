@@ -34,7 +34,7 @@
 
     </head>
     <body>
-        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="navbar-header navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -59,13 +59,13 @@
 
             </div>
         </div>
+        @if (Session::has('flash_message'))
         <div class="container">
-            @if (Session::has('flash_message'))
             <div class="alert {{ Session::get('flash_type') }} " role="alert">
                 {{ Session::get('flash_message') }}
             </div>
-            @endif
         </div>
+        @endif
 
             @yield('content')
 
