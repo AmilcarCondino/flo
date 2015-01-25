@@ -20,7 +20,9 @@
         <link rel="stylesheet" href="/css/jasny-bootstrap.css">
         <!-- Include the MASONRY plugin's CSS and JS: -->
         <script src="/js/masonry-docs.js"></script>
-<!--        <link rel="stylesheet" href="/css/masonry-docs.css">-->
+        <!-- Include the ckeditor plugin's JS: -->
+        <script src="/js/ckeditor/ckeditor.js"></script>
+
 
 
     </head>

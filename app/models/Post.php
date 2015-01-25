@@ -5,7 +5,7 @@ class Post extends Model {
 
     protected static $rules = [
         'title' => array('required', 'unique:photos,title,[id]', 'min:3'),
-        'body' => array('required','max:140')
+        'body' => array('required')
 
     ];
 
@@ -13,8 +13,8 @@ class Post extends Model {
         'title.required' => 'El campo "Titulo", es obligatorio.',
         'title.unique' => 'Este Titulo ya existe en otra publicacion.',
         'title.min' => 'El Titulo debe ser mayor a 3 caracteres.',
-        'body.required' => 'La descripcion es obligatoria',
-        'body.max' => 'La descripcion no puede superar los 140 caracteres'
+        'body.required' => 'La descripcion es obligatoria'
+
 
 
     ];
