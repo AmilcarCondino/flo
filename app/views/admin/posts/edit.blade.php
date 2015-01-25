@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-10">
             {{  Form::model($post, ['method' => 'PATCH', 'route' => ['admin.posts.update', $post->id]]) }}
 
                 {{ Form::openGroup('title', 'Titlo: ') }}<br />
@@ -30,5 +30,9 @@
         </div>
     </div>
 </div>
-
+<script>
+    // Replace the <textarea id="editor1"> with a CKEditor
+    // instance, using default configuration.
+    CKEDITOR.replace( 'body' );
+</script>
 @stop
