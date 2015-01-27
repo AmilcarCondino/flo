@@ -61,7 +61,7 @@
         </div>
         <div class="footer">
             <div class="container">
-                <p class="text-muted">Just a c.r.u.d, by KeleK.</p>
+                <p class="text-muted">Created by amilcar.condino@gmail.com</p>
             </div>
         </div>
         <script>

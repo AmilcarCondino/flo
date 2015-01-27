@@ -21,8 +21,8 @@ class PostsController extends BaseController
      */
     public function index()
     {
-        $this->layout->content = View::make('admin.posts.index')
-            ->with('posts', Post::all());
+        $posts = Post::orderBy('id', 'DESC')->get();
+        $this->layout->content = View::make('guest.posts.index', compact('posts'));
 
     }
 

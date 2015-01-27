@@ -32,7 +32,7 @@ class PhotosController extends \BaseController {
         ->with('collections', Collection::all())
         ->with('categories', Category::all())
         ->with('tags', Tag::all())
-        ->with('photos', Photo::all());
+        ->with('photos', orderBy('id', 'DESC')->get());
 	}
 
 	/**
