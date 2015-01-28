@@ -31,9 +31,10 @@
         <script src="/js/Magnific-Popup-v1.0.0.js"></script>
         <link rel="stylesheet" href="/css/Mafnic-Popup.css">
         <!-- Include the Ferro Slide plugin's CSS and JS: -->
-        <script src="/js/jquery.transit.min.js"></script>
-        <script src="/js/jquery.ferro.ferroSlider-2.3.3.min.js"></script>
-        <link rel="stylesheet" href="/css/jquery.ferro.ferroSlider.css">
+        <script src="/js/jquery.mobile.customized.min.js"></script>
+        <script src="/js/jquery.easing.1.3.js"></script>
+        <script src="/js/camera.js"></script>
+        <link rel="stylesheet" href="/css/camera.css">
 
 
     </head>

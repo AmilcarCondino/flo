@@ -16,7 +16,7 @@
 <!--    </ol>-->
     <!-- Wrapper for slides -->
     <!--Carrousel images must be 1024px x 523px-->
-    <div class="carousel" id="carousel">
+    <div  id="carousel">
         @foreach ($sliders as $slider)
             @if($slider->show === 1)
                 <div class="item" id="{{ $slider->img_name }}" title="{{ $slider->img_name }}">
@@ -34,15 +34,7 @@
 <script>
 
     $(document).ready(function() {
-        $('.item').ferroSlider({
-            createMap               : true,
-            createSensibleAreas     : true,
-            autoSlide               : true,
-            autoSlideTime           : 2000,
-            createTimeBar           : true,
-            timeBarInsidePlayer     : false,
-            mapPosition				: 'bottom_center'
-        });
+        $('carousel').camera();
     });
 
 
