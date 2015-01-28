@@ -27,12 +27,13 @@ class PhotosController extends \BaseController {
 	 */
 	public function index()
 	{
+
+        $categories = Category::lists('title', 'id');
+        $tags = Tag::lists('title', 'id');
+        $collections = Collection::lists('title', 'id');
+        $photos = Photo::orderBy('id', 'DESC')->get();
 	//Render the "photos" page, with all records instantiated
-    $this->layout->content =  View::make('admin.photos.index')
-        ->with('collections', Collection::all())
-        ->with('categories', Category::all())
-        ->with('tags', Tag::all())
-        ->with('photos', orderBy('id', 'DESC')->get());
+    $this->layout->content =  View::make('admin.photos.index',compact('photos', 'categories', 'tags', 'collections'));
 	}
 
 	/**

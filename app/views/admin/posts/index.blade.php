@@ -6,6 +6,11 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-sm-4">
+            <a class="btn btn-sm btn-success " href="posts/create" role="button">Crear un nuevo post</a>
+        </div>
+    </div>
+    <div class="row" style="padding-top: 10px">
         <div class="col-sm-6">
             <ul class="list-group">
                 @foreach($posts as $post)
@@ -14,11 +19,6 @@
                     </li>
                 @endforeach
             </ul>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-4">
-            <a class="btn btn-sm btn-success " href="posts/create" role="button">Crear un nuevo post</a>
         </div>
     </div>
 </div>
