@@ -10,7 +10,7 @@
         <!-- Core Bootstrap -->
         <link href="/css/bootstrap.css" rel="stylesheet">
         <!-- Core jquery -->
-        <script src="/js/jquery-2.1.1.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
         <!-- Include the JASNY plugin's CSS and JS: -->
         <script src="/js/jasny-bootstrap.js"></script>
@@ -19,10 +19,6 @@
         <script src="/js/masonry.pkgd.min.js"></script>
         <!-- Custom CSS -->
         <link href="/css/crud.css" rel="stylesheet">
-        <!-- jQuery ( JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="/js/bootstrap.min.js"></script>
         <!-- Include screenfull js -->
         <script src="/js/screenfull.js"></script>
         <!-- jQuery 1.7.2+ or Zepto.js 1.0+ -->

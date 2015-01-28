@@ -34,7 +34,7 @@
 <script>
 
     $(document).ready(function() {
-        $('carousel').camera();
+        $('#carousel').camera();
     });
 
 
