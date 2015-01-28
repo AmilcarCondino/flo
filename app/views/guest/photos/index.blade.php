@@ -21,7 +21,7 @@
     @if($photos[$i]->show === 1)
 
     <div class="picture {{ $pattern[ ($i % count($pattern) ) ] }}">
-        <a href="/uploads/images/{{$photos[$i]->img_name}}" title="{{$photos[$i]->title}}" description="{{$photos[$i]->description}}">
+        <a href="/uploads/images/{{$photos[$i]->img_name}}" description="{{$photos[$i]->description}}">
             <img src="/uploads/images/{{$photos[$i]->img_name}}" alt="alt" class="photo">
         </a>
     </div>
