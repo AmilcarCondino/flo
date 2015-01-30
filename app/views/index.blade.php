@@ -35,9 +35,125 @@
     <a class="slider-control right" href="#" data-jump="next">></a>
 </div>
 
-
+<?php
+    // defino $settings como muestra
+    $settings = [
+        'textDistance' => 1000,
+    ];
+?>
 
 <script>
+    $.fn.responsiveSlider.animations = {
+      slideAppearRightToLeft: function($caption, delay, length) {
+        var animate, css;
+        if (delay == null) {
+          delay = 0;
+        }
+        if (length == null) {
+          length = 300;
+        }
+        css = {
+          'margin-left': <?php echo $settings['textDistance']; ?>,
+          'margin-right': -<?php echo $settings['textDistance']; ?>
+        };
+        $caption.css(css);
+        animate = function() {
+          css = {
+            'margin-left': 0,
+            'margin-right': 0,
+            'opacity': 1
+          };
+          return $caption.animate(css, length);
+        };
+        if (delay > 0) {
+          return setTimeout(animate, delay);
+        } else {
+          return animate();
+        }
+      },
+      slideAppearLeftToRight: function($caption, delay, length) {
+        var animate, css;
+        if (delay == null) {
+          delay = 0;
+        }
+        if (length == null) {
+          length = 300;
+        }
+        css = {
+          'margin-left': -<?php echo $settings['textDistance']; ?>,
+          'margin-right': <?php echo $settings['textDistance']; ?>
+        };
+        $caption.css(css);
+        animate = function() {
+          css = {
+            'margin-left': 0,
+            'margin-right': 0,
+            'opacity': 1
+          };
+          return $caption.animate(css, length);
+        };
+        if (delay > 0) {
+          return setTimeout(animate, delay);
+        } else {
+          return animate();
+        }
+      },
+      slideAppearUpToDown: function($caption, delay, length) {
+        var animate, css;
+        if (delay == null) {
+          delay = 0;
+        }
+        if (length == null) {
+          length = 300;
+        }
+        css = {
+          'margin-top': <?php echo $settings['textDistance']; ?>,
+          'margin-bottom': -<?php echo $settings['textDistance']; ?>
+        };
+        $caption.css(css);
+        animate = function() {
+          css = {
+            'margin-top': 0,
+            'margin-bottom': 0,
+            'opacity': 1
+          };
+          return $caption.animate(css, length);
+        };
+        if (delay > 0) {
+          return setTimeout(animate, delay);
+        } else {
+          return animate();
+        }
+      },
+      slideAppearDownToUp: function($caption, delay, length) {
+        var animate, css;
+        if (delay == null) {
+          delay = 0;
+        }
+        if (length == null) {
+          length = 300;
+        }
+        css = {
+          'margin-top': -<?php echo $settings['textDistance']; ?>,
+          'margin-bottom': <?php echo $settings['textDistance']; ?>
+        };
+        $caption.css(css);
+        animate = function() {
+          css = {
+            'margin-top': 0,
+            'margin-bottom': 0,
+            'opacity': 1
+          };
+          return $caption.animate(css, length);
+        };
+        if (delay > 0) {
+          return setTimeout(animate, delay);
+        } else {
+          return animate();
+        }
+      }
+    };
+
     $( document ).ready( function() {
         $('.responsive-slider').responsiveSlider({
             autoplay: true,
