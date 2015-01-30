@@ -181,17 +181,17 @@
           }
         }
       },
-      stop: function(permanent) {
-        if (permanent == null) {
-          permanent = true;
-        }
-        clearInterval(this.interval);
-        if (permanent) {
-          this.$element.off('mouseover');
-          this.$element.off('mouseleave');
-        }
-        return null;
-      },
+//      stop: function(permanent) {
+//        if (permanent == null) {
+//          permanent = true;
+//        }
+//        clearInterval(this.interval);
+//        if (permanent) {
+//          this.$element.off('mouseover');
+//          this.$element.off('mouseleave');
+//        }
+//        return null;
+//      },
       start: function() {
         var r;
         r = this;
