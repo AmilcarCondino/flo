@@ -21,7 +21,7 @@
                     <li>
                         <div class="slide-body" data-group="slide">
                             <img src="/uploads/slider/{{ $slider->img_name }}">
-                            <div class="caption header" data-animate="slideAppearLeftToRight" data-delay="500" data-length="1500" style="top: 5%; left: 90%; margin-left: -100; margin-right: 100;">
+                            <div class="caption header" data-animate="slideAppearLeftToRight" data-delay="500" data-length="300" style="top: 5%; left: 90%; margin-left: -100; margin-right: 100;">
                                 <h3>{{ $slider->headline }}</h3>
                                 <div class="caption sub" data-animate="slideAppearUpToDown" data-delay="800" data-length="300">{{ $slider->paragraph }}</div>
                             </div>
