@@ -50,7 +50,7 @@
         return captions.each(function() {
           var $caption;
           $caption = $(this);
-          return r.options.animations[$caption.data('animate')]($caption, $caption.data('delay'), $caption.data('length'));
+          return r.options.animations[$caption.data('animate')]($caption, $caption.data('delay'), $caption.data('length'), r.options.transitionDistance);
         });
       },
       hideAnimatedCaptions: function(slide) {
@@ -204,13 +204,15 @@
         r = this;
         this.stop();
         this.start();
-        this.$element.on('mouseover', function() {
-          return r.stop(false);
-        });
-        return this.$element.on('mouseleave', function() {
-          r.stop(false);
-          return r.start();
-        });
+        if(this.options.stopOnMouseover){
+          this.$element.on('mouseover', function() {
+            return r.stop(false);
+          });
+          return this.$element.on('mouseleave', function() {
+            r.stop(false);
+            return r.start();
+          });
+        }
       },
       prev: function(transitionTime, noanimation) {
         if (transitionTime == null) {
@@ -307,7 +309,7 @@
       }
     };
     $.fn.responsiveSlider.animations = {
-      slideAppearRightToLeft: function($caption, delay, length) {
+      slideAppearRightToLeft: function($caption, delay, length, distance) {
         var animate, css;
         if (delay == null) {
           delay = 0;
@@ -316,8 +318,8 @@
           length = 300;
         }
         css = {
-          'margin-left': 100,
-          'margin-right': -100
+          'margin-left': distance,
+          'margin-right': -distance
         };
         $caption.css(css);
         animate = function() {
@@ -334,7 +336,7 @@
           return animate();
         }
       },
-      slideAppearLeftToRight: function($caption, delay, length) {
+      slideAppearLeftToRight: function($caption, delay, length, distance) {
         var animate, css;
         if (delay == null) {
           delay = 0;
@@ -343,8 +345,8 @@
           length = 300;
         }
         css = {
-          'margin-left': -100,
-          'margin-right': 100
+          'margin-left': -distance,
+          'margin-right': distance
         };
         $caption.css(css);
         animate = function() {
@@ -361,7 +363,7 @@
           return animate();
         }
       },
-      slideAppearUpToDown: function($caption, delay, length) {
+      slideAppearUpToDown: function($caption, delay, length, distance) {
         var animate, css;
         if (delay == null) {
           delay = 0;
@@ -370,8 +372,8 @@
           length = 300;
         }
         css = {
-          'margin-top': 100,
-          'margin-bottom': -100
+          'margin-top': distance,
+          'margin-bottom': -distance
         };
         $caption.css(css);
         animate = function() {
@@ -388,7 +390,7 @@
           return animate();
         }
       },
-      slideAppearDownToUp: function($caption, delay, length) {
+      slideAppearDownToUp: function($caption, delay, length, distance) {
         var animate, css;
         if (delay == null) {
           delay = 0;
@@ -397,8 +399,8 @@
           length = 300;
         }
         css = {
-          'margin-top': -100,
-          'margin-bottom': 100
+          'margin-top': -distance,
+          'margin-bottom': distance
         };
         $caption.css(css);
         animate = function() {
@@ -418,12 +420,14 @@
     };
     $.fn.responsiveSlider.defaults = {
       autoplay: false,
+      stopOnMouseover: true,
       interval: 5000,
       touch: true,
       parallax: false,
       parallaxDistance: 1 / 10,
       parallaxDirection: 1,
       transitionTime: 300,
+      transitionDistance: 100,
       moveDistanceToSlideChange: 4,
       onSlideChange: function() {},
       onSlideNext: function() {},
