@@ -18,8 +18,6 @@
         <link rel="stylesheet" href="/css/jasny-bootstrap.css">
         <!-- Include the MASONRY plugin's CSS and JS: -->
         <script src="/js/masonry.pkgd.min.js"></script>
-        <!-- Custom CSS -->
-        <link href="/css/crud.css" rel="stylesheet">
         <!-- Include screenfull js -->
         <script src="/js/screenfull.js"></script>
         <!-- jQuery 1.7.2+ or Zepto.js 1.0+ -->
@@ -31,6 +29,8 @@
         <script src="/js/jquery.event.move.js"></script>
         <script src="/js/responsive-slider.js"></script>
         <link rel="stylesheet" href="/css/responsive-slider.css">
+        <!-- Custom CSS -->
+        <link href="/css/crud.css" rel="stylesheet">
 
 
     </head>

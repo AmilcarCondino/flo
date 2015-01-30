@@ -21,9 +21,9 @@
                     <li>
                         <div class="slide-body" data-group="slide">
                             <img src="/uploads/slider/{{ $slider->img_name }}">
-                            <div class="caption header" data-animate="slideAppearRightToLeft" data-delay="500" data-length="300">
+                            <div class="caption header" data-animate="slideAppearRightToLeft" data-delay="500" data-length="300" style="top: 75%; left: 50%;">
                                 <h3>{{ $slider->headline }}</h3>
-                                <div class="caption sub" data-animate="slideAppearLeftToRight" data-delay="800" data-length="300">{{ $slider->paragraph }}</div>
+                                <div class="caption sub" data-animate="slideAppearUpToDown" data-delay="800" data-length="300">{{ $slider->paragraph }}</div>
                             </div>
                         </div>
                     </li>
@@ -32,13 +32,7 @@
         </ul>
     </div>
 </div>
-<a class="slider-control left" href="#" data-jump="prev"><i class="glyphicon-circle-arrow-left"></i></a>
-<a class="slider-control right" href="#" data-jump="next"><i class="glyphicon-circle-arrow-right"></i></a>
-<div class="pages">
-    <a class="page" href="#" data-jump-to="1">1</a>
-    <a class="page" href="#" data-jump-to="2">2</a>
-    <a class="page" href="#" data-jump-to="3">3</a>
-</div>
+
 
 
 <script>

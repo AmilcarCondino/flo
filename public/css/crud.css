@@ -30,7 +30,6 @@ html {
 }
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 60px;
     background: #060606;
 }
 .footer {
@@ -79,3 +78,10 @@ body {
     -webkit-filter: grayscale(0);
 }
 
+/* Responsive Silider */
+
+
+.responsive-slider .slides ul li .slide-body img {
+
+    width:2200px;
+}
