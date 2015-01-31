@@ -10,6 +10,7 @@ use DB;
 use Exception;
 use Response;
 use Slider;
+use Caption;
 
 
 class SlidersController extends BaseController {

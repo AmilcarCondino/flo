@@ -1,4 +1,16 @@
-<?php
+<?php namespace Admin;
+
+use BaseController;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Validator;
+use View;
+use Input;
+use Redirect;
+use DB;
+use Exception;
+use Response;
+use Slider;
+use Caption;
 
 class CaptionsController extends \BaseController {
 

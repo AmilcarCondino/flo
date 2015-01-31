@@ -43,6 +43,7 @@ Route::group(array('prefix' => 'admin', 'before' => array('auth|admin')), functi
     Route::resource('collections', 'Admin\\CollectionsController',['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
     Route::resource('tags', 'Admin\\TagsController',['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
     Route::resource('sliders', 'Admin\\SlidersController');
+    Route::resource('captions', 'Admin\\SlidersController');
 
 });
 
