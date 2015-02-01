@@ -50,7 +50,7 @@
                     <td>
                         {{ Form::open(['method' => 'get', 'route' => ['admin.sliders.edit', $slide->id]]) }}
 
-                        {{ Form::submit('Editar', array('class'=>'btn btn-sm btn-primary')) }}
+                            {{ Form::submit('Editar', array('class'=>'btn btn-sm btn-primary')) }}
 
                         {{ Form::close() }}
                     </td>
@@ -58,7 +58,7 @@
                     <td>
                         {{ Form::open(['method' => 'delete', 'route' => ['admin.sliders.destroy', $slide->id]]) }}
 
-                        {{ Form::submit('Eliminar', array('class'=>'btn btn-xs btn-danger')) }}
+                            {{ Form::submit('Eliminar', array('class'=>'btn btn-xs btn-danger')) }}
 
                         {{ Form::close() }}
                     </td>

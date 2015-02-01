@@ -14,8 +14,8 @@
 //Home index route
 Route::get('/', function()
 {
-    $sliders = DB::table('sliders')->orderBy('order')->get();
-    $captions = DB::table('captions')->get();
+    $sliders = Slider::orderBy('order', 'DESC')->get();
+    $captions = Caption::all();
 	return View::make('index')
         ->with('sliders', $sliders)
         ->with('captions', $captions);
