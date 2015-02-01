@@ -16,12 +16,8 @@
             </div>
         </div>
 
-            {{ Form::openGroup('headline', 'Titulo: ') }}
-            {{ Form::text('headline', null, ['class' => 'validate']) }}
-            {{ Form::closeGroup() }}
-
-            {{ Form::openGroup('paragraph', 'Parrafo: ') }}
-            {{ Form::textarea('paragraph', null, ['class' => 'validate']) }}
+            {{ Form::openGroup('title', 'Titulo: ') }}
+            {{ Form::text('title', null, ['class' => 'validate']) }}
             {{ Form::closeGroup() }}
 
         <div class="row">
@@ -36,7 +32,7 @@
                 {{ Form::submit('Guardar Slide', array('class'=>'btn btn-sm-3 btn-success')) }}
             </div>
             <div class="col-sm-3">
-                <a class="btn btn-block btn-danger" href="/admin/photos" role="button">Cancelar</a>
+                <a class="btn btn-block btn-danger" href="/admin/sliders" role="button">Cancelar</a>
             </div>
         </div>
 

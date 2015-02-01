@@ -78,7 +78,7 @@ class SlidersController extends BaseController {
 
             //Check if the file extension, is in to the allowed ones
             if ( !in_array(strtolower($extension), $allowed_extensions)) {
-                //If isn't an allowed extension, then throw a new Exceptio, with a reason.
+                //If isn't an allowed extension, then throw a new Exception, with a reason.
                 throw new Exception('El archivo nos es de un formato valido.');
             };
 
@@ -88,15 +88,15 @@ class SlidersController extends BaseController {
             $last_id = DB::table('sliders')->orderBy('id','dec')->take(1)->pluck('id');
             $next_id = $last_id + 1;
 
-            //Construct de filename to avoid file replacement
-            $filename = 'slide_' . $next_id . '.' . $image->getClientOriginalExtension();
+            //Construct de filename using slide title
+
+            $slide_title = Input::get('title');
+            $filename = str_replace(' ', '_', $slide_title) . '_' . $next_id . '.' . $image->getClientOriginalExtension();
 
             //Target the save path location
             $destination_path = public_path().'/uploads/slider/';
 
             //Assign the data at the appropriate fields
-            $slide->headline = Input::get('headline');
-            $slide->paragraph = Input::get('paragraph');
             $slide->show = Input::get('show');
             $slide->img_name = $filename;
             $slide->order = $next_id;
@@ -115,10 +115,9 @@ class SlidersController extends BaseController {
             //Try to save in the DB and check for true or false
             if ($slide->save()) {
 
+                $slide_id = DB::table('sliders')->orderBy('id','dec')->take(1)->pluck('id');
                 //If its true, redirect to sliders page with a successful message.
-                return Redirect::to('admin/sliders')
-                    ->with('flash_message','El archivo "' . $original_name . '" se ha guardado correctamente')
-                    ->with('flash_type', 'alert-success');
+                return Redirect::to('admin/sliders/' . $slide_id . '/edit');
             }
 
             //If it's false, don't pass de validation checks. Redirect to the previous page with details of the problem.
@@ -173,8 +172,10 @@ class SlidersController extends BaseController {
             $order = Slider::lists('order', 'order');
             $rows = DB::table('sliders')->count();
 
+            $captions = $slide->captions;
+
             //Render edit page with the record data
-            $this->layout->content = View::make('admin.sliders.edit', compact('slide', 'order', 'rows'));
+            $this->layout->content = View::make('admin.sliders.edit', compact('slide', 'order', 'rows', 'captions'));
             //Error handler response
         }
         catch (\Exception $e) {
@@ -197,11 +198,33 @@ class SlidersController extends BaseController {
             //Instantiate the record to edit
             $slide = Slider::findOrFail($id);
 
-            //Assign the data at the appropriate fields
-            $slide->headline = Input::get('headline');
-            $slide->paragraph = Input::get('paragraph');
-            $slide->show = Input::get('show');
+            // Check if a image change is required
+            $image = Input::file('image');
+            If (!is_null($image)) {
 
+                //Declare the allowed extensions
+                $allowed_extensions = ['jpg', 'jpeg', 'bmp', 'png'];
+
+                //Get the file extension
+                $extension = $image->getClientOriginalExtension();
+
+                if ( !in_array(strtolower($extension), $allowed_extensions)) {
+                    //If isn't an allowed extension, then throw a new Exception, with a reason.
+                    throw new Exception('El archivo nos es de un formato valido.');
+                };
+
+                $image_name = $slide->img_name;
+
+                //Move the image in to the server
+                $destination_path = public_path().'/uploads/slider/';
+                $image->move($destination_path, $image_name);
+
+
+            }
+
+            //Assign the data at the appropriate fields
+
+            $slide->show = Input::get('show');
             $new_position_order = Input::get('order');
             $new_id_position = $slide->id;
 
@@ -267,10 +290,10 @@ class SlidersController extends BaseController {
             if (empty($sli)) {
                 //Redirect to the sliders.index page
                 return Redirect::to('admin/sliders')
-                    ->with('flash_message','La slide "' . $slide->headline . '" se ha eliminado correctamente')
+                    ->with('flash_message','La slide "' . $slide->img_name . '" se ha eliminado correctamente')
                     ->with('flash_type', 'alert-success');
             }
-            throw new Exception('El archivo "' . $slide->title . '" no se puedo eliminar. Si el error continua, contacte con su administrador');
+            throw new Exception('El archivo "' . $slide->img_name . '" no se puedo eliminar. Si el error continua, contacte con su administrador');
         }
         catch (\Exception $e) {
             return Redirect::to('sliders')

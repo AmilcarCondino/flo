@@ -6,13 +6,15 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddImageNameColumnInCaptionTable' => $baseDir . '/app/database/migrations/2015_02_01_033723_add_image_name_column_in_caption_table.php',
+    'AddSubcaptionColumnsToCaptionTable' => $baseDir . '/app/database/migrations/2015_01_31_185024_add_subcaption_columns_to_caption_table.php',
+    'Admin\\CaptionsController' => $baseDir . '/app/controllers/admin/CaptionsController.php',
     'Admin\\CategoriesController' => $baseDir . '/app/controllers/admin/CategoriesController.php',
     'Admin\\CollectionsController' => $baseDir . '/app/controllers/admin/CollectionsController.php',
     'Admin\\PhotosController' => $baseDir . '/app/controllers/admin/PhotosController.php',
     'Admin\\PostsController' => $baseDir . '/app/controllers/admin/PostsController.php',
     'Admin\\SlidersController' => $baseDir . '/app/controllers/admin/SlidersController.php',
     'Admin\\TagsController' => $baseDir . '/app/controllers/admin/TagsController.php',
-    'Admin\\CaptionsController' => $baseDir . '/app/controllers/admin/CaptionsController.php',
     'BaseController' => $baseDir . '/app/controllers/BaseController.php',
     'BootstrapForms\\Html\\FormBuilder' => $baseDir . '/app/src/Html/FormBuilder.php',
     'BootstrapForms\\Providers\\HtmlServiceProvider' => $baseDir . '/app/src/Providers/HtmlServiceProvider.php',
@@ -65,6 +67,7 @@ return array(
     'Crypt_TripleDES' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/TripleDES.php',
     'Crypt_Twofish' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/Twofish.php',
     'DatabaseSeeder' => $baseDir . '/app/database/seeds/DatabaseSeeder.php',
+    'EditParentIdProtiesInCaptionTable' => $baseDir . '/app/database/migrations/2015_02_01_030200_edit_parent_id_proties_in_caption_table.php',
     'File_ANSI' => $vendorDir . '/phpseclib/phpseclib/phpseclib/File/ANSI.php',
     'File_ASN1' => $vendorDir . '/phpseclib/phpseclib/phpseclib/File/ASN1.php',
     'File_ASN1_Element' => $vendorDir . '/phpseclib/phpseclib/phpseclib/File/ASN1.php',

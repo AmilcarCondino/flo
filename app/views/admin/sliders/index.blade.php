@@ -12,8 +12,7 @@
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Hedline</th>
-                    <th>Comentario</th>
+                    <th>Nombre</th>
                     <th>Show</th>
                     <th>Orden</th>
                     <th>Creado</th>
@@ -29,11 +28,7 @@
                     </td>
 
                     <td>
-                        {{$slide->headline}}
-                    </td>
-
-                    <td>
-                        {{$slide->paragraph}}
+                        {{$slide->img_name}}
                     </td>
 
                     <td>

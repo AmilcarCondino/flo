@@ -1,1 +1,0 @@
-/Users/amil/Works/flor/www/app/views/captions/edit.blade.php
