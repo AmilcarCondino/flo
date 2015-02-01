@@ -5,6 +5,6 @@ class Slider extends Model {
 
     public function captions()
     {
-        return $this->belongsToMany('Caption');
+        return $this->hasToMany('Caption');
     }
 }
