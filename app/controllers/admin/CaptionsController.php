@@ -61,7 +61,6 @@ class CaptionsController extends BaseController {
 
             //Check if is an image
             $image = Input::file('image');
-            $image_name = null;
             If (!is_null($image)) {
 
                 //Declare the allowed extensions
@@ -175,7 +174,6 @@ class CaptionsController extends BaseController {
 
             //Check if is an image
             $image = Input::file('image');
-            $image_name = null;
             If (!is_null($image)) {
 
                 //Declare the allowed extensions
@@ -201,6 +199,8 @@ class CaptionsController extends BaseController {
                 //Move the image in to the server
                 $destination_path = public_path().'/uploads/captions/';
                 $image->move($destination_path, $image_name);
+                $caption->caption_image_name = $image_name;
+
             }
 
             //Assign the data at the appropriate fields
@@ -213,7 +213,6 @@ class CaptionsController extends BaseController {
             $caption->left_position = Input::get('left_position');
             $caption->transition_distance = Input::get('transition_distance');
             $caption->parent_id = Input::get('parent_id');
-            $caption->caption_image_name = $image_name;
             $parent_slide = $caption->sliders;
 
 

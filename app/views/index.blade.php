@@ -15,11 +15,11 @@
                             @foreach ($slider->captions as $caption)
                                 <div class="caption header" data-animate="{{$caption->data_animate}}" data-delay="{{$caption->data_delay}}" data-length="{{$caption->data_length}}" style="top:{{$caption->top_position}}%; left: {{$caption->left_position}}%";>
                                     @if ($caption->is_photo === 1)
-                                        <img src="/uploads/captions/{{$caption->caption_image_name}}">
+                                        <img src="/uploads/captions/{{$caption->caption_image_name}}" style="width: 100%;">
                                     @else
                                         <h2>{{$caption->caption_body}}</h2>
                                     @endif
-                                    <div class="caption sub" data-animate="slideAppearUpToDown" data-delay="800" data-length="300">To avoid errors we use harcoded captions.</div>
+                                    <div class="caption sub" data-animate="slideAppearUpToDown" data-delay="800" data-length="300"></div>
                                 </div>
                             @endforeach
                         </div>
