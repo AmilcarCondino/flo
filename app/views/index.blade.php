@@ -7,13 +7,13 @@
 <div  class="responsive-slider">
     <div class="slides" data-group="slides">
         <ul>
-            @for($i = 0; $i < count($sliders); $i++)
-                @if($sliders[$i]->show === 1)
+           @foreach ($sliders as $slider)
+                @if($slider->show === 1)
                     <li>
-                        <div class="slide-body" data-group="slide">
-                            <img src="/uploads/slider/{{ $sliders[$i]->img_name }}">
+                        <div class="slide-body" data-group="slide"><?php  var_dump($slider->captions); dd(); ?>
+                            <img src="/uploads/slider/{{ $slider->img_name }}">
                             @foreach ($captions as $caption)
-                                <div class="caption header" data-animate="{{$caption->data_animate}}" data-delay="{{$caption->data_delay}}" data-length="{{$caption->data_length}}" style="top:{{$caption->top_position}}%; left: {{$caption->left_position}}%;>
+                                <div class="caption header" data-animate="{{$caption->data_animate}}" data-delay="{{$caption->data_delay}}" data-length="{{$caption->data_length}}" style="top:{{$caption->top_position}}%; left: {{$caption->left_position}}%";>
                                     @if ($caption->is_photo === 1)
                                         <img src="/uploads/captions/{{$caption->caption_image_name}}">
                                     @else
@@ -25,7 +25,7 @@
                         </div>
                     </li>
                 @endif
-            @endfor
+            @endforeach
         </ul>
     </div>
     <a class="slider-control left" href="#" data-jump="prev"><</a>

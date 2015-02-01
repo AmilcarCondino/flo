@@ -15,7 +15,7 @@
 Route::get('/', function()
 {
     $sliders = DB::table('sliders')->orderBy('order')->get();
-    $captions = Caption::all();
+    $captions = DB::table('captions')->get();
 	return View::make('index')
         ->with('sliders', $sliders)
         ->with('captions', $captions);
