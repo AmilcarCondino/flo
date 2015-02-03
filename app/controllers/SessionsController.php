@@ -52,4 +52,17 @@ class SessionsController extends \BaseController {
             ->with('flash_type', 'alert-success');
 	}
 
+    public function setLanguage(){
+
+        $language = Input::all();
+
+        if (isset ($language)) {
+
+            Session::forget('lan');
+
+            Session::put('lan', $language);
+            return Redirect::back();
+        }
+    }
+
 }

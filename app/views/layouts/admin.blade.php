@@ -1,5 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+<?php $lang = Session::get('lan');
+
+var_dump($lang);
+
+;?>
+    @if ($lang === 'en' )
+        {{ App::setLocale('en') }}
+    @endif
+    @if ($lang ==='es')
+        {{ App::setLocale('es') }}
+    @endif
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,9 +33,6 @@
         <script src="/js/masonry-docs.js"></script>
         <!-- Include the ckeditor plugin's JS: -->
         <script src="/js/ckeditor/ckeditor.js"></script>
-
-
-
     </head>
     <body>
         <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">

@@ -3,12 +3,18 @@
 //Lang::get(‘welcome_to_our_application’);
 
 return array(
-    'control_panel' => 'Panel de Control',
-    'news_admin' => 'Administrador de Noticias',
-    'image_admin' => 'Administrador de Imagenes',
-    'slider_admin' => 'Editor de Homepage',
-    'image_gallery' => 'Galeria de Imagenes',
-    'news' => 'Noticias publicas'
+    // Admin Nav bar
+    'control_panel' => 'Control Panel',
+    'news_admin' => 'News Editor',
+    'image_admin' => 'Images Editor',
+    'slider_admin' => 'Homepage Editor',
+    'image_gallery' => 'Image Gallery',
+    'news_guest' => 'Public News',
+
+    // Guest Navbar
+    'login' => 'Login',
+    'news' => 'News',
+
 
 
 );

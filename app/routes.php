@@ -59,6 +59,7 @@ Route::resource('photos', 'PhotosController', ['only' => ['index', 'show', 'filt
 //Log in and atuth routes
 Route::get('login', 'SessionsController@create');
 Route::get('logout', 'SessionsController@destroy');
+Route::get('lang', 'SessionsController@setLanguage');
 
-Route::resource('sessions', 'SessionsController', ['only' => ['create', 'destroy', 'store']]);
+Route::resource('sessions', 'SessionsController', ['only' => ['create', 'destroy', 'store', 'setLanguage']]);
 
