@@ -38,16 +38,7 @@
                     </button>
                     <a class="navbar-brand" href="/">HOME</a>
                 </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>{{ HTML::link('/admin', 'Pane de Control') }}</li>
-                        <li>{{ HTML::link('admin/posts', 'Posts') }}</li>
-                        <li>{{ HTML::link('admin/photos', 'Fotos') }}</li>
-                        <li>{{ HTML::link('logout', 'Log out') }}</li>
-                        <li>{{ HTML::link('/admin/sliders', 'Slider') }}</li>
-                    </ul>
-
-                </div>
+                @include('includes.navbar_admin')
             </div>
         </div>
         <div class="container">

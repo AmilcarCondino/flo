@@ -46,18 +46,11 @@
                     </button>
                     <a class="navbar-brand" href="/">HOME</a>
                 </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        @if ( Auth::check() )
-                            <li>{{ HTML::link('admin', 'Dashboard') }}</li>
-                        @else
-                            <li>{{ HTML::link('login', 'Login') }}</li>
-                        @endif
-                            <li>{{ HTML::link('posts', 'Posts') }}</li>
-                            <li>{{ HTML::link('photos', 'Fotos') }}</li>
-                    </ul>
-                </div>
-
+                @if (Auth::check())
+                    @include('includes.navbar_admin')
+                @else
+                    @include('includes.navbar_default')
+                @endif
             </div>
         </div>
         @if (Session::has('flash_message'))
