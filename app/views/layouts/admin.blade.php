@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html>
-<?php $lang = Session::get('lan');
-
-var_dump($lang);
-
-;?>
+<?php $lang = Session::get('lan');?>
     @if ($lang === 'en' )
         {{ App::setLocale('en') }}
     @endif

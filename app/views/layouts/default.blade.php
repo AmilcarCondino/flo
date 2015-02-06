@@ -2,21 +2,12 @@
 <html lang="en">
     <head>
         <?php $lan = Session::get('lan');?>
-        @if ($lan === 'en' )
+        @if ($lan['language'] === 'en' )
         {{ App::setLocale('en') }}
         @endif
-        @if ($lan ==='es')
+        @if ($lan['language'] ==='es')
         {{ App::setLocale('es') }}
         @endif
-        <?php
-
-        if($lan->language[0] === 'es') {
-            $foo = 'español';
-
-        } else {
-            $foo = 'mierda';
-        }
-        var_dump($foo); dd(); ?>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -68,27 +59,6 @@
                     @include('includes.navbar_default')
                 @endif
 
-                {{  Form::open(array('method' => 'GET', 'url' => 'lang' )) }}
-
-                {{ Form::openGroup('language') }}
-                {{ Form::text('language', 'en', ['class' => 'hide']) }}
-                {{ Form::closeGroup() }}
-
-                {{ Form::submit('Ingles', array('class'=>'btn btn-sm btn-dafault', 'id' => 'btn')) }}
-
-                {{ Form::close() }}
-
-
-
-                {{  Form::open(array('method' => 'GET', 'url' => 'lang' )) }}
-
-                {{ Form::openGroup('language') }}
-                {{ Form::text('language', 'es', ['class' => 'hide']) }}
-                {{ Form::closeGroup() }}
-
-                {{ Form::submit('Español', array('class'=>'btn btn-sm btn-dafault', 'id' => 'btn')) }}
-
-                {{ Form::close() }}
             </div>
         </div>
         @if (Session::has('flash_message'))
