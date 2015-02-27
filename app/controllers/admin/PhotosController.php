@@ -64,6 +64,7 @@ class PhotosController extends \BaseController {
 
             //Instantiate a new Photo object
             $photo = new Photo;
+            $photo_en = new Photo;
 
             //Instantiate the image file
             $image = Input::file('image');
@@ -106,6 +107,7 @@ class PhotosController extends \BaseController {
             $photo->description = Input::get('description');
             $photo->show = Input::get('show');
             $photo->img_name = $filename;
+            $photo->language = "es";
 
             if (!is_null (Input::get('collections'))) {
                 //Create an empty array for the collection data.
@@ -161,12 +163,33 @@ class PhotosController extends \BaseController {
                 if (!empty($array_tags)) {
                     $photo->tags()->saveMany($array_tags);
                 }
-                //If its true, redirect to photos page with a successful message.
-                return Redirect::to('admin/photos')
-                    ->with('flash_message','El archivo "' . $original_name . '" se ha guardado correctamente')
-                    ->with('flash_type', 'alert-success');
-            }
 
+                //Assign the data at the appropriate fields of the second language
+                $photo_en->title = Input::get('title_en');
+                $photo_en->description = Input::get('description_en');
+                $photo_en->show = Input::get('show');
+                $photo_en->img_name = $filename;
+                $photo_en->referential_id = DB::table('photos')->orderBy('id','dec')->take(1)->pluck('id');
+                $photo_en->language = "en";
+
+                if ($photo_en->save()) {
+                    //Save the array of tags
+                    if (!empty($array_categories)) {
+                        $photo_en->categories()->saveMany($array_categories);
+                    }
+                    //Save the array of tags
+                    if (!empty($array_collections)) {
+                        $photo_en->collections()->saveMany($array_collections);
+                    }
+                    //Save the array of tags
+                    if (!empty($array_tags)) {
+                        $photo_en->tags()->saveMany($array_tags);
+                    }
+                    return Redirect::to('admin/photos')
+                        ->with('flash_message','La foto "' . $photo->title . '" se ha guardado correctamente')
+                        ->with('flash_type', 'alert-success');
+                }
+            }
             //If it's false, don't pass de validation checks. Redirect to the previous page with details of the problem.
             return Redirect::back()->withInput()->withErrors($photo->getErrors());
         }
@@ -199,6 +222,7 @@ class PhotosController extends \BaseController {
                 ->with('flash_message', 'Algo salio mal. Error: ' .  $e->getMessage())
                 ->with('flash_type', 'alert-danger');
         }
+
 	}
 
 	/**
@@ -215,7 +239,7 @@ class PhotosController extends \BaseController {
 
             //Instantiate the record to edit
             $photo = Photo::findOrFail($id);
-
+            $photo_en = DB::table('photos')->where('referential_id', $photo->id)->first();
             $categories = Category::lists('title', 'id');
             $tags = Tag::lists('title', 'id');
             $collections = Collection::lists('title', 'id');
@@ -223,7 +247,7 @@ class PhotosController extends \BaseController {
 
 
             //Render edit page with the record data
-            $this->layout->content = View::make('admin.photos.edit', compact('photo', 'categories', 'tags', 'collections'));
+            $this->layout->content = View::make('admin.photos.edit', compact('photo', 'categories', 'tags', 'collections', 'photo_en'));
             //Error handler response
         }
         catch (\Exception $e) {
@@ -250,6 +274,8 @@ class PhotosController extends \BaseController {
 
             //Instantiate the record to edit
             $photo = Photo::findOrFail($id);
+            $photo_en_id = DB::table('photos')->where('referential_id', $photo->id)->first();
+            $photo_en = Photo::findOrFail($photo_en_id->id);
 
            //Check for a new image
             if (!empty ($image)) {
@@ -269,8 +295,6 @@ class PhotosController extends \BaseController {
             $photo->title = Input::get('title');
             $photo->description = Input::get('description');
             $photo->show = Input::get('show');
-            $collection_id = 10;
-            $category_id = 6;
 
             if (!is_null (Input::get('collections'))) {
                 //Create an empty array for the collection data.
@@ -304,9 +328,6 @@ class PhotosController extends \BaseController {
 
             //Try to update the register in the DB and check for errors
             if ($photo->save()) {
-
-
-
                 //First erase the olda data, and then save the array of categories
                 $photo->categories()->detach();
                 if (!empty($array_categories)) {
@@ -323,26 +344,45 @@ class PhotosController extends \BaseController {
                     $photo->tags()->saveMany($array_tags);
                 }
 
-
-
                 //Then redirect at photos page with a successful message.
-                 if (!empty ($image)) {
+                if (!empty ($image)) {
                     //Target the save path location
                     $destination_path = public_path().'/uploads/images/';
 
                     $photo_name = $photo->img_name;
                     //Copy the new image
                     $image->move($destination_path, $photo->img_name);
-                 }
+                }
+                    //Assign the data at the appropriate fields of the second language
+                    $photo_en->title = Input::get('title_en');
+                    $photo_en->description = Input::get('description_en');
+                    $photo_en->show = Input::get('show');
 
-                 return Redirect::to('admin/photos')
-                     ->with('flash_message','La foto "' . $photo->title . '" se ha editado correctamente')
-                     ->with('flash_type', 'alert-success');
+                DB::table('photos')
+                    ->where('id', $photo_en->id)
+                    ->update(['title' => $photo_en->title, 'description' =>$photo_en->description, 'show' =>$photo_en->show ]);
 
+                //First erase the olda data, and then save the array of categories
+                $photo_en->categories()->detach();
+                if (!empty($array_categories)) {
+                    $photo_en->categories()->saveMany($array_categories);
+                }
+                //First erase the olda data, and then save the array of collections
+                $photo_en->collections()->detach();
+                if (!empty($array_collections)) {
+                    $photo_en->collections()->saveMany($array_collections);
+                }
+                //First erase the olda data, and then save the array of tags
+                $photo_en->tags()->detach();
+                if (!empty($array_tags)) {
+                    $photo_en->tags()->saveMany($array_tags);
+                }
+                return Redirect::to('admin/photos')
+                    ->with('flash_message','La foto "' . $photo->title . '" se ha editado correctamente')
+                    ->with('flash_type', 'alert-success');
+                //If errors exist, don't pass de validation checks. Redirect to the previous page with details of the problem.
+                return Redirect::back()->withInput()->withErrors($photo->getErrors());
             }
-            //If errors exist, don't pass de validation checks. Redirect to the previous page with details of the problem.
-            return Redirect::back()->withInput()->withErrors($photo->getErrors());
-
         }
         catch (\Exception $e) {
             return Redirect::back()
@@ -365,9 +405,11 @@ class PhotosController extends \BaseController {
         try {
             //Instantiate the record to edit
             $photo = Photo::findOrFail($id);
+            $photo_en = DB::table('photos')->where('referential_id', $photo->id)->first();
 
             //Delete the record from the DB
             Photo::find($id)->delete();
+            Photo::find($photo_en->id)->delete();
 
             $pho = Photo::find($id);
             //Check register still exist in the DB

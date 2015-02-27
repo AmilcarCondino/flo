@@ -20,14 +20,26 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-sm-6">
+                        {{ Form::openGroup('title', 'Titulo: ') }}
+                            {{ Form::text('title', null, ['class' => 'validate']) }}
+                        {{ Form::closeGroup() }}
 
-                {{ Form::openGroup('title', 'Titulo: ') }}
-                    {{ Form::text('title', null, ['class' => 'validate']) }}
-                {{ Form::closeGroup() }}
+                        {{ Form::openGroup('description', 'Creditos: ') }}
+                            {{ Form::textarea('description', null, ['class' => 'validate']) }}
+                        {{ Form::closeGroup() }}
+                    </div>
+                    <div class="col-sm-6">
+                        {{ Form::openGroup('title_en', 'Titulo en Ingles: ') }}
+                            {{ Form::text('title_en', null, ['class' => 'validate']) }}
+                        {{ Form::closeGroup() }}
 
-                {{ Form::openGroup('description', 'Descripción: ') }}
-                    {{ Form::textarea('description', null, ['class' => 'validate']) }}
-                {{ Form::closeGroup() }}
+                        {{ Form::openGroup('description_en', 'Creditos en Ingles: ') }}
+                            {{ Form::textarea('description_en', null, ['class' => 'validate']) }}
+                        {{ Form::closeGroup() }}
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-sm-2">

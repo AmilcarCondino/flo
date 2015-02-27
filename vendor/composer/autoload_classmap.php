@@ -7,7 +7,12 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AddImageNameColumnInCaptionTable' => $baseDir . '/app/database/migrations/2015_02_01_033723_add_image_name_column_in_caption_table.php',
-    'AddSubcaptionColumnsToCaptionTable' => $baseDir . '/app/database/migrations/2015_01_31_185024_add_subcaption_columns_to_caption_table.php',
+    'AddLenguageFieldsToPhotoTable' => $baseDir . '/app/database/migrations/2015_02_26_231831_add_lenguage_fields_to_photo_table.php',
+    'AddLenguageFieldsToPhotosTable' => $baseDir . '/app/database/migrations/2015_02_26_172746_add_lenguage_fields_to_photos_table.php',
+    'AddLenguagesFieldsInCategoryTable' => $baseDir . '/app/database/migrations/2015_02_26_195341_add_lenguages_fields_in_category_table.php',
+    'AddLenguagesFieldsInCollectionTable' => $baseDir . '/app/database/migrations/2015_02_26_195325_add_lenguages_fields_in-collection_table.php',
+    'AddLenguagesFieldsInTagTable' => $baseDir . '/app/database/migrations/2015_02_26_195351_add_lenguages_fields_in_tag_table.php',
+    'AddLenguagesFieldsToPostTable' => $baseDir . '/app/database/migrations/2015_02_26_175047_add_lenguages_fields_to_post_table.php',
     'Admin\\CaptionsController' => $baseDir . '/app/controllers/admin/CaptionsController.php',
     'Admin\\CategoriesController' => $baseDir . '/app/controllers/admin/CategoriesController.php',
     'Admin\\CollectionsController' => $baseDir . '/app/controllers/admin/CollectionsController.php',
@@ -67,7 +72,7 @@ return array(
     'Crypt_TripleDES' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/TripleDES.php',
     'Crypt_Twofish' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/Twofish.php',
     'DatabaseSeeder' => $baseDir . '/app/database/seeds/DatabaseSeeder.php',
-    'EditParentIdProtiesInCaptionTable' => $baseDir . '/app/database/migrations/2015_02_01_030200_edit_parent_id_proties_in_caption_table.php',
+    'EditParentIdProtiesInCaptionTable' => $baseDir . '/app/database/migrations/2015_02_01_030637_edit_parent_id_proties_in_caption_table.php',
     'File_ANSI' => $vendorDir . '/phpseclib/phpseclib/phpseclib/File/ANSI.php',
     'File_ASN1' => $vendorDir . '/phpseclib/phpseclib/phpseclib/File/ASN1.php',
     'File_ASN1_Element' => $vendorDir . '/phpseclib/phpseclib/phpseclib/File/ASN1.php',

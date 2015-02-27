@@ -1,4 +1,7 @@
-<?php $pattern = ['w1', 'w2', 'w3', 'w4','w5', 'w6', 'w7', 'w8', 'w9', 'w10', 'w11']; ?>
+<?php
+    $pattern = ['w1', 'w2', 'w3', 'w4','w5', 'w6', 'w7', 'w8', 'w9', 'w10', 'w11'];
+    $lan = Session::get('lan');
+?>
 
 @section('content')
 <div class="navbar navbar-inverse" >
@@ -19,13 +22,15 @@
 <!--Pseudo randomizer of image size-->
     @for($i = 0; $i < count($photos); $i++)
     @if($photos[$i]->show === 1)
+    @if($photos[$i]->language == $lan['language'])
 
-    <div class="picture {{ $pattern[ ($i % count($pattern) ) ] }}">
-        <a href="/uploads/images/{{$photos[$i]->img_name}}" description="{{$photos[$i]->description}}">
-            <img src="/uploads/images/{{$photos[$i]->img_name}}" alt="alt" class="photo">
-        </a>
-    </div>
+        <div class="picture {{ $pattern[ ($i % count($pattern) ) ] }}">
+            <a href="/uploads/images/{{$photos[$i]->img_name}}" photo_name="{{$photos[$i]->title}}" description="{{$photos[$i]->description}}">
+                <img src="/uploads/images/{{$photos[$i]->img_name}}" alt="alt" class="photo">
+            </a>
+        </div>
 
+    @endif
     @endif
     @endfor
 </div>
@@ -92,7 +97,7 @@
                 tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
                 titleSrc: function(item) {
 
-                    return item.el.attr('title') + '<small>'+ item.el.attr('description') +'</small>';
+                    return item.el.attr('photo_name') + '<small>'+ item.el.attr('description') +'</small>';
                 }
             }
         });

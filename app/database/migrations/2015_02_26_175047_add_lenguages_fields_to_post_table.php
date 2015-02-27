@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddImageNameColumnInCaptionTable extends Migration {
+class AddLenguagesFieldsToPostTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,11 @@ class AddImageNameColumnInCaptionTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('captions', function(Blueprint $table)
-		{
-            $table->text('caption_imagae_name')->nullable();
-		});
+        Schema::table('posts', function(Blueprint $table)
+        {
+            $table->integer('referential_id');
+            $table->text('language');
+        });
 	}
 
 	/**
@@ -25,10 +26,7 @@ class AddImageNameColumnInCaptionTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('captions', function(Blueprint $table)
-		{
-			//
-		});
+		//
 	}
 
 }

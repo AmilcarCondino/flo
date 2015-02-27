@@ -1,4 +1,6 @@
-
+<?php
+    $lan = Session::get('lan');
+?>
 @section('content')
 <div class="container">
     <div class="row">
@@ -24,6 +26,7 @@
                 </thead>
                     <tbody>
                         @foreach($photos as $photo)
+                        @if($photo->language == 'es')
                             <tr>
                                 <td>
                                     <a href="/admin/photos/{{ $photo->id }}">
@@ -77,6 +80,7 @@
                                 </td>
 
                             </tr>
+                        @endif
                         @endforeach
                     </tbody>
             </table>
