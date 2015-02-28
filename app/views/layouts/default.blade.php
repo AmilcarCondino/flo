@@ -6,8 +6,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Flo Tucci</title>
-
-
+        @if ($lan['language'] === 'en' )
+        {{ App::setLocale('en') }}
+        @endif
+        @if ($lan['language'] ==='es')
+        {{ App::setLocale('es') }}
+        @endif
         <!-- Core Bootstrap -->
         <link href="/css/bootstrap.css" rel="stylesheet">
         <!-- Core jquery -->

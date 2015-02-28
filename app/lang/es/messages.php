@@ -12,7 +12,7 @@ return array(
     'news_guest' => 'Noticias publicas',
 
     // Guest Navbar
-    'login' => 'Iniciar secion',
+    'login' => 'Iniciar sesion',
     'news' => 'Noticias',
 
 
