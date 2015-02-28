@@ -49,6 +49,7 @@ class CollectionsController extends \BaseController
             $collection = new Collection;
 
             $collection->title = Input::get('title');
+            $collection->title_EN = Input::get('title_EN');
 
             //Try to save in the DB and check for errors
             if ($collection->save()) {
@@ -124,6 +125,7 @@ class CollectionsController extends \BaseController
             $collection = Collection::findOrFail($id);
 
             $collection->title = Input::get('title');
+            $collection->title_EN = Input::get('title_EN');
 
             if ($collection->save()) {
                 return Redirect::to('admin')

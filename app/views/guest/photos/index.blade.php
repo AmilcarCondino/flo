@@ -6,16 +6,30 @@
 @section('content')
 <div class="navbar navbar-inverse" >
     <div class="col-sm-3 navbar-form navbar-right">
-        {{ Form::open(array('url' => 'photos', 'method' => 'get', 'id' => 'filter', 'class' => 'form-group')) }}
+        @if($lan['language'] == 'es')
+            {{ Form::open(array('url' => 'photos', 'method' => 'get', 'id' => 'filter', 'class' => 'form-group')) }}
 
-            {{ Form::openGroup('filter') }}
-                {{ Form::select('categories', array('' => 'Categorias', 'Selecione para filtrar' => $categories), array('id' => 'tags', 'class' => 'selectpicker')) }}
-            {{ Form::closeGroup() }}
+                {{ Form::openGroup('filter') }}
+                    {{ Form::select('categories', array('' => 'Categorias', 'Selecione para filtrar' => $categories), array('id' => 'tags', 'class' => 'selectpicker')) }}
+                {{ Form::closeGroup() }}
 
-            {{ Form::openGroup('filter') }}
-                {{ Form::select('collections', array('' => 'Colecciones', 'Selecione para filtrar' => $collections), array('id' => 'tags', 'class' => 'selectpicker')) }}
-            {{ Form::closeGroup() }}
-        {{ Form::close() }}
+                {{ Form::openGroup('filter') }}
+                    {{ Form::select('collections', array('' => 'Colecciones', 'Selecione para filtrar' => $collections), array('id' => 'tags', 'class' => 'selectpicker')) }}
+                {{ Form::closeGroup() }}
+            {{ Form::close() }}
+        @endif
+        @if($lan['language'] == 'en')
+            {{ Form::open(array('url' => 'photos', 'method' => 'get', 'id' => 'filter', 'class' => 'form-group')) }}
+
+                {{ Form::openGroup('filter') }}
+                    {{ Form::select('categories', array('' => 'Categorias', 'Selecione para filtrar' => $categories_EN), array('id' => 'tags', 'class' => 'selectpicker')) }}
+                {{ Form::closeGroup() }}
+
+                {{ Form::openGroup('filter') }}
+                    {{ Form::select('collections', array('' => 'Colecciones', 'Selecione para filtrar' => $collections_EN), array('id' => 'tags', 'class' => 'selectpicker')) }}
+                {{ Form::closeGroup() }}
+            {{ Form::close() }}
+        @endif
     </div>
 </div>
 <div id="masonry-container" class="popup-gallery">

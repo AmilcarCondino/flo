@@ -49,6 +49,7 @@ class TagsController extends \BaseController
             $tag = new Tag;
 
             $tag->title = Input::get('title');
+            $tag->title_EN = Input::get('title_EN');
 
             //Try to save in the DB and check for errors
             if ($tag->save()) {
@@ -121,9 +122,11 @@ class TagsController extends \BaseController
     public function update($id)
     {
         try {
-            $tag = TAg::findOrFail($id);
+            $tag = Tag::findOrFail($id);
 
             $tag->title = Input::get('title');
+            $tag->title_EN = Input::get('title_EN');
+
 
             if ($tag->save()) {
                 return Redirect::to('admin')

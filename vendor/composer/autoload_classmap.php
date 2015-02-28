@@ -6,9 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AdNullableReferntialInPostsTable' => $baseDir . '/app/database/migrations/2015_02_28_172428_ad_nullable_referntial_in_posts_table.php',
     'AddImageNameColumnInCaptionTable' => $baseDir . '/app/database/migrations/2015_02_01_033723_add_image_name_column_in_caption_table.php',
     'AddLenguageFieldsToPhotoTable' => $baseDir . '/app/database/migrations/2015_02_26_231831_add_lenguage_fields_to_photo_table.php',
-    'AddLenguageFieldsToPhotosTable' => $baseDir . '/app/database/migrations/2015_02_26_172746_add_lenguage_fields_to_photos_table.php',
     'AddLenguagesFieldsInCategoryTable' => $baseDir . '/app/database/migrations/2015_02_26_195341_add_lenguages_fields_in_category_table.php',
     'AddLenguagesFieldsInCollectionTable' => $baseDir . '/app/database/migrations/2015_02_26_195325_add_lenguages_fields_in-collection_table.php',
     'AddLenguagesFieldsInTagTable' => $baseDir . '/app/database/migrations/2015_02_26_195351_add_lenguages_fields_in_tag_table.php',
@@ -535,6 +535,7 @@ return array(
     'Net_SSH1' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Net/SSH1.php',
     'Net_SSH2' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Net/SSH2.php',
     'Normalizer' => $vendorDir . '/patchwork/utf8/class/Normalizer.php',
+    'NullableReferntialInPostsTable' => $baseDir . '/app/database/migrations/2015_02_28_172003_nullable_referntial_in_posts_table.php',
     'PHPParser_Autoloader' => $vendorDir . '/nikic/php-parser/lib/PHPParser/Autoloader.php',
     'PHPParser_Builder' => $vendorDir . '/nikic/php-parser/lib/PHPParser/Builder.php',
     'PHPParser_BuilderAbstract' => $vendorDir . '/nikic/php-parser/lib/PHPParser/BuilderAbstract.php',

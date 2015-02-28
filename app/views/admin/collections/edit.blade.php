@@ -9,8 +9,12 @@
         <div class="col-sm-6">
             {{  Form::model($collection, ['method' => 'PATCH', 'route' => ['admin.collections.update', $collection->id]]) }}
 
-                {{ Form::openGroup('title', 'Titulo: ') }}<br />
+                {{ Form::openGroup('title', 'Coleccion: ') }}<br />
                     {{ Form::text('title') }}
+                {{ Form::closeGroup() }}
+
+                {{ Form::openGroup('title_EN', 'Collection: ') }}<br />
+                    {{ Form::text('title_EN') }}
                 {{ Form::closeGroup() }}
 
                 <div class="row">

@@ -14,9 +14,11 @@
         <div class="col-sm-6">
             <ul class="list-group">
                 @foreach($posts as $post)
+                @if($post->language == 'es')
                     <li class="list-group-item list-group-item-content">
                         {{ link_to("admin/posts/{$post->id}", $post->title) }}
                     </li>
+                @endif
                 @endforeach
             </ul>
         </div>

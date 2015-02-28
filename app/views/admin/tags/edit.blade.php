@@ -7,10 +7,14 @@
     </div>
     <div class="row">
         <div class="col-sm-6">
-            {{  Form::model($tag, ['method' => 'PATCH', 'route' => ['admin.tags.update', $tag->id]]) }}
+            {{  Form::open(array('method' => 'PATCH', 'route' => ['admin.tags.update', $tag->id])) }}
 
-                {{ Form::openGroup('title', 'Titulo: ') }}<br />
-                    {{ Form::text('title') }}
+                {{ Form::openGroup('title', 'Etiqueta: ') }}<br />
+                    {{ Form::text('title', $tag->title) }}
+                {{ Form::closeGroup() }}
+
+                {{ Form::openGroup('title_EN', 'Tag: ') }}<br />
+                    {{ Form::text('title_EN', $tag->title_EN) }}
                 {{ Form::closeGroup() }}
 
                 <div class="row">

@@ -49,6 +49,7 @@ class CategoriesController extends \BaseController
             $category = new Category;
     
             $category->title = Input::get('title');
+            $category->title_EN = Input::get('title_EN');
 
             //Try to save in the DB and check for errors
             if ($category->save()) {
@@ -124,6 +125,7 @@ class CategoriesController extends \BaseController
             $category = Category::findOrFail($id);
 
             $category->title = Input::get('title');
+            $category->title_EN = Input::get('title_EN');
 
             if ($category->save()) {
                 return Redirect::to('admin')

@@ -10,11 +10,19 @@
             {{  Form::open(array('url' => 'admin/posts' )) }}
 
             {{ Form::openGroup('title', 'Titulo: ') }}
-            {{ Form::text('title') }}
+                {{ Form::text('title') }}
             {{ Form::closeGroup() }}
 
             {{ Form::openGroup('body', 'Descripcion: ') }}
-            {{ Form::textarea('body') }}
+                {{ Form::textarea('body') }}
+            {{ Form::closeGroup() }}
+
+            {{ Form::openGroup('title_en', 'Titulo: ') }}
+                {{ Form::text('title_en') }}
+            {{ Form::closeGroup() }}
+
+            {{ Form::openGroup('body_en', 'Descripcion: ') }}
+                {{ Form::textarea('body_en') }}
             {{ Form::closeGroup() }}
 
             <div class="row">
@@ -33,5 +41,6 @@
     // Replace the <textarea id="editor1"> with a CKEditor
     // instance, using default configuration.
     CKEDITOR.replace( 'body' );
+    CKEDITOR.replace( 'body_en' );
 </script>
 @stop

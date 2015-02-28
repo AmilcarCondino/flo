@@ -20,6 +20,9 @@ class PhotosController extends \BaseController {
         $categories = Category::lists('title', 'id');
         $tags = Tag::lists('title', 'id');
         $collections = Collection::lists('title', 'id');
+        $categories_EN = Category::lists('title_EN', 'id');
+        $tags_EN = Tag::lists('title_EN', 'id');
+        $collections_EN = Collection::lists('title_EN', 'id');
         $photos = Photo::orderBy('id', 'DESC')->get();
 
         if (!empty($filter)) {
@@ -41,9 +44,10 @@ class PhotosController extends \BaseController {
 
                 })->orderBy('id','DESC')->get();
             }
+
         }
 
         //Render the "create" view
-        $this->layout->content = View::make('guest.photos.index', compact('photos', 'categories', 'tags', 'collections'));
+        $this->layout->content = View::make('guest.photos.index', compact('photos', 'categories', 'tags', 'collections', 'categories_EN', 'collections_EN', 'tags_EN'));
 	}
 }

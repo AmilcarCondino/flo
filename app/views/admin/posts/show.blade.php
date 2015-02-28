@@ -16,11 +16,20 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
+    </div>
+    <div class="row">
+        <div class="col-sm-4,  text-center">
             <h2  class="text-center">{{ $post->title }}</h2>
-            <p>{{ $post->body }}</p>
+            <p class="text-center">{{ $post->body }}</p>
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-4, text-center">
+            <h2  class="text-center">{{ $post_en->title }}</h2>
+            <p class="text-center">{{ $post_en->body }}</p>
+        </div>
+    </div>
+
 </div>
 
 @stop
